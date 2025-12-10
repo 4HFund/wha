@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Luau Manor Resident Handbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff7a5c;
+      --primary-dark: #e25a3e;
+      --aqua: #19c6c1;
+      --sun: #ffd166;
+      --deep-blue: #0b4f6c;
+      --sand: #fff7ec;
+      --text-main: #1f2c3d;
+      --text-muted: #415063;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ffe7c6, #fff7ec 40%, #e4fbff 100%);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 1.5rem;
+    }
+
+    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(11,79,108,0.3); }
+    a:hover { text-decoration-color: var(--primary); }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(11, 79, 108, 0.08);
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.4rem 1.8rem;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 10%, rgba(255, 209, 102, 0.2), transparent 35%),
+                  radial-gradient(circle at 88% 80%, rgba(25, 198, 193, 0.18), transparent 35%);
+      pointer-events: none;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: "Baloo 2", "Inter", sans-serif;
+      font-size: 2rem;
+      color: var(--deep-blue);
+    }
+
+    h2 {
+      font-family: "Baloo 2", "Inter", sans-serif;
+      font-size: 1.35rem;
+      color: var(--deep-blue);
+      margin: 1.2rem 0 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 0.6rem 0 0.3rem;
+      color: var(--text-main);
+    }
+
+    p { margin-bottom: 0.75rem; color: var(--text-muted); }
+
+    ul { margin: 0.3rem 0 0.8rem 1.1rem; color: var(--text-muted); }
+    li { margin-bottom: 0.35rem; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 0.25rem; }
+    .pill { background: rgba(25,198,193,0.16); color: var(--deep-blue); padding: 0.15rem 0.65rem; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
+
+    .note {
+      background: rgba(255,122,92,0.12);
+      border: 1px solid rgba(226,90,62,0.16);
+      padding: 0.85rem 1rem;
+      border-radius: 0.95rem;
+      color: var(--text-main);
+      margin: 0.4rem 0 1rem;
+    }
+
+    .back-link { display: inline-block; margin-top: 0.8rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Luau Manor Resident Handbook</h1>
+      <p>Quick, colorful reference to the key topics from the Wheeling Housing Authority Resident Handbook. For questions, contact the office at (304) 233-0658 or email <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</p>
+    </header>
+
+    <div class="note">This page is a friendly summary. Your signed lease, WHA policies, and HUD rules are the final authority.</div>
+
+    <h2>📘 General Conduct</h2>
+    <p>Be a great neighbor—keep noise down, treat staff and residents with respect, and follow posted guidance in common areas.</p>
+    <ul>
+      <li>Respect quiet hours and avoid loud music, slamming doors, or shouting in hallways.</li>
+      <li>Only invite guests you know and supervise them at all times.</li>
+      <li>Do not let strangers “piggyback” into secure areas.</li>
+    </ul>
+
+    <h2>🛠️ Maintenance & Repairs</h2>
+    <p>Report issues quickly to prevent damage. Non-emergencies can be submitted online from the main page.</p>
+    <ul>
+      <li>Emergency maintenance: (304) 242-2820 (24/7).</li>
+      <li>Give permission to enter or provide clear instructions for scheduling.</li>
+      <li>Resident-caused damage may result in charges per policy.</li>
+    </ul>
+
+    <h2>🚪 Guests & Visitors</h2>
+    <p>You are responsible for the conduct of your guests.</p>
+    <ul>
+      <li>Follow overnight guest limits and any required registration.</li>
+      <li>Never host someone who is banned from WHA property.</li>
+      <li>Report disturbances or unsafe behavior to the office and, if needed, 911.</li>
+    </ul>
+
+    <h2>🏠 Housekeeping & Safety</h2>
+    <ul>
+      <li>Keep exits, smoke detectors, and sprinklers clear of clutter.</li>
+      <li>Bag trash and dispose of it in designated locations only.</li>
+      <li>Report pests early for treatment; maintain a sanitary unit.</li>
+    </ul>
+
+    <h2>🐾 Pet & Assistance Animals</h2>
+    <p>Pets must be registered and follow behavior rules.</p>
+    <ul>
+      <li>Typical limit: small household pets, up to ~25 lbs for dogs/cats.</li>
+      <li>Provide vaccination, licensing, and spay/neuter documentation.</li>
+      <li>Clean up after animals and prevent damage or disturbances.</li>
+    </ul>
+    <div class="pill-row">
+      <span class="pill">Service & assistance animals are accommodations</span>
+      <span class="pill">No aggressive breeds</span>
+    </div>
+
+    <h2>💳 Rent & Fees</h2>
+    <ul>
+      <li>Rent is due on the 1st; late fees may apply after policy deadlines.</li>
+      <li>Air conditioner charges apply when units are installed.</li>
+      <li>Contact the office early if you anticipate difficulty paying.</li>
+    </ul>
+
+    <h2>🔍 Inspections & Entry</h2>
+    <ul>
+      <li>Annual and special inspections are required; reasonable notice is provided when possible.</li>
+      <li>Management may enter without notice during emergencies.</li>
+      <li>Refusal of entry can lead to lease enforcement action.</li>
+    </ul>
+
+    <h2>🧭 Grievances & Hearings</h2>
+    <p>You may request an informal hearing or grievance for certain decisions.</p>
+    <ul>
+      <li>Requests must be made in writing within policy timeframes.</li>
+      <li>Include your name, unit, contact information, and reason for the request.</li>
+      <li>Email <a href="mailto:sidney@wheelingwv-pha.org?subject=Hearing%20Request%20-%20Luau%20Manor">sidney@wheelingwv-pha.org</a> or visit the office to begin.</li>
+    </ul>
+
+    <h2>🚫 Ban Policy</h2>
+    <ul>
+      <li>Banned individuals may not be invited or allowed in the building.</li>
+      <li>Report sightings to the office or security; call 911 if safety is at risk.</li>
+    </ul>
+
+    <p class="back-link"><a href="./">⬅ Back to the Resident Hub</a></p>
+  </div>
+</body>
+</html>

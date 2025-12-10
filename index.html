@@ -4,15 +4,20 @@
   <meta charset="UTF-8">
   <title>Luau Manor Resident Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #16697a;
-      --primary-dark: #0f4854;
-      --accent: #f8b400;
-      --bg: #f5f5f5;
-      --card-bg: #ffffff;
-      --text-main: #222222;
-      --text-muted: #555555;
+      --primary: #ff7a5c;
+      --primary-dark: #e25a3e;
+      --aqua: #19c6c1;
+      --sun: #ffd166;
+      --deep-blue: #0b4f6c;
+      --sand: #fff7ec;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-main: #1f2c3d;
+      --text-muted: #415063;
       --danger: #c0392b;
       --success: #2e7d32;
     }
@@ -24,30 +29,38 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--bg);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ffe7c6 0%, #fff7ec 40%, #e4fbff 100%);
       color: var(--text-main);
-      line-height: 1.6;
+      line-height: 1.65;
+      min-height: 100vh;
     }
 
     a {
-      color: inherit;
-      text-decoration: none;
+      color: var(--deep-blue);
+      text-decoration: underline;
+      text-decoration-color: rgba(12, 79, 108, 0.35);
+      text-decoration-thickness: 2px;
+    }
+
+    a:hover {
+      text-decoration-color: var(--primary);
     }
 
     /* Layout */
-
     header {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: #fff;
-      padding: 1rem 1.25rem;
+      background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%);
+      color: #0f172a;
+      padding: 1.1rem 1.25rem 1.35rem;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      border-bottom: 4px solid rgba(12, 79, 108, 0.08);
     }
 
     .nav-container {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -56,127 +69,154 @@
     }
 
     .brand {
+      font-family: "Baloo 2", "Inter", system-ui, sans-serif;
       font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: 0.03em;
+      font-size: 1.5rem;
+      letter-spacing: 0.02em;
     }
 
     .brand span {
-      font-weight: 400;
-      font-size: 0.85rem;
-      opacity: 0.9;
+      font-weight: 500;
+      font-size: 0.9rem;
+      opacity: 0.95;
       display: block;
     }
 
     nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.6rem;
       justify-content: flex-end;
     }
 
     nav a {
-      font-size: 0.9rem;
-      padding: 0.35rem 0.6rem;
+      font-size: 0.95rem;
+      padding: 0.45rem 0.75rem;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #fff;
-      transition: background 0.2s, transform 0.1s;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease;
     }
 
     nav a:hover {
-      background: rgba(255, 255, 255, 0.12);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-color: rgba(255, 255, 255, 0.6);
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 1.5rem 1.25rem 2.5rem;
+      padding: 1.6rem 1.25rem 2.6rem;
     }
 
     /* Hero */
-
     .hero {
-      background: radial-gradient(circle at top left, rgba(248, 180, 0, 0.18), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(22, 105, 122, 0.18), transparent 55%);
-      border-radius: 1.25rem;
-      padding: 1.75rem 1.5rem;
-      margin: 1rem 0 1.75rem;
+      background: linear-gradient(135deg, rgba(255, 122, 92, 0.15), rgba(25, 198, 193, 0.14)),
+                  radial-gradient(circle at 15% 20%, rgba(255, 209, 102, 0.35), transparent 40%),
+                  radial-gradient(circle at 80% 0%, rgba(0, 191, 166, 0.18), transparent 35%),
+                  #ffffff;
+      border-radius: 1.4rem;
+      padding: 1.9rem 1.7rem;
+      margin: 1.15rem 0 1.9rem;
       display: grid;
       grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
       gap: 1.5rem;
       align-items: center;
+      border: 2px solid rgba(0, 121, 107, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.7), transparent 50%);
+      pointer-events: none;
     }
 
     .hero h1 {
-      font-size: 2rem;
-      margin-bottom: 0.6rem;
+      font-family: "Baloo 2", "Inter", sans-serif;
+      font-size: 2.1rem;
+      margin-bottom: 0.7rem;
+      color: var(--deep-blue);
     }
 
     .hero p {
       color: var(--text-muted);
       margin-bottom: 1rem;
+      font-size: 1rem;
     }
 
     .tagline {
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-dark);
       margin-bottom: 0.75rem;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
+      gap: 0.85rem;
+      margin-bottom: 0.65rem;
     }
 
     .hero-card {
-      background: rgba(255, 255, 255, 0.92);
+      background: var(--card-bg);
       border-radius: 1rem;
-      padding: 1rem 1rem 0.9rem;
-      box-shadow: 0 8px 20px rgba(15, 72, 84, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      padding: 1.05rem 1.1rem;
+      box-shadow: 0 10px 24px rgba(11, 79, 108, 0.15);
+      border: 1px solid rgba(11, 79, 108, 0.08);
+      backdrop-filter: blur(3px);
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+      color: var(--deep-blue);
     }
 
     .hero-card p {
-      font-size: 0.9rem;
-      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
     }
 
     .emergency {
       color: var(--danger);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     /* Sections & Cards */
-
     section {
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.9rem;
     }
 
     section h2 {
-      font-size: 1.35rem;
-      margin-bottom: 0.25rem;
+      font-family: "Baloo 2", "Inter", sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.35rem;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      color: var(--deep-blue);
     }
 
     section h2 span.icon {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     section .subtitle {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.95rem;
     }
 
     .card-grid {
@@ -187,122 +227,140 @@
 
     .card {
       background: var(--card-bg);
-      border-radius: 0.85rem;
-      padding: 1rem;
-      border: 1px solid #e2e2e2;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      border-radius: 1rem;
+      padding: 1.05rem;
+      border: 1px solid rgba(12, 79, 108, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 15% 10%, rgba(255, 209, 102, 0.2), transparent 35%),
+                  radial-gradient(circle at 90% 80%, rgba(25, 198, 193, 0.12), transparent 35%);
+      pointer-events: none;
     }
 
     .card h3 {
-      font-size: 1rem;
+      font-size: 1.05rem;
       margin-bottom: 0.4rem;
+      color: var(--deep-blue);
     }
 
     .card p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       margin-bottom: 0.4rem;
     }
 
     .card ul {
       list-style: disc;
-      padding-left: 1.1rem;
+      padding-left: 1.15rem;
       margin-top: 0.25rem;
     }
 
     .card ul li {
-      font-size: 0.9rem;
-      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
       color: var(--text-muted);
     }
 
     .highlight {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--primary-dark);
     }
 
     .label {
       display: inline-block;
-      font-size: 0.8rem;
-      padding: 0.2rem 0.55rem;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
-      background: rgba(22, 105, 122, 0.07);
-      color: var(--primary-dark);
-      margin-bottom: 0.35rem;
+      background: linear-gradient(120deg, rgba(255, 122, 92, 0.18), rgba(25, 198, 193, 0.18));
+      color: var(--deep-blue);
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
     }
 
     .label-danger {
-      background: rgba(192, 57, 43, 0.08);
+      background: rgba(192, 57, 43, 0.12);
       color: var(--danger);
     }
 
     .label-success {
-      background: rgba(46, 125, 50, 0.09);
+      background: rgba(46, 125, 50, 0.14);
       color: var(--success);
     }
 
     /* Buttons & Links */
-
     .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 0.4rem;
+      gap: 0.7rem;
+      margin-top: 0.45rem;
     }
 
     .btn {
       display: inline-block;
-      padding: 0.45rem 0.9rem;
+      padding: 0.5rem 1rem;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       border: 1px solid transparent;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s;
+      font-weight: 700;
+      letter-spacing: 0.01em;
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
       color: #fff;
-      border-color: var(--primary-dark);
-      box-shadow: 0 3px 8px rgba(15, 72, 84, 0.35);
+      border-color: rgba(0, 0, 0, 0.05);
+      box-shadow: 0 6px 16px rgba(226, 90, 62, 0.35);
     }
 
     .btn-primary:hover {
-      background: var(--primary-dark);
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15, 72, 84, 0.45);
+      box-shadow: 0 10px 18px rgba(226, 90, 62, 0.45);
     }
 
     .btn-secondary {
-      background: #fff;
-      color: var(--primary-dark);
-      border-color: rgba(22, 105, 122, 0.4);
+      background: linear-gradient(120deg, var(--aqua), #6ee7e0);
+      color: #0b4f6c;
+      border-color: rgba(11, 79, 108, 0.15);
+      box-shadow: 0 6px 16px rgba(25, 198, 193, 0.3);
     }
 
     .btn-secondary:hover {
-      background: rgba(22, 105, 122, 0.05);
       transform: translateY(-1px);
     }
 
     .btn-soft {
-      background: rgba(22, 105, 122, 0.08);
-      color: var(--primary-dark);
-      border-color: transparent;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--deep-blue);
+      border-color: rgba(12, 79, 108, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .btn-soft:hover {
-      background: rgba(22, 105, 122, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-1px);
     }
 
     .btn-danger {
-      background: var(--danger);
+      background: linear-gradient(120deg, #ff6b6b, #f04747);
       color: #fff;
-      border-color: #922b21;
+      border-color: rgba(0, 0, 0, 0.05);
+      box-shadow: 0 6px 16px rgba(240, 71, 71, 0.35);
     }
 
     .btn-danger:hover {
-      background: #922b21;
+      transform: translateY(-1px);
     }
 
     /* Forms */
@@ -381,19 +439,20 @@
 
     /* Lists & Text */
 
+    /* Lists & Text */
     .key-points {
       list-style: disc;
       padding-left: 1.05rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
     }
 
     .key-points li {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.28rem;
     }
 
     .muted {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
@@ -401,15 +460,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem;
-      margin-top: 0.3rem;
+      margin-top: 0.35rem;
     }
 
     .pill {
-      font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
+      font-size: 0.82rem;
+      padding: 0.18rem 0.6rem;
       border-radius: 999px;
-      background: #f0f0f0;
-      color: #444;
+      background: rgba(25, 198, 193, 0.15);
+      color: var(--deep-blue);
+      font-weight: 700;
     }
 
     /* Forms */
@@ -464,18 +524,19 @@
     }
 
     /* Footer */
-
     footer {
-      background: #111827;
-      color: #d1d5db;
-      padding: 1rem 1.25rem 1.5rem;
-      margin-top: 1.5rem;
+      background: linear-gradient(120deg, #0b4f6c, #0e7490);
+      color: #e5eff7;
+      padding: 1.1rem 1.25rem 1.6rem;
+      margin-top: 1.6rem;
+      border-top: 4px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.12);
     }
 
     .footer-inner {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -484,17 +545,15 @@
     }
 
     .footer-inner a {
-      color: #e5e7eb;
+      color: #fbe7a1;
       text-decoration: underline;
       text-decoration-style: dotted;
     }
 
     /* Responsive */
-
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: minmax(0, 1fr);
-        padding: 1.4rem 1.15rem;
       }
     }
 
@@ -506,14 +565,17 @@
       nav {
         justify-content: flex-start;
       }
+      header {
+        position: sticky;
+      }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       header {
-        padding-bottom: 0.75rem;
+        padding-bottom: 0.9rem;
       }
       .hero h1 {
-        font-size: 1.55rem;
+        font-size: 1.65rem;
       }
     }
 
@@ -548,7 +610,7 @@
   <section class="hero">
     <div>
       <h1>Welcome to the Luau Manor Resident Hub</h1>
-      <p class="tagline">A simple place for residents to request help, get updates, and find building information.</p>
+      <p class="tagline">Tropical vibes, practical info—request help, get updates, and stay connected.</p>
       <p>
         <strong>Office Phone:</strong> (304) 233-0658<br>
         <strong>Mailing Address:</strong> Wheeling Housing Authority • P.O. Box 2089 • Wheeling, WV 26003
@@ -569,26 +631,26 @@
       <h3>Emergency Maintenance</h3>
       <p class="emergency">Call: (304) 242-2820 &mdash; 24/7</p>
       <p class="muted">
-        For fire, serious gas or water leaks, no heat in extreme weather, or anything that threatens life, safety, or
-        major property damage, call immediately.
+        If there is immediate danger to people or the building, call 911 first, then contact emergency maintenance.
       </p>
-      <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0.7rem 0;">
-      <span class="label label-success">Police</span>
-      <p class="muted">
-        For criminal activity or immediate danger, call <strong>911</strong> first, then notify management so we can
-        document and follow up.
-      </p>
+      <div class="pill-row">
+        <span class="pill">No heat</span>
+        <span class="pill">Flooding</span>
+        <span class="pill">Major leak</span>
+        <span class="pill">Fire damage</span>
+      </div>
     </div>
   </section>
 
-  <!-- QUICK ACTIONS -->
-  <section>
-    <h2><span class="icon">⚡</span>Quick Actions</h2>
-    <p class="subtitle">Most-used tools for Luau Manor residents.</p>
+  <!-- QUICK LINKS -->
+  <section id="quicklinks">
+    <h2><span class="icon">🌺</span>Tropical Quick Links</h2>
+    <p class="subtitle">Jump to the most-used requests and info.</p>
     <div class="card-grid">
       <div class="card">
-        <h3>Maintenance & Repairs</h3>
-        <p>Submit a work order for non-emergency repairs.</p>
+        <span class="label">Action</span>
+        <h3>Need Something Fixed?</h3>
+        <p>Tell us about maintenance issues, leaks, or repairs.</p>
         <div class="btn-row">
           <a href="#maintenance-form" class="btn btn-primary">Maintenance Request</a>
         </div>
@@ -601,17 +663,19 @@
         </div>
       </div>
       <div class="card">
+        <span class="label">Stay Safe</span>
         <h3>Report a Concern</h3>
-        <p>Noise, safety, housekeeping, or building issues.</p>
+        <p>Share noise, safety, or nuisance concerns so we can respond.</p>
         <div class="btn-row">
           <a href="#concern-form" class="btn btn-soft">Report a Concern</a>
         </div>
       </div>
       <div class="card">
-        <h3>See Building Policies</h3>
-        <p>View the Resident Handbook, pet rules, and more.</p>
+        <span class="label label-success">New</span>
+        <h3>Resident Handbook</h3>
+        <p>View the full Resident Handbook with rules, expectations, and helpful tips.</p>
         <div class="btn-row">
-          <a href="#handbook" class="btn btn-soft">Resident Policies</a>
+          <a href="resident-handbook.html" class="btn btn-secondary">Open Handbook</a>
         </div>
       </div>
     </div>
@@ -786,7 +850,7 @@
   <section id="maintenance">
     <h2><span class="icon">🛠️</span>Maintenance Requests</h2>
     <p class="subtitle">
-      Use this section to request routine repairs in your apartment or common areas.
+      Use the form below for non-emergency repairs. Emergency? Call (304) 242-2820 right away.
     </p>
     <div class="card-grid">
       <div class="card">
@@ -809,27 +873,23 @@
       </div>
 
       <div class="card">
-        <span class="label label-danger">Important</span>
-        <h3>Emergency vs. Non-Emergency</h3>
+        <span class="label label-danger">When to Call Immediately</span>
+        <h3>Emergency Examples</h3>
         <ul class="key-points">
-          <li><span class="highlight">Emergency:</span> Call (304) 242-2820 &mdash; fire, gas leaks, major flooding, no
-            heat in extreme weather, broken exterior door locks, or anything that threatens safety.</li>
-          <li><span class="highlight">Non-Emergency:</span> Use the online form or call the office during business
-            hours.</li>
+          <li>No heat during cold weather.</li>
+          <li>Major leak, flood, or sewer backup.</li>
+          <li>Broken exterior doors or smashed windows.</li>
+          <li>Fire, electrical sparks, or burning smell.</li>
         </ul>
-        <p class="muted">
-          Maintenance may enter your unit to complete work orders or inspections in line with WHA policy.
-        </p>
+        <p class="muted">Call 911 first for fire, smoke, or medical emergencies.</p>
       </div>
     </div>
   </section>
 
   <!-- CONCERNS -->
   <section id="concerns">
-    <h2><span class="icon">💬</span>Report a Concern or Incident</h2>
-    <p class="subtitle">
-      Help us keep Luau Manor safe, quiet, and well-maintained by reporting issues in writing.
-    </p>
+    <h2><span class="icon">📣</span>Report an Incident or Concern</h2>
+    <p class="subtitle">Noise, safety, housekeeping, visitors, or other issues—share details so we can help.</p>
     <div class="card-grid">
       <div class="card">
         <span class="label">Types of Concerns</span>
@@ -855,6 +915,18 @@
         <p class="muted" style="margin-top:0.4rem;">
           You may also pick up or drop off a paper form in the office. For emergencies, call 911 first.
         </p>
+      </div>
+
+      <div class="card">
+        <span class="label">What to Include</span>
+        <h3>Helpful Details</h3>
+        <ul class="key-points">
+          <li>Date/time and location.</li>
+          <li>Who was involved and any unit numbers.</li>
+          <li>Witnesses or video, if available.</li>
+          <li>Whether police or fire responded.</li>
+        </ul>
+        <p class="muted">Clear details help us respond quickly and fairly.</p>
       </div>
     </div>
   </section>
@@ -902,9 +974,17 @@
   <section id="handbook">
     <h2><span class="icon">📘</span>Resident Handbook & Key Policies</h2>
     <p class="subtitle">
-      This is a quick summary. Your signed lease and the WHA Resident Handbook are the official documents.
+      The official Resident Handbook explains detailed rules and expectations. Highlights are below.
     </p>
     <div class="card-grid">
+      <div class="card">
+        <span class="label">Handbook</span>
+        <h3>Resident Handbook (Full)</h3>
+        <p>Open the handbook for house rules, maintenance tips, and community standards.</p>
+        <div class="btn-row">
+          <a href="resident-handbook.html" class="btn btn-secondary">View Handbook</a>
+        </div>
+      </div>
       <div class="card">
         <span class="label">Guests & Visitors</span>
         <h3>Guest Responsibilities</h3>
@@ -964,8 +1044,7 @@
           <li>Requests must be made in writing within the time limits in the policy.</li>
         </ul>
         <div class="btn-row">
-          <!-- TODO: Replace # with a grievance request form or instructions -->
-          <a href="#" class="btn btn-soft">Request a Hearing</a>
+          <a href="mailto:sidney@wheelingwv-pha.org?subject=Hearing%20Request%20-%20Luau%20Manor" class="btn btn-soft">Request a Hearing</a>
         </div>
       </div>
     </div>
@@ -1011,8 +1090,7 @@
           <li>Owners are responsible for cleaning up after pets and preventing damage.</li>
         </ul>
         <div class="btn-row">
-          <!-- TODO: Replace # with pet registration form -->
-          <a href="#" class="btn btn-secondary">Request Pet Registration Packet</a>
+          <a href="mailto:sidney@wheelingwv-pha.org?subject=Pet%20Registration%20Packet%20-%20Luau%20Manor" class="btn btn-secondary">Request Pet Registration Packet</a>
         </div>
       </div>
     </div>
@@ -1037,26 +1115,15 @@
       </div>
 
       <div class="card">
-        <span class="label">Resident Responsibility</span>
-        <h3>Hosting Banned Individuals</h3>
+        <span class="label">Rules</span>
+        <h3>Reporting & Enforcement</h3>
         <ul class="key-points">
-          <li>Residents do <strong>not</strong> have the right to invite someone who is banned without written WHA approval.</li>
-          <li>Allowing a banned person on the property can result in lease termination.</li>
-          <li>Special limited visitation may be requested from WHA in specific situations.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <span class="label">Ban List & Appeals</span>
-        <h3>Ban Lengths & Removal</h3>
-        <ul class="key-points">
-          <li>Ban lengths range from 6 months to lifetime, depending on the offense.</li>
-          <li>One appeal may be requested in writing within the WHA timeframe.</li>
-          <li>At the end of the minimum ban period, individuals may request review for removal from the list.</li>
+          <li>Report banned individuals to the office or security immediately.</li>
+          <li>Residents are not allowed to invite or host banned individuals.</li>
+          <li>Violations can lead to lease action.</li>
         </ul>
         <div class="btn-row">
-          <!-- TODO: Replace # with a link to the posted ban list or PDF if you host it -->
-          <a href="#" class="btn btn-soft">View Ban List (if available)</a>
+          <a href="mailto:sidney@wheelingwv-pha.org?subject=Ban%20List%20Request%20-%20Luau%20Manor" class="btn btn-soft">Request Current Ban List</a>
         </div>
       </div>
     </div>
@@ -1064,46 +1131,22 @@
 
   <!-- RESIDENT COUNCIL -->
   <section id="council">
-    <h2><span class="icon">🏛️</span>Resident Council</h2>
-    <p class="subtitle">
-      The Resident Council helps improve quality of life, plan activities, and represent resident voices.
-    </p>
+    <h2><span class="icon">🤝</span>Resident Council</h2>
+    <p class="subtitle">Share ideas, volunteer, and stay in the loop with your community.</p>
     <div class="card-grid">
       <div class="card">
-        <span class="label">Purpose</span>
-        <h3>What the Council Does</h3>
-        <ul class="key-points">
-          <li>Organizes meetings and shares information with residents.</li>
-          <li>Plans events and activities to build community.</li>
-          <li>Works with WHA staff on building concerns and ideas.</li>
-          <li>Oversees use of Tenant Participation Funds, within HUD rules.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <span class="label">Tenant Participation Funds</span>
-        <h3>Allowed Uses (Examples)</h3>
-        <ul class="key-points">
-          <li>Training for resident leaders.</li>
-          <li>Youth and after-school activities.</li>
-          <li>Violence prevention or safety programs.</li>
-          <li>Childcare for eligible council events.</li>
-          <li>Community garden or computer lab support.</li>
-        </ul>
-        <p class="muted">
-          Funds must be used reasonably and in line with HUD and WHA requirements.
-        </p>
-      </div>
-
-      <div class="card">
         <span class="label">Get Involved</span>
-        <h3>Join or Share Ideas</h3>
-        <p>Residents are encouraged to participate in Resident Council elections, meetings, and projects.</p>
+        <h3>Connect with the Council</h3>
+        <p>Share event ideas, volunteer to help, or suggest improvements for Luau Manor.</p>
         <div class="btn-row">
-          <!-- TODO: Replace # with your council interest form or contact -->
-          <a href="#" class="btn btn-secondary">Share an Idea / Volunteer</a>
+          <a href="mailto:sidney@wheelingwv-pha.org?subject=Resident%20Council%20Idea%20-%20Luau%20Manor" class="btn btn-secondary">Share an Idea / Volunteer</a>
           <a href="#events" class="btn btn-soft">See Upcoming Meetings</a>
         </div>
+      </div>
+      <div class="card">
+        <span class="label">Stay Updated</span>
+        <h3>Announcements</h3>
+        <p class="muted">Council meeting notices and activity flyers are posted in the lobby and on this page.</p>
       </div>
     </div>
   </section>
@@ -1119,7 +1162,6 @@
         <span class="label">Announcements</span>
         <h3>Building Updates</h3>
         <ul class="key-points">
-          <!-- TODO: Edit these examples as needed -->
           <li><strong>Elevator Notice:</strong> One elevator is out of service while we wait for a part. We will post a
             timeline as soon as it is available.</li>
           <li><strong>Pest Control:</strong> Scheduled service will be posted on each floor’s bulletin board.</li>
@@ -1132,7 +1174,6 @@
         <span class="label">Events</span>
         <h3>Resident Activities</h3>
         <ul class="key-points">
-          <!-- TODO: Replace with real events -->
           <li><strong>Bingo Night:</strong> Monthly in the community room.</li>
           <li><strong>Coffee & Conversations:</strong> Occasional morning gatherings with local partners.</li>
           <li><strong>Resident of the Month:</strong> Ongoing voting and recognition.</li>
@@ -1165,7 +1206,6 @@
         <span class="label">Payment Options</span>
         <h3>How to Pay</h3>
         <ul class="key-points">
-          <!-- TODO: Customize payment instructions based on WHA process -->
           <li>In-person payments: office during regular business hours.</li>
           <li>Mail: follow WHA instructions for mailing payments safely.</li>
           <li>Online or other methods: if available, details will be provided by WHA.</li>
