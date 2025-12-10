@@ -412,6 +412,57 @@
       color: #444;
     }
 
+    /* Forms */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      padding: 0.55rem 0.6rem;
+      border-radius: 0.55rem;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
     /* Footer */
 
     footer {
@@ -483,7 +534,7 @@
       <a href="#top">Home</a>
       <a href="#maintenance">Maintenance</a>
       <a href="#concerns">Concerns</a>
-      <a href="#documents">Forms</a>
+      <a href="#forms">Forms</a>
       <a href="#handbook">Policies</a>
       <a href="#pets">Pets</a>
       <a href="#council">Resident Council</a>
@@ -504,10 +555,8 @@
       </p>
 
       <div class="hero-actions">
-        <!-- TODO: Replace # with link to your maintenance/work order form -->
-        <a href="#maintenance" class="btn btn-primary">Submit a Maintenance Request</a>
-        <!-- TODO: Replace # with link to your suggestion/portal form -->
-        <a href="#concerns" class="btn btn-secondary">Report a Concern</a>
+        <a href="#maintenance-form" class="btn btn-primary">Submit a Maintenance Request</a>
+        <a href="#concern-form" class="btn btn-secondary">Report a Concern</a>
       </div>
 
       <p class="muted">
@@ -541,21 +590,21 @@
         <h3>Maintenance & Repairs</h3>
         <p>Submit a work order for non-emergency repairs.</p>
         <div class="btn-row">
-          <a href="#maintenance" class="btn btn-primary">Maintenance Request</a>
+          <a href="#maintenance-form" class="btn btn-primary">Maintenance Request</a>
         </div>
       </div>
       <div class="card">
         <h3>Document & Letter Requests</h3>
         <p>Need a rent letter, copy of your lease, or other documents?</p>
         <div class="btn-row">
-          <a href="#documents" class="btn btn-secondary">Request Documents</a>
+          <a href="#document-form" class="btn btn-secondary">Request Documents</a>
         </div>
       </div>
       <div class="card">
         <h3>Report a Concern</h3>
         <p>Noise, safety, housekeeping, or building issues.</p>
         <div class="btn-row">
-          <a href="#concerns" class="btn btn-soft">Report a Concern</a>
+          <a href="#concern-form" class="btn btn-soft">Report a Concern</a>
         </div>
       </div>
       <div class="card">
@@ -564,6 +613,171 @@
         <div class="btn-row">
           <a href="#handbook" class="btn btn-soft">Resident Policies</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ONLINE FORMS -->
+  <section id="forms">
+    <h2><span class="icon">📝</span>Online Forms</h2>
+    <p class="subtitle">
+      These secure forms send directly to management at <strong>sidney@wheelingwv-pha.org</strong>.
+      Please include as much detail as possible so we can respond quickly.
+    </p>
+
+    <div class="form-grid">
+      <div class="card" id="maintenance-form">
+        <span class="label">Maintenance</span>
+        <h3>Submit a Maintenance Request</h3>
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+          <input type="hidden" name="_subject" value="Luau Manor - Maintenance Request">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_template" value="table">
+
+          <label>
+            Your Name
+            <input type="text" name="Resident Name" placeholder="First and last name" required>
+          </label>
+
+          <label>
+            Unit / Apartment Number
+            <input type="text" name="Unit" placeholder="Example: 305" required>
+          </label>
+
+          <label>
+            Best Phone Number
+            <input type="tel" name="Phone" placeholder="(304) 555-1234" required>
+          </label>
+
+          <label>
+            Email (optional)
+            <input type="email" name="Email" placeholder="you@example.com">
+          </label>
+
+          <label>
+            Permission to Enter
+            <select name="Permission to Enter" required>
+              <option value="">Select one</option>
+              <option>Yes, maintenance may enter with a key</option>
+              <option>No, please contact me to schedule a time</option>
+            </select>
+          </label>
+
+          <label>
+            Urgency
+            <select name="Urgency" required>
+              <option value="">Choose an option</option>
+              <option>Routine (next available appointment)</option>
+              <option>Within 24 hours if possible</option>
+            </select>
+          </label>
+
+          <label>
+            Describe the Issue
+            <textarea name="Issue Details" placeholder="Tell us what is broken, where it is located, and any steps to recreate the issue." required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send Request</button>
+            <span class="form-note">For emergencies, please call (304) 242-2820 instead of using this form.</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card" id="concern-form">
+        <span class="label label-danger">Concerns & Incidents</span>
+        <h3>Report a Concern</h3>
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+          <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_template" value="table">
+
+          <label>
+            Your Name (optional)
+            <input type="text" name="Your Name" placeholder="You may remain anonymous if you prefer">
+          </label>
+
+          <label>
+            Phone or Email (optional)
+            <input type="text" name="Contact" placeholder="Include if you want a follow-up">
+          </label>
+
+          <label>
+            Location of Concern
+            <input type="text" name="Location" placeholder="Example: 2nd floor hallway, apartment number" required>
+          </label>
+
+          <label>
+            Date & Time (if known)
+            <input type="text" name="Date and Time" placeholder="Example: March 12 around 9:30 PM">
+          </label>
+
+          <label>
+            What Happened?
+            <textarea name="Details" placeholder="Describe the issue, people involved, and any safety concerns." required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-secondary">Submit Concern</button>
+            <span class="form-note">Call 911 first for emergencies, then notify management.</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card" id="document-form">
+        <span class="label">Documents & Letters</span>
+        <h3>Request Documents</h3>
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+          <input type="hidden" name="_subject" value="Luau Manor - Document Request">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_template" value="table">
+
+          <label>
+            Your Name
+            <input type="text" name="Resident Name" placeholder="First and last name" required>
+          </label>
+
+          <label>
+            Unit / Apartment Number
+            <input type="text" name="Unit" placeholder="Example: 305" required>
+          </label>
+
+          <label>
+            Phone Number
+            <input type="tel" name="Phone" placeholder="(304) 555-1234" required>
+          </label>
+
+          <label>
+            Email (optional)
+            <input type="email" name="Email" placeholder="you@example.com">
+          </label>
+
+          <label>
+            What do you need?
+            <select name="Request Type" required>
+              <option value="">Select one</option>
+              <option>Rent letter / verification</option>
+              <option>Ledger or payment history</option>
+              <option>Copy of lease</option>
+              <option>Reasonable accommodation packet</option>
+              <option>Payment agreement forms (if applicable)</option>
+              <option>Guest / overnight visitor registration</option>
+              <option>Pet registration paperwork</option>
+              <option>Household or income change form</option>
+              <option>Other (describe below)</option>
+            </select>
+          </label>
+
+          <label>
+            Details or Special Instructions
+            <textarea name="Details" placeholder="Tell us if you need the document printed, emailed, or held in the office." required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-soft">Send Request</button>
+            <span class="form-note">Most requests are processed during normal office hours.</span>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -578,44 +792,17 @@
       <div class="card">
         <span class="label">Work Orders</span>
         <h3>Submit a Maintenance Request</h3>
-        <p>Use the form for routine repairs in your unit or common areas.</p>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
-          <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://4hfund.github.io/wha/">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="maint-name">Your Name</label>
-              <input id="maint-name" name="Resident Name" type="text" placeholder="Full name" required>
-            </div>
-            <div class="form-field">
-              <label for="maint-unit">Apartment / Building</label>
-              <input id="maint-unit" name="Apartment" type="text" placeholder="Example: Apt 204" required>
-            </div>
-            <div class="form-field">
-              <label for="maint-phone">Phone Number</label>
-              <input id="maint-phone" name="Phone" type="tel" placeholder="(###) ###-####" required>
-            </div>
-            <div class="form-field">
-              <label for="maint-permission">Permission to Enter</label>
-              <select id="maint-permission" name="Permission to Enter" required>
-                <option value="">Select an option</option>
-                <option>Yes, maintenance may enter</option>
-                <option>Call first before entering</option>
-                <option>Do not enter without me home</option>
-              </select>
-              <span class="helper">If you have pets, please note that below.</span>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="maint-details">What needs fixed?</label>
-            <textarea id="maint-details" name="Issue Details" placeholder="Describe the problem, location, and any safety concerns" required></textarea>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Send Maintenance Request</button>
-            <span class="form-note">Submissions go directly to sidney@wheelingwv-pha.org.</span>
-          </div>
-        </form>
+        <p>Use the online form for:</p>
+        <ul class="key-points">
+          <li>Plumbing issues (sinks, toilets, tubs)</li>
+          <li>Appliances (stove, fridge, A/C units)</li>
+          <li>Lights, outlets, or switches</li>
+          <li>Doors, locks, windows</li>
+          <li>Pest concerns</li>
+        </ul>
+        <div class="btn-row">
+          <a href="#maintenance-form" class="btn btn-primary">Open Maintenance Form</a>
+        </div>
         <p class="muted" style="margin-top:0.4rem;">
           If you can’t use the form, please call the office so we can submit the work order for you.
         </p>
@@ -662,46 +849,9 @@
         <p>
           All complaints and incident reports must be in writing so we can document and follow up properly.
         </p>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
-          <input type="hidden" name="_subject" value="Luau Manor Concern / Incident Report">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://4hfund.github.io/wha/">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="concern-name">Your Name</label>
-              <input id="concern-name" name="Resident Name" type="text" placeholder="Full name" required>
-            </div>
-            <div class="form-field">
-              <label for="concern-unit">Apartment / Building</label>
-              <input id="concern-unit" name="Apartment" type="text" placeholder="Example: Apt 204" required>
-            </div>
-            <div class="form-field">
-              <label for="concern-phone">Phone Number</label>
-              <input id="concern-phone" name="Phone" type="tel" placeholder="(###) ###-####" required>
-            </div>
-            <div class="form-field">
-              <label for="concern-type">Type of Concern</label>
-              <select id="concern-type" name="Concern Type" required>
-                <option value="">Select a category</option>
-                <option>Noise / nuisance</option>
-                <option>Safety / security</option>
-                <option>Housekeeping / pests</option>
-                <option>Guest / visitor issue</option>
-                <option>Lease violation</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="concern-details">What happened?</label>
-            <textarea id="concern-details" name="Incident Details" placeholder="Describe what happened, when it occurred, and who was involved" required></textarea>
-            <span class="helper">If you called police, please include the case number if you have it.</span>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-secondary">Submit Concern</button>
-            <span class="form-note">Submissions are delivered to sidney@wheelingwv-pha.org for follow up.</span>
-          </div>
-        </form>
+        <div class="btn-row">
+          <a href="#concern-form" class="btn btn-secondary">Open Complaint / Incident Form</a>
+        </div>
         <p class="muted" style="margin-top:0.4rem;">
           You may also pick up or drop off a paper form in the office. For emergencies, call 911 first.
         </p>
@@ -727,45 +877,9 @@
           <li>Reasonable accommodation forms</li>
           <li>Payment agreement forms (if applicable)</li>
         </ul>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
-          <input type="hidden" name="_subject" value="Luau Manor Document Request">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://4hfund.github.io/wha/">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="doc-name">Your Name</label>
-              <input id="doc-name" name="Resident Name" type="text" placeholder="Full name" required>
-            </div>
-            <div class="form-field">
-              <label for="doc-unit">Apartment / Building</label>
-              <input id="doc-unit" name="Apartment" type="text" placeholder="Example: Apt 204" required>
-            </div>
-            <div class="form-field">
-              <label for="doc-phone">Phone Number</label>
-              <input id="doc-phone" name="Phone" type="tel" placeholder="(###) ###-####" required>
-            </div>
-            <div class="form-field">
-              <label for="doc-type">What do you need?</label>
-              <select id="doc-type" name="Requested Document" required>
-                <option value="">Select a document</option>
-                <option>Rent letter / verification</option>
-                <option>Ledger or payment history</option>
-                <option>Lease copy</option>
-                <option>Reasonable accommodation packet</option>
-                <option>Payment agreement form</option>
-                <option>Other (describe below)</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="doc-notes">Notes or details</label>
-            <textarea id="doc-notes" name="Notes" placeholder="Tell us how you want to receive the document (email, pick up, mail)"></textarea>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-soft">Send Document Request</button>
-            <span class="form-note">The office will respond from sidney@wheelingwv-pha.org.</span>
-          </div>
-        </form>
+        <div class="btn-row">
+          <a href="#document-form" class="btn btn-soft">Request Documents Online</a>
+        </div>
       </div>
 
       <div class="card">
