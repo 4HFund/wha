@@ -90,6 +90,14 @@
       flex-wrap: wrap;
       gap: 0.6rem;
       justify-content: flex-end;
+      overflow-x: auto;
+      padding-bottom: 0.15rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
     }
 
     nav a {
@@ -116,6 +124,57 @@
       padding: 1.6rem 1.25rem 2.6rem;
     }
 
+    .quick-nav {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(11, 79, 108, 0.08);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+      border-radius: 1rem;
+      padding: 0.8rem 1rem;
+      margin: 0 0 1.4rem;
+    }
+
+    .quick-nav-label {
+      font-weight: 700;
+      color: var(--deep-blue);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .quick-nav-links {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .quick-nav-links::-webkit-scrollbar { display: none; }
+
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(25, 198, 193, 0.16), rgba(255, 209, 102, 0.18));
+      color: var(--deep-blue);
+      border: 1px solid rgba(11, 79, 108, 0.12);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
     /* Hero */
     .hero {
       background: linear-gradient(135deg, rgba(255, 122, 92, 0.15), rgba(25, 198, 193, 0.14)),
@@ -133,6 +192,12 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
     .hero:before {
@@ -554,9 +619,19 @@
     }
 
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .hero {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
+        padding: 1.4rem 1.25rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-card {
+        order: -1;
       }
     }
 
@@ -571,6 +646,11 @@
       header {
         position: sticky;
       }
+      .quick-nav {
+        position: sticky;
+        top: 4.5rem;
+        z-index: 900;
+      }
     }
 
     @media (max-width: 520px) {
@@ -579,6 +659,9 @@
       }
       .hero h1 {
         font-size: 1.65rem;
+      }
+      .quick-nav {
+        gap: 0.55rem;
       }
     }
 
@@ -611,7 +694,7 @@
 <main id="top">
   <!-- HERO -->
   <section class="hero">
-    <div>
+    <div class="hero-content">
       <h1>Welcome to the Luau Manor Resident Hub</h1>
       <p class="tagline">Tropical vibes, practical info—request help, get updates, and stay connected.</p>
       <p>
@@ -645,6 +728,18 @@
     </div>
   </section>
 
+  <div class="quick-nav" aria-label="Quick navigation">
+    <span class="quick-nav-label">Jump to:</span>
+    <div class="quick-nav-links">
+      <a class="quick-link" href="#maintenance">🛠️ Maintenance</a>
+      <a class="quick-link" href="#forms">📝 Forms</a>
+      <a class="quick-link" href="#concerns">📣 Concerns</a>
+      <a class="quick-link" href="#handbook">📘 Policies</a>
+      <a class="quick-link" href="#pets">🐾 Pets</a>
+      <a class="quick-link" href="#events">📅 Events</a>
+    </div>
+  </div>
+
   <!-- QUICK LINKS -->
   <section id="quicklinks">
     <h2><span class="icon">🌺</span>Tropical Quick Links</h2>
@@ -675,10 +770,10 @@
       </div>
       <div class="card">
         <span class="label label-success">New</span>
-        <h3>Resident Handbook</h3>
-        <p>View the full Resident Handbook with rules, expectations, and helpful tips.</p>
+        <h3>Resident Handbook Snapshot</h3>
+        <p>Read a mobile-friendly summary of key rules, expectations, and helpful tips.</p>
         <div class="btn-row">
-          <a href="resident-handbook.html" class="btn btn-secondary">Open Handbook</a>
+          <a href="resident-handbook.html" class="btn btn-secondary">Open Handbook Summary</a>
         </div>
       </div>
     </div>
@@ -1017,17 +1112,17 @@
 
   <!-- HANDBOOK & POLICIES -->
   <section id="handbook">
-    <h2><span class="icon">📘</span>Resident Handbook & Key Policies</h2>
+    <h2><span class="icon">📘</span>Resident Handbook Snapshot & Key Policies</h2>
     <p class="subtitle">
-      The official Resident Handbook explains detailed rules and expectations. Highlights are below.
+      Mobile-friendly highlights from the official Resident Handbook. Contact the office for the complete WHA handbook or lease.
     </p>
     <div class="card-grid">
       <div class="card">
         <span class="label">Handbook</span>
-        <h3>Resident Handbook (Full)</h3>
-        <p>Open the handbook for house rules, maintenance tips, and community standards.</p>
+        <h3>Resident Handbook Summary</h3>
+        <p>Browse a concise, phone-friendly summary of house rules, maintenance tips, and community standards.</p>
         <div class="btn-row">
-          <a href="resident-handbook.html" class="btn btn-secondary">View Handbook</a>
+          <a href="resident-handbook.html" class="btn btn-secondary">View Summary</a>
         </div>
       </div>
       <div class="card">

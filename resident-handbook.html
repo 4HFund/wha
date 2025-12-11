@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Luau Manor Resident Handbook</title>
+  <title>Luau Manor Resident Handbook Summary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,19 +99,85 @@
       margin: 0.4rem 0 1rem;
     }
 
+    .section-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(11, 79, 108, 0.12);
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-nav-label {
+      font-weight: 700;
+      color: var(--deep-blue);
+      white-space: nowrap;
+    }
+
+    .section-nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .section-nav-links::-webkit-scrollbar { display: none; }
+
+    .section-link {
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(25,198,193,0.16), rgba(255,209,102,0.16));
+      color: var(--deep-blue);
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid rgba(11, 79, 108, 0.12);
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+    }
+
+    .section-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
     .back-link { display: inline-block; margin-top: 0.8rem; font-weight: 700; }
+
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      h1 { font-size: 1.75rem; }
+      .section-nav { position: sticky; top: 0.5rem; z-index: 500; }
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
-      <h1>Luau Manor Resident Handbook</h1>
-      <p>Quick, colorful reference to the key topics from the Wheeling Housing Authority Resident Handbook. For questions, contact the office at (304) 233-0658 or email <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</p>
+      <h1>Luau Manor Resident Handbook Summary</h1>
+      <p>Quick, colorful reference to key topics from the Wheeling Housing Authority Resident Handbook. For questions, contact the office at (304) 233-0658 or email <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</p>
     </header>
 
-    <div class="note">This page is a friendly summary. Your signed lease, WHA policies, and HUD rules are the final authority.</div>
+    <div class="note">This page is a friendly summary for quick reading—your signed lease, WHA policies, and HUD rules are the final authority.</div>
 
-    <h2>📘 General Conduct</h2>
+    <div class="section-nav" aria-label="Jump to a topic">
+      <span class="section-nav-label">Jump to:</span>
+      <div class="section-nav-links">
+        <a class="section-link" href="#conduct">Conduct</a>
+        <a class="section-link" href="#maintenance">Maintenance</a>
+        <a class="section-link" href="#guests">Guests</a>
+        <a class="section-link" href="#housekeeping">Housekeeping</a>
+        <a class="section-link" href="#pets">Pets</a>
+        <a class="section-link" href="#rent">Rent</a>
+        <a class="section-link" href="#inspections">Inspections</a>
+        <a class="section-link" href="#grievances">Grievances</a>
+        <a class="section-link" href="#bans">Ban Policy</a>
+      </div>
+    </div>
+
+    <h2 id="conduct">📘 General Conduct</h2>
     <p>Be a great neighbor—keep noise down, treat staff and residents with respect, and follow posted guidance in common areas.</p>
     <ul>
       <li>Respect quiet hours and avoid loud music, slamming doors, or shouting in hallways.</li>
@@ -119,7 +185,7 @@
       <li>Do not let strangers “piggyback” into secure areas.</li>
     </ul>
 
-    <h2>🛠️ Maintenance & Repairs</h2>
+    <h2 id="maintenance">🛠️ Maintenance & Repairs</h2>
     <p>Report issues quickly to prevent damage. Non-emergencies can be submitted online from the main page.</p>
     <ul>
       <li>Emergency maintenance: (304) 242-2820 (24/7).</li>
@@ -127,7 +193,7 @@
       <li>Resident-caused damage may result in charges per policy.</li>
     </ul>
 
-    <h2>🚪 Guests & Visitors</h2>
+    <h2 id="guests">🚪 Guests & Visitors</h2>
     <p>You are responsible for the conduct of your guests.</p>
     <ul>
       <li>Follow overnight guest limits and any required registration.</li>
@@ -135,14 +201,14 @@
       <li>Report disturbances or unsafe behavior to the office and, if needed, 911.</li>
     </ul>
 
-    <h2>🏠 Housekeeping & Safety</h2>
+    <h2 id="housekeeping">🏠 Housekeeping & Safety</h2>
     <ul>
       <li>Keep exits, smoke detectors, and sprinklers clear of clutter.</li>
       <li>Bag trash and dispose of it in designated locations only.</li>
       <li>Report pests early for treatment; maintain a sanitary unit.</li>
     </ul>
 
-    <h2>🐾 Pet & Assistance Animals</h2>
+    <h2 id="pets">🐾 Pet & Assistance Animals</h2>
     <p>Pets must be registered and follow behavior rules.</p>
     <ul>
       <li>Typical limit: small household pets, up to ~25 lbs for dogs/cats.</li>
@@ -154,21 +220,21 @@
       <span class="pill">No aggressive breeds</span>
     </div>
 
-    <h2>💳 Rent & Fees</h2>
+    <h2 id="rent">💳 Rent & Fees</h2>
     <ul>
       <li>Rent is due on the 1st; late fees may apply after policy deadlines.</li>
       <li>Air conditioner charges apply when units are installed.</li>
       <li>Contact the office early if you anticipate difficulty paying.</li>
     </ul>
 
-    <h2>🔍 Inspections & Entry</h2>
+    <h2 id="inspections">🔍 Inspections & Entry</h2>
     <ul>
       <li>Annual and special inspections are required; reasonable notice is provided when possible.</li>
       <li>Management may enter without notice during emergencies.</li>
       <li>Refusal of entry can lead to lease enforcement action.</li>
     </ul>
 
-    <h2>🧭 Grievances & Hearings</h2>
+    <h2 id="grievances">🧭 Grievances & Hearings</h2>
     <p>You may request an informal hearing or grievance for certain decisions.</p>
     <ul>
       <li>Requests must be made in writing within policy timeframes.</li>
@@ -176,7 +242,7 @@
       <li>Email <a href="mailto:sidney@wheelingwv-pha.org?subject=Hearing%20Request%20-%20Luau%20Manor">sidney@wheelingwv-pha.org</a> or visit the office to begin.</li>
     </ul>
 
-    <h2>🚫 Ban Policy</h2>
+    <h2 id="bans">🚫 Ban Policy</h2>
     <ul>
       <li>Banned individuals may not be invited or allowed in the building.</li>
       <li>Report sightings to the office or security; call 911 if safety is at risk.</li>
