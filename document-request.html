@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Documents • Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff7a5c;
+      --primary-dark: #e25a3e;
+      --aqua: #19c6c1;
+      --sun: #ffd166;
+      --deep-blue: #0b4f6c;
+      --sand: #fff7ec;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --text-main: #1f2c3d;
+      --text-muted: #415063;
+      --danger: #c0392b;
+      --success: #2e7d32;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; background: linear-gradient(135deg, #ffe7c6 0%, #fff7ec 40%, #e4fbff 100%); color: var(--text-main); line-height: 1.65; min-height: 100vh; }
+
+    header { background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%); color: #0f172a; padding: 1.1rem 1.25rem 1.35rem; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12); border-bottom: 4px solid rgba(12, 79, 108, 0.08); }
+    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(12, 79, 108, 0.35); text-decoration-thickness: 2px; }
+    a:hover { text-decoration-color: var(--primary); }
+
+    .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
+    .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
+    nav { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
+    nav a { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.78); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; }
+    nav a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+
+    main { max-width: 960px; margin: 0 auto; padding: 1.6rem 1.25rem 2.6rem; }
+
+    .hero { background: #ffffff; border: 1px solid rgba(0, 121, 107, 0.1); border-radius: 1.4rem; padding: 1.6rem 1.4rem; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1); margin: 1.15rem 0 1.4rem; display: grid; gap: 1rem; }
+    .hero h1 { font-family: "Baloo 2", "Inter", sans-serif; font-size: 2rem; color: var(--deep-blue); }
+    .hero p { color: var(--text-muted); }
+    .hero strong { color: var(--deep-blue); }
+
+    .label { display: inline-block; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: linear-gradient(120deg, rgba(255, 122, 92, 0.18), rgba(25, 198, 193, 0.18)); color: var(--deep-blue); margin-bottom: 0.4rem; font-weight: 700; letter-spacing: 0.01em; }
+
+    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.05rem; border: 1px solid rgba(12, 79, 108, 0.08); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--deep-blue); }
+    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
+    .key-points li { margin-bottom: 0.28rem; }
+
+    .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
+    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 0.55rem 0.7rem; border-radius: 0.65rem; border: 1px solid #d9d9d9; background: #fafafa; font-size: 0.95rem; transition: border 0.2s, box-shadow 0.2s; }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22, 105, 122, 0.15); background: #fff; }
+
+    .btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; font-weight: 700; letter-spacing: 0.01em; }
+    .btn-primary { background: linear-gradient(120deg, var(--primary), var(--primary-dark)); color: #fff; border-color: rgba(0, 0, 0, 0.05); box-shadow: 0 6px 16px rgba(226, 90, 62, 0.35); }
+    .btn-soft { background: rgba(255, 255, 255, 0.8); color: var(--deep-blue); border-color: rgba(12, 79, 108, 0.1); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+
+    .form-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.4rem; }
+    .form-note { font-size: 0.85rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a class="brand" href="index.html">
+        Luau Manor
+        <span>Resident Hub • Wheeling Housing Authority</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <h1>Request Documents or Letters</h1>
+        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup).</p>
+      </div>
+      <div class="card">
+        <span class="label">Ideas for Requests</span>
+        <ul class="key-points">
+          <li>Rent letters or payment history.</li>
+          <li>Copy of your lease or addenda.</li>
+          <li>Reasonable accommodation packet.</li>
+          <li>Guest or overnight visitor registration.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="form-card">
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <input type="hidden" name="_subject" value="Luau Manor - Document Request">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="document-request.html#top">
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Your Name</label>
+            <input id="name" type="text" name="Resident Name" placeholder="First and last name" required>
+          </div>
+          <div class="form-field">
+            <label for="unit">Unit / Apartment Number</label>
+            <input id="unit" type="text" name="Unit" placeholder="Example: 305" required>
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" name="Phone" placeholder="(304) 555-1234" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Email (optional)</label>
+            <input id="email" type="email" name="Email" placeholder="you@example.com">
+          </div>
+          <div class="form-field">
+            <label for="request">What do you need?</label>
+            <select id="request" name="Request Type" required>
+              <option value="">Select one</option>
+              <option>Rent letter / verification</option>
+              <option>Ledger or payment history</option>
+              <option>Copy of lease</option>
+              <option>Reasonable accommodation packet</option>
+              <option>Payment agreement forms (if applicable)</option>
+              <option>Guest / overnight visitor registration</option>
+              <option>Pet registration paperwork</option>
+              <option>Household or income change form</option>
+              <option>Other (describe below)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="details">Details or Special Instructions</label>
+          <textarea id="details" name="Details" placeholder="Tell us if you need the document printed, emailed, or held in the office." required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Send Request</button>
+          <span class="form-note">Most requests are processed during normal office hours.</span>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

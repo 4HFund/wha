@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Report a Concern • Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff7a5c;
+      --primary-dark: #e25a3e;
+      --aqua: #19c6c1;
+      --sun: #ffd166;
+      --deep-blue: #0b4f6c;
+      --sand: #fff7ec;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --text-main: #1f2c3d;
+      --text-muted: #415063;
+      --danger: #c0392b;
+      --success: #2e7d32;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; background: linear-gradient(135deg, #ffe7c6 0%, #fff7ec 40%, #e4fbff 100%); color: var(--text-main); line-height: 1.65; min-height: 100vh; }
+
+    header { background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%); color: #0f172a; padding: 1.1rem 1.25rem 1.35rem; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12); border-bottom: 4px solid rgba(12, 79, 108, 0.08); }
+    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(12, 79, 108, 0.35); text-decoration-thickness: 2px; }
+    a:hover { text-decoration-color: var(--primary); }
+
+    .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
+    .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
+    nav { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
+    nav a { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.78); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; }
+    nav a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+
+    main { max-width: 960px; margin: 0 auto; padding: 1.6rem 1.25rem 2.6rem; }
+
+    .hero { background: #ffffff; border: 1px solid rgba(0, 121, 107, 0.1); border-radius: 1.4rem; padding: 1.6rem 1.4rem; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1); margin: 1.15rem 0 1.4rem; display: grid; gap: 1rem; }
+    .hero h1 { font-family: "Baloo 2", "Inter", sans-serif; font-size: 2rem; color: var(--deep-blue); }
+    .hero p { color: var(--text-muted); }
+    .hero strong { color: var(--deep-blue); }
+
+    .label { display: inline-block; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: linear-gradient(120deg, rgba(255, 122, 92, 0.18), rgba(25, 198, 193, 0.18)); color: var(--deep-blue); margin-bottom: 0.4rem; font-weight: 700; letter-spacing: 0.01em; }
+    .label-danger { background: rgba(192, 57, 43, 0.12); color: var(--danger); }
+
+    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.05rem; border: 1px solid rgba(12, 79, 108, 0.08); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--deep-blue); }
+    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
+    .key-points li { margin-bottom: 0.28rem; }
+
+    .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
+    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
+    input[type="text"], input[type="email"], select, textarea { width: 100%; padding: 0.55rem 0.7rem; border-radius: 0.65rem; border: 1px solid #d9d9d9; background: #fafafa; font-size: 0.95rem; transition: border 0.2s, box-shadow 0.2s; }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22, 105, 122, 0.15); background: #fff; }
+
+    .btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; font-weight: 700; letter-spacing: 0.01em; }
+    .btn-secondary { background: linear-gradient(120deg, var(--aqua), #6ee7e0); color: #0b4f6c; border-color: rgba(11, 79, 108, 0.15); box-shadow: 0 6px 16px rgba(25, 198, 193, 0.3); }
+    .btn-secondary:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(25, 198, 193, 0.45); }
+
+    .form-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.4rem; }
+    .form-note { font-size: 0.85rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a class="brand" href="index.html">
+        Luau Manor
+        <span>Resident Hub • Wheeling Housing Authority</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="document-request.html">Documents</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <h1>Report a Concern</h1>
+        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up.</p>
+      </div>
+      <div class="card">
+        <span class="label label-danger">Call 911 First for Emergencies</span>
+        <p>After contacting emergency responders, you can still document the situation here so management is aware.</p>
+        <p><strong>Emergency maintenance:</strong> (304) 242-2820</p>
+      </div>
+    </section>
+
+    <div class="form-card">
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="concern-report.html#top">
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Your Name (optional)</label>
+            <input id="name" type="text" name="Your Name" placeholder="You may remain anonymous if you prefer">
+          </div>
+          <div class="form-field">
+            <label for="contact">Phone or Email (optional)</label>
+            <input id="contact" type="text" name="Contact" placeholder="Include if you want a follow-up">
+          </div>
+          <div class="form-field">
+            <label for="location">Location of Concern</label>
+            <input id="location" type="text" name="Location" placeholder="Example: 2nd floor hallway, apartment number" required>
+          </div>
+          <div class="form-field">
+            <label for="datetime">Date & Time (if known)</label>
+            <input id="datetime" type="text" name="Date and Time" placeholder="Example: March 12 around 9:30 PM">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="details">What Happened?</label>
+          <textarea id="details" name="Details" placeholder="Describe the issue, people involved, and any safety concerns." required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-secondary">Submit Concern</button>
+          <span class="form-note">Call 911 first for emergencies, then notify management.</span>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
