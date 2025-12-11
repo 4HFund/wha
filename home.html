@@ -73,6 +73,9 @@
       font-weight: 700;
       font-size: 1.5rem;
       letter-spacing: 0.02em;
+      text-decoration: none;
+      color: #0f172a;
+      display: inline-block;
     }
 
     .brand span {
@@ -588,10 +591,10 @@
 
 <header>
   <div class="nav-container">
-    <div class="brand">
+    <a class="brand" href="#top">
       Luau Manor
       <span>Resident Hub • Wheeling Housing Authority</span>
-    </div>
+    </a>
     <nav>
       <a href="#top">Home</a>
       <a href="#maintenance">Maintenance</a>
@@ -697,6 +700,7 @@
           <input type="hidden" name="_subject" value="Luau Manor - Maintenance Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="index.html#top">
 
           <label>
             Your Name
@@ -755,6 +759,7 @@
           <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="index.html#top">
 
           <label>
             Your Name (optional)
@@ -795,6 +800,7 @@
           <input type="hidden" name="_subject" value="Luau Manor - Document Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="index.html#top">
 
           <label>
             Your Name
@@ -859,7 +865,7 @@
         <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
           <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://4hfund.github.io/wha/">
+          <input type="hidden" name="_next" value="index.html#top">
           <div class="form-grid">
             <div class="form-field">
               <label for="maint-name">Your Name</label>
@@ -1286,6 +1292,27 @@
       </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      const homeUrl = new URL('index.html#top', window.location.href).href;
+
+      document
+        .querySelectorAll('form[action^="https://formsubmit.co"]')
+        .forEach((form) => {
+          let nextInput = form.querySelector('input[name="_next"]');
+
+          if (!nextInput) {
+            nextInput = document.createElement('input');
+            nextInput.type = 'hidden';
+            nextInput.name = '_next';
+            form.appendChild(nextInput);
+          }
+
+          nextInput.value = homeUrl;
+        });
+    })();
+  </script>
 </main>
 
 <footer>
