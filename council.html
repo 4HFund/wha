@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resident Council | Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
+      <nav>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+        <a href="policies.html">Policies</a>
+        <a href="pets.html">Pets</a>
+        <a href="events.html">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="small-label">Resident Council</p>
+        <h1>Stay involved with your community</h1>
+        <p>Share ideas, volunteer, and stay updated on council announcements for Luau Manor.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Connect with the council</h2>
+        <p>Share event ideas, volunteer to help, or suggest improvements for Luau Manor.</p>
+        <div class="actions">
+          <a class="btn outline" href="mailto:sidney@wheelingwv-pha.org?subject=Resident%20Council%20Idea%20-%20Luau%20Manor">Share an idea / volunteer</a>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Announcements</h2>
+        <p>Council meeting notices and activity flyers are posted in the lobby and will be shared here when available.</p>
+      </div>
+      <div class="card">
+        <h2>Stay in the loop</h2>
+        <ul>
+          <li>Watch the lobby bulletin boards for meeting dates and agendas.</li>
+          <li>Check the <a href="events.html">announcements & events</a> page for upcoming activities.</li>
+          <li>Talk with your neighbors and council representatives about what matters most.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

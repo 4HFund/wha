@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Announcements & Events | Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
+      <nav>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+        <a href="policies.html">Policies</a>
+        <a href="pets.html">Pets</a>
+        <a href="council.html">Council</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="small-label">Announcements & Events</p>
+        <h1>Current notices for Luau Manor</h1>
+        <p>Check here for building updates and resident activities. Watch lobby bulletin boards for the latest flyers and sign-up sheets.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Building updates</h2>
+        <ul>
+          <li><strong>Elevator notice:</strong> One elevator is out of service while we wait for a part. We will post a timeline as soon as it is available.</li>
+          <li><strong>Pest control:</strong> Scheduled service will be posted on each floor’s bulletin board.</li>
+          <li><strong>Signage:</strong> New signs have been added to improve safety and communication around the building.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Resident activities</h2>
+        <ul>
+          <li><strong>Bingo Night:</strong> Monthly in the community room.</li>
+          <li><strong>Coffee &amp; Conversations:</strong> Occasional morning gatherings with local partners.</li>
+          <li><strong>Resident of the Month:</strong> Ongoing voting and recognition.</li>
+        </ul>
+        <p>See lobby bulletin boards and flyers for dates, times, and any sign-up requirements.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
