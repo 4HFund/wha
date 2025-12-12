@@ -880,7 +880,7 @@
       <div class="card" id="maintenance-form">
         <span class="label">Maintenance</span>
         <h3>Submit a Maintenance Request</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance">
           <input type="hidden" name="_subject" value="Luau Manor - Maintenance Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -939,7 +939,7 @@
       <div class="card" id="concern-form">
         <span class="label label-danger">Concerns & Incidents</span>
         <h3>Report a Concern</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-concern">
           <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -980,7 +980,7 @@
       <div class="card" id="document-form">
         <span class="label">Documents & Letters</span>
         <h3>Request Documents</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-documents">
           <input type="hidden" name="_subject" value="Luau Manor - Document Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -1046,7 +1046,7 @@
       <div class="card">
         <span class="label">Submit Online</span>
         <h3>Work Order Form</h3>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance-detailed">
           <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="thank-you.html">
@@ -1479,7 +1479,7 @@
 
   <script>
     (function () {
-      const thankYouUrl = new URL('thank-you.html', window.location.href).href;
+      const thankYouBase = new URL('thank-you.html', window.location.href);
 
       document
         .querySelectorAll('form[action^="https://formsubmit.co"]')
@@ -1493,7 +1493,10 @@
             form.appendChild(nextInput);
           }
 
-          nextInput.value = thankYouUrl;
+          const nextUrl = new URL(thankYouBase);
+          nextUrl.searchParams.set('from', form.dataset.formSource || 'resident-hub');
+
+          nextInput.value = nextUrl.toString();
         });
     })();
   </script>
