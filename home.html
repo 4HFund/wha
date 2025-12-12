@@ -9,15 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #ff7a5c;
-      --primary-dark: #e25a3e;
-      --aqua: #19c6c1;
+      --primary: #f76b6a;
+      --primary-dark: #d85151;
+      --aqua: #1ec6b6;
       --sun: #ffd166;
-      --deep-blue: #0b4f6c;
+      --deep-blue: #0f3057;
       --sand: #fff7ec;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text-main: #1f2c3d;
-      --text-muted: #415063;
+      --leaf: #3fb27f;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-main: #132134;
+      --text-muted: #3f5369;
       --danger: #c0392b;
       --success: #2e7d32;
     }
@@ -30,10 +31,14 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #ffe7c6 0%, #fff7ec 40%, #e4fbff 100%);
+      background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%),
+                  radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%),
+                  radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%),
+                  linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%);
       color: var(--text-main);
       line-height: 1.65;
       min-height: 100vh;
+      background-attachment: fixed;
     }
 
     a {
@@ -57,6 +62,16 @@
       z-index: 1000;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
       border-bottom: 4px solid rgba(12, 79, 108, 0.08);
+      overflow: hidden;
+    }
+
+    header:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.28), transparent 35%),
+                  radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16), transparent 32%);
+      pointer-events: none;
     }
 
     .nav-container {
@@ -106,7 +121,7 @@
       border-radius: 999px;
       border: 1px solid rgba(15, 23, 42, 0.12);
       color: #0f172a;
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.9);
       text-decoration: none;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
       transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease;
@@ -122,6 +137,33 @@
       max-width: 1150px;
       margin: 0 auto;
       padding: 1.6rem 1.25rem 2.6rem;
+    }
+
+    .info-strip {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(11, 79, 108, 0.1);
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin: 0.85rem auto 0;
+      max-width: 960px;
+    }
+
+    .info-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(30, 198, 182, 0.18), rgba(255, 209, 102, 0.18));
+      color: var(--deep-blue);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
     }
 
     .quick-nav {
@@ -690,6 +732,13 @@
     </nav>
   </div>
 </header>
+
+<div class="info-strip" aria-label="Immediate contact info">
+  <span class="info-chip">🌺 Aloha! Luau Manor Resident Hub</span>
+  <span class="info-chip">📞 Office: (304) 233-0658</span>
+  <span class="info-chip">🚨 Emergencies: (304) 242-2820</span>
+  <span class="info-chip">📍 Wheeling, WV</span>
+</div>
 
 <main id="top">
   <!-- HERO -->
