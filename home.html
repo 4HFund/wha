@@ -881,6 +881,7 @@
         <span class="label">Maintenance</span>
         <h3>Submit a Maintenance Request</h3>
         <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance">
+          <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org" />
           <input type="hidden" name="_subject" value="Luau Manor - Maintenance Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -981,6 +982,7 @@
         <span class="label">Documents & Letters</span>
         <h3>Request Documents</h3>
         <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-documents">
+          <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org" />
           <input type="hidden" name="_subject" value="Luau Manor - Document Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -1043,13 +1045,14 @@
       Use the form below for non-emergency repairs. Emergency? Call (304) 242-2820 right away.
     </p>
     <div class="card-grid">
-      <div class="card">
-        <span class="label">Submit Online</span>
-        <h3>Work Order Form</h3>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance-detailed">
-          <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="thank-you.html">
+        <div class="card">
+          <span class="label">Submit Online</span>
+          <h3>Work Order Form</h3>
+          <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance-detailed">
+            <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org" />
+            <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thank-you.html">
           <div class="form-grid">
             <div class="form-field">
               <label for="maint-name">Your Name</label>
