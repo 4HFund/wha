@@ -55,6 +55,14 @@
     .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
     .key-points li { margin-bottom: 0.28rem; }
 
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1rem 0 1.2rem; }
+    .mini-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(12, 79, 108, 0.08); border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); display: grid; gap: 0.35rem; }
+    .mini-card strong { color: var(--deep-blue); }
+    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(30, 198, 182, 0.12); color: var(--deep-blue); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
+    .quick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; color: var(--text-muted); font-size: 0.95rem; }
+    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
+    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
+
     .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
     .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -103,7 +111,7 @@
     <section class="hero">
       <div>
         <h1>Request Documents or Letters</h1>
-        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup). You can also call or text <strong>(304) 555-2024</strong> for quick questions.</p>
+        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup). The form works on any device and sends straight to the office. You can also call or text <strong>(304) 555-2024</strong> for quick questions.</p>
       </div>
       <div class="card">
         <span class="label">Ideas for Requests</span>
@@ -115,6 +123,36 @@
         </ul>
       </div>
     </section>
+
+    <div class="info-grid" aria-label="Tips for document requests">
+      <div class="mini-card">
+        <span class="badge">Fast and flexible</span>
+        <strong>Most requests take under a minute to send.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Tell us if you want the document emailed, printed, or held for pickup.</span></li>
+          <li><span class="dot"></span><span>Add names that should appear on the letter and any deadlines you have.</span></li>
+          <li><span class="dot"></span><span>We’ll confirm if identification is needed before releasing paperwork.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">After you submit</span>
+        <strong>We route the request to the right team.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>You’ll see a confirmation page after submitting.</span></li>
+          <li><span class="dot"></span><span>We typically respond during business hours with timing or next steps.</span></li>
+          <li><span class="dot"></span><span>If something is missing, we’ll call or text the phone number you provide.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">Common needs</span>
+        <strong>Ledgers, verification letters, pet forms, and change forms.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>For maintenance emergencies, call <strong>(304) 242-2820</strong> instead.</span></li>
+          <li><span class="dot"></span><span>For behavior concerns, use the Concern form so we can track it.</span></li>
+          <li><span class="dot"></span><span>Still unsure? Call/Text <strong>(304) 555-2024</strong> and we’ll help.</span></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="form-card">
       <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">

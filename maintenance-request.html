@@ -100,6 +100,14 @@
     .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
     .key-points li { margin-bottom: 0.28rem; }
 
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1rem 0 1.2rem; }
+    .mini-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(12, 79, 108, 0.08); border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); display: grid; gap: 0.35rem; }
+    .mini-card strong { color: var(--deep-blue); }
+    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(30, 198, 182, 0.12); color: var(--deep-blue); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
+    .quick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; color: var(--text-muted); font-size: 0.95rem; }
+    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
+    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
+
     .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
     .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -153,7 +161,7 @@
       <div>
         <h1>Maintenance Request</h1>
         <p>
-          Use this form for non-emergency repairs. For emergencies, call <strong>(304) 242-2820</strong> 24/7.
+          Use this form for non-emergency repairs. It works on any phone, tablet, or computer and sends straight to the maintenance team.
           For quick questions or updates, call or text <strong>(304) 555-2024</strong>.
         </p>
       </div>
@@ -167,6 +175,36 @@
         </ul>
       </div>
     </section>
+
+    <div class="info-grid" aria-label="What to know before you submit">
+      <div class="mini-card">
+        <span class="badge">How to submit</span>
+        <strong>It takes three quick steps.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Share your name, unit, and the best phone number.</span></li>
+          <li><span class="dot"></span><span>Tell us the room and what’s wrong (add photos if you reply by text).</span></li>
+          <li><span class="dot"></span><span>Choose permission to enter so we can schedule without delays.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">After you submit</span>
+        <strong>We review it the same business day.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Urgent but non-emergency requests are prioritized within 24 hours when possible.</span></li>
+          <li><span class="dot"></span><span>Routine repairs are scheduled for the next available appointment.</span></li>
+          <li><span class="dot"></span><span>We’ll text or call if we need photos, a time window, or to confirm access.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">Best for</span>
+        <strong>Leaks, appliances, doors, outlets, and safety issues.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Emergencies? Call <strong>(304) 242-2820</strong> so a tech is dispatched immediately.</span></li>
+          <li><span class="dot"></span><span>Comfort issues like heating or cooling are higher priority during extreme weather.</span></li>
+          <li><span class="dot"></span><span>You can always call/text <strong>(304) 555-2024</strong> for updates.</span></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="form-card">
       <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">

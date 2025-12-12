@@ -56,6 +56,14 @@
     .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
     .key-points li { margin-bottom: 0.28rem; }
 
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1rem 0 1.2rem; }
+    .mini-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(12, 79, 108, 0.08); border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); display: grid; gap: 0.35rem; }
+    .mini-card strong { color: var(--deep-blue); }
+    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(30, 198, 182, 0.12); color: var(--deep-blue); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
+    .quick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; color: var(--text-muted); font-size: 0.95rem; }
+    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
+    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
+
     .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
     .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -105,7 +113,7 @@
     <section class="hero">
       <div>
         <h1>Report a Concern</h1>
-        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up. For quick updates, call or text <strong>(304) 555-2024</strong>.</p>
+        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up. The form is mobile-friendly and can be submitted anonymously. For quick updates, call or text <strong>(304) 555-2024</strong>.</p>
       </div>
       <div class="card">
         <span class="label label-danger">Call 911 First for Emergencies</span>
@@ -113,6 +121,36 @@
         <p><strong>Emergency maintenance:</strong> (304) 242-2820</p>
       </div>
     </section>
+
+    <div class="info-grid" aria-label="Guidance for concern reports">
+      <div class="mini-card">
+        <span class="badge">Fast and simple</span>
+        <strong>Most reports take under a minute.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>You may leave your name blank if you prefer to stay anonymous.</span></li>
+          <li><span class="dot"></span><span>Include the location and time so staff can verify and respond.</span></li>
+          <li><span class="dot"></span><span>Add safety concerns or ongoing patterns so we can prioritize correctly.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">After you submit</span>
+        <strong>Your report routes to management right away.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>You’ll get a confirmation screen after sending the form.</span></li>
+          <li><span class="dot"></span><span>We may call or text if clarification is needed for follow-up.</span></li>
+          <li><span class="dot"></span><span>For ongoing issues, note how often it happens so we can track trends.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">Use this form for</span>
+        <strong>Noise, guests, safety, or housekeeping concerns.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Wellness checks or emergencies should go to <strong>911</strong> first.</span></li>
+          <li><span class="dot"></span><span>Maintenance emergencies should call <strong>(304) 242-2820</strong>.</span></li>
+          <li><span class="dot"></span><span>Other questions? Call/Text <strong>(304) 555-2024</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="form-card">
       <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
