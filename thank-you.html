@@ -115,17 +115,112 @@
 </head>
 <body>
   <div class="card">
-    <div class="badge">✅ Submission received</div>
-    <h1>Thank you for your submission!</h1>
-    <p>
+    <div class="badge" id="badge-status">✅ Submission received</div>
+    <h1 id="thankyou-title">Thank you for your submission!</h1>
+    <p id="thankyou-copy">
       We received your form and will follow up shortly. If this is an emergency or you need immediate help,
       please call the office or use the numbers below to reach us right away.
     </p>
+    <p id="followup-text">
+      While you wait, you can keep your phone nearby for a call or text in case we need clarification.
+    </p>
     <div class="actions">
-      <a class="btn btn-primary" href="index.html#top">Return to Resident Hub</a>
-      <a class="btn btn-secondary" href="home.html#forms">Fill out another form</a>
-      <a class="btn btn-quiet" href="tel:3045552024">Call/Text (304) 555-2024</a>
+      <a class="btn btn-primary" id="primary-link" href="index.html#top">Return to Resident Hub</a>
+      <a class="btn btn-secondary" id="secondary-link" href="home.html#forms">Fill out another form</a>
+      <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
     </div>
   </div>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const source = params.get('from') || 'resident-hub';
+
+      const primaryLink = document.getElementById('primary-link');
+      const secondaryLink = document.getElementById('secondary-link');
+      const followupText = document.getElementById('followup-text');
+      const title = document.getElementById('thankyou-title');
+
+      const copyBySource = {
+        'resident-hub': {
+          title: 'Thanks for reaching out!',
+          primary: { href: 'home.html#forms', text: 'Return to online forms' },
+          secondary: { href: 'index.html#top', text: 'Go to Resident Hub' },
+          followup:
+            'We will review your submission soon. Call the office if you need to update details or provide photos.',
+        },
+        'home-maintenance': {
+          title: 'Maintenance request received',
+          primary: { href: 'home.html#maintenance-form', text: 'Submit another maintenance request' },
+          secondary: { href: 'maintenance-request.html#top', text: 'Open full maintenance page' },
+          followup:
+            'Our maintenance team will review the details and reach out if we need a time window or permission to enter.',
+        },
+        'home-maintenance-detailed': {
+          title: 'Maintenance request received',
+          primary: { href: 'home.html#maintenance', text: 'Return to maintenance info' },
+          secondary: { href: 'home.html#maintenance-form', text: 'Send another maintenance request' },
+          followup:
+            'We will prioritize urgent issues first. For emergencies, call (304) 242-2820 instead of replying to this email.',
+        },
+        'maintenance-page': {
+          title: 'Maintenance request received',
+          primary: { href: 'maintenance-request.html#top', text: 'Back to maintenance request page' },
+          secondary: { href: 'home.html#maintenance', text: 'View maintenance tips' },
+          followup:
+            'We will contact you using the phone or email you provided. Please keep your phone nearby for scheduling.',
+        },
+        'home-concern': {
+          title: 'Concern submitted',
+          primary: { href: 'home.html#concern-form', text: 'Submit another concern' },
+          secondary: { href: 'concern-report.html#top', text: 'Open concern form page' },
+          followup:
+            'If this relates to safety or criminal activity, remember to call 911 first before waiting for a follow-up.',
+        },
+        'concern-page': {
+          title: 'Concern submitted',
+          primary: { href: 'concern-report.html#top', text: 'Back to concern form' },
+          secondary: { href: 'home.html#concerns', text: 'View safety reminders' },
+          followup:
+            'Management will review your report. If you requested a follow-up, keep an eye on your phone for a call or text.',
+        },
+        'home-documents': {
+          title: 'Document request received',
+          primary: { href: 'home.html#document-form', text: 'Send another document request' },
+          secondary: { href: 'home.html#forms', text: 'Return to online forms' },
+          followup:
+            'Most document requests are processed during office hours. We will contact you if anything else is needed.',
+        },
+        'document-request': {
+          title: 'Document request received',
+          primary: { href: 'document-request.html#top', text: 'Back to document request page' },
+          secondary: { href: 'home.html#forms', text: 'See all online forms' },
+          followup:
+            'Expect a follow-up during office hours. If you need to add details, reply to the confirmation email or call the office.',
+        },
+      };
+
+      const selected = copyBySource[source] || copyBySource['resident-hub'];
+
+      if (selected) {
+        if (selected.title) {
+          title.textContent = selected.title;
+        }
+
+        if (selected.primary) {
+          primaryLink.href = selected.primary.href;
+          primaryLink.textContent = selected.primary.text;
+        }
+
+        if (selected.secondary) {
+          secondaryLink.href = selected.secondary.href;
+          secondaryLink.textContent = selected.secondary.text;
+        }
+
+        if (selected.followup) {
+          followupText.textContent = selected.followup;
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

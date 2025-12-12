@@ -104,7 +104,7 @@
 
   <div class="info-strip" aria-label="Immediate contact info">
     <span class="info-chip">🌺 Share a concern securely</span>
-    <span class="info-chip">📱 Call/Text Cell: (304) 555-2024</span>
+    <span class="info-chip">📱 Call/Text Cell: (304) 215-2584</span>
     <span class="info-chip">📞 Office: (304) 233-0658</span>
     <span class="info-chip">🚨 Emergency Maintenance: (304) 242-2820</span>
   </div>
@@ -113,7 +113,7 @@
     <section class="hero">
       <div>
         <h1>Report a Concern</h1>
-        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up. The form is mobile-friendly and can be submitted anonymously. For quick updates, call or text <strong>(304) 555-2024</strong>.</p>
+        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up. The form is mobile-friendly and can be submitted anonymously. For quick updates, call or text <strong>(304) 215-2584</strong>.</p>
       </div>
       <div class="card">
         <span class="label label-danger">Call 911 First for Emergencies</span>
@@ -147,13 +147,13 @@
         <ul class="quick-list">
           <li><span class="dot"></span><span>Wellness checks or emergencies should go to <strong>911</strong> first.</span></li>
           <li><span class="dot"></span><span>Maintenance emergencies should call <strong>(304) 242-2820</strong>.</span></li>
-          <li><span class="dot"></span><span>Other questions? Call/Text <strong>(304) 555-2024</strong>.</span></li>
+          <li><span class="dot"></span><span>Other questions? Call/Text <strong>(304) 215-2584</strong>.</span></li>
         </ul>
       </div>
     </div>
 
     <div class="form-card">
-      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="concern-page">
         <input type="hidden" name="_next" value="thank-you.html" />
         <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
         <input type="text" name="_honey" style="display:none">
@@ -162,11 +162,11 @@
         <div class="form-grid">
           <div class="form-field">
             <label for="name">Your Name (optional)</label>
-            <input id="name" type="text" name="Your Name" placeholder="You may remain anonymous if you prefer">
+            <input id="name" type="text" name="Your Name" placeholder="You may remain anonymous if you prefer" autocomplete="name">
           </div>
           <div class="form-field">
             <label for="contact">Phone or Email (optional)</label>
-            <input id="contact" type="text" name="Contact" placeholder="Include if you want a follow-up">
+            <input id="contact" type="text" name="Contact" placeholder="Include if you want a follow-up" autocomplete="tel">
           </div>
           <div class="form-field">
             <label for="location">Location of Concern</label>
@@ -192,8 +192,25 @@
   </main>
 
   <div class="mobile-action-bar" aria-label="Quick contact actions">
-    <a class="btn btn-quiet" href="tel:3045552024">Call/Text (304) 555-2024</a>
+    <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
     <a class="btn btn-secondary" href="tel:3042330658">Call Office</a>
   </div>
+
+  <script>
+    (function () {
+      const thankYouBase = new URL('thank-you.html', window.location.href);
+
+      document
+        .querySelectorAll('form[action^="https://formsubmit.co"]')
+        .forEach((form) => {
+          const nextField =
+            form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
+
+          const nextUrl = new URL(thankYouBase);
+          nextUrl.searchParams.set('from', form.dataset.formSource || 'concern-report');
+          nextField.value = nextUrl.toString();
+        });
+    })();
+  </script>
 </body>
 </html>

@@ -102,7 +102,7 @@
 
   <div class="info-strip" aria-label="Immediate contact info">
     <span class="info-chip">🌺 Request documents and letters</span>
-    <span class="info-chip">📱 Call/Text Cell: (304) 555-2024</span>
+    <span class="info-chip">📱 Call/Text Cell: (304) 215-2584</span>
     <span class="info-chip">📞 Office: (304) 233-0658</span>
     <span class="info-chip">🚨 Emergency Maintenance: (304) 242-2820</span>
   </div>
@@ -111,7 +111,7 @@
     <section class="hero">
       <div>
         <h1>Request Documents or Letters</h1>
-        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup). The form works on any device and sends straight to the office. You can also call or text <strong>(304) 555-2024</strong> for quick questions.</p>
+        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup). The form works on any device and sends straight to the office. You can also call or text <strong>(304) 215-2584</strong> for quick questions.</p>
       </div>
       <div class="card">
         <span class="label">Ideas for Requests</span>
@@ -149,13 +149,13 @@
         <ul class="quick-list">
           <li><span class="dot"></span><span>For maintenance emergencies, call <strong>(304) 242-2820</strong> instead.</span></li>
           <li><span class="dot"></span><span>For behavior concerns, use the Concern form so we can track it.</span></li>
-          <li><span class="dot"></span><span>Still unsure? Call/Text <strong>(304) 555-2024</strong> and we’ll help.</span></li>
+          <li><span class="dot"></span><span>Still unsure? Call/Text <strong>(304) 215-2584</strong> and we’ll help.</span></li>
         </ul>
       </div>
     </div>
 
     <div class="form-card">
-      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="document-request">
         <input type="hidden" name="_next" value="thank-you.html" />
         <input type="hidden" name="_subject" value="Luau Manor - Document Request">
         <input type="text" name="_honey" style="display:none">
@@ -164,19 +164,19 @@
         <div class="form-grid">
           <div class="form-field">
             <label for="name">Your Name</label>
-            <input id="name" type="text" name="Resident Name" placeholder="First and last name" required>
+            <input id="name" type="text" name="Resident Name" placeholder="First and last name" autocomplete="name" required>
           </div>
           <div class="form-field">
             <label for="unit">Unit / Apartment Number</label>
-            <input id="unit" type="text" name="Unit" placeholder="Example: 305" required>
+            <input id="unit" type="text" name="Unit" placeholder="Example: 305" autocomplete="address-line2" required>
           </div>
           <div class="form-field">
             <label for="phone">Phone Number</label>
-            <input id="phone" type="tel" name="Phone" placeholder="(304) 555-1234" required>
+            <input id="phone" type="tel" name="Phone" placeholder="(304) 555-1234" autocomplete="tel" required>
           </div>
           <div class="form-field">
             <label for="email">Email (optional)</label>
-            <input id="email" type="email" name="Email" placeholder="you@example.com">
+            <input id="email" type="email" name="Email" placeholder="you@example.com" autocomplete="email">
           </div>
           <div class="form-field">
             <label for="request">What do you need?</label>
@@ -209,8 +209,25 @@
   </main>
 
   <div class="mobile-action-bar" aria-label="Quick contact actions">
-    <a class="btn btn-quiet" href="tel:3045552024">Call/Text (304) 555-2024</a>
+    <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
     <a class="btn btn-secondary" href="tel:3042330658">Call Office</a>
   </div>
+
+  <script>
+    (function () {
+      const thankYouBase = new URL('thank-you.html', window.location.href);
+
+      document
+        .querySelectorAll('form[action^="https://formsubmit.co"]')
+        .forEach((form) => {
+          const nextField =
+            form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
+
+          const nextUrl = new URL(thankYouBase);
+          nextUrl.searchParams.set('from', form.dataset.formSource || 'document-request');
+          nextField.value = nextUrl.toString();
+        });
+    })();
+  </script>
 </body>
 </html>

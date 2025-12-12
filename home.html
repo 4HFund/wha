@@ -763,7 +763,7 @@
 
 <div class="info-strip" aria-label="Immediate contact info">
   <span class="info-chip">🌺 Aloha! Luau Manor Resident Hub</span>
-  <span class="info-chip">📱 Call/Text Cell: (304) 555-2024</span>
+  <span class="info-chip">📱 Call/Text Cell: (304) 215-2584</span>
   <span class="info-chip">📞 Office: (304) 233-0658</span>
   <span class="info-chip">🚨 Emergencies: (304) 242-2820</span>
   <span class="info-chip">📍 Wheeling, WV</span>
@@ -777,7 +777,7 @@
       <p class="tagline">Tropical vibes, practical info—request help, get updates, and stay connected.</p>
       <p>
         <strong>Office Phone:</strong> (304) 233-0658<br>
-        <strong>Direct Cell (call or text):</strong> (304) 555-2024<br>
+        <strong>Direct Cell (call or text):</strong> (304) 215-2584<br>
         <strong>Mailing Address:</strong> Wheeling Housing Authority • P.O. Box 2089 • Wheeling, WV 26003
       </p>
 
@@ -790,7 +790,7 @@
         <strong>Need help fast?</strong>
         <p class="muted">Save this hub to your phone so you can tap to reach us anytime.</p>
         <div class="mobile-contact-actions">
-          <a class="btn btn-quiet" href="tel:3045552024">Call/Text (304) 555-2024</a>
+          <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
           <a class="btn btn-secondary" href="#maintenance-form">Maintenance</a>
           <a class="btn btn-soft" href="#concern-form">Concerns</a>
         </div>
@@ -880,7 +880,7 @@
       <div class="card" id="maintenance-form">
         <span class="label">Maintenance</span>
         <h3>Submit a Maintenance Request</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance">
           <input type="hidden" name="_subject" value="Luau Manor - Maintenance Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -939,7 +939,7 @@
       <div class="card" id="concern-form">
         <span class="label label-danger">Concerns & Incidents</span>
         <h3>Report a Concern</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-concern">
           <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -980,7 +980,7 @@
       <div class="card" id="document-form">
         <span class="label">Documents & Letters</span>
         <h3>Request Documents</h3>
-        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-documents">
           <input type="hidden" name="_subject" value="Luau Manor - Document Request">
           <input type="text" name="_honey" style="display:none">
           <input type="hidden" name="_template" value="table">
@@ -1046,7 +1046,7 @@
       <div class="card">
         <span class="label">Submit Online</span>
         <h3>Work Order Form</h3>
-        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST">
+        <form class="form-card" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="home-maintenance-detailed">
           <input type="hidden" name="_subject" value="Luau Manor Maintenance Request">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="thank-you.html">
@@ -1479,7 +1479,7 @@
 
   <script>
     (function () {
-      const thankYouUrl = new URL('thank-you.html', window.location.href).href;
+      const thankYouBase = new URL('thank-you.html', window.location.href);
 
       document
         .querySelectorAll('form[action^="https://formsubmit.co"]')
@@ -1493,14 +1493,17 @@
             form.appendChild(nextInput);
           }
 
-          nextInput.value = thankYouUrl;
+          const nextUrl = new URL(thankYouBase);
+          nextUrl.searchParams.set('from', form.dataset.formSource || 'resident-hub');
+
+          nextInput.value = nextUrl.toString();
         });
     })();
   </script>
 </main>
 
 <div class="mobile-action-bar" aria-label="Quick contact actions">
-  <a class="btn btn-quiet" href="tel:3045552024">Call/Text (304) 555-2024</a>
+  <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
   <a class="btn btn-primary" href="#maintenance-form">Maintenance</a>
   <a class="btn btn-secondary" href="#concern-form">Concerns</a>
 </div>
