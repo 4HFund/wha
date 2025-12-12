@@ -9,24 +9,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #ff7a5c;
-      --primary-dark: #e25a3e;
-      --aqua: #19c6c1;
+      --primary: #f76b6a;
+      --primary-dark: #d85151;
+      --aqua: #1ec6b6;
       --sun: #ffd166;
-      --deep-blue: #0b4f6c;
+      --deep-blue: #0f3057;
       --sand: #fff7ec;
-      --text-main: #1f2c3d;
-      --text-muted: #415063;
+      --text-main: #132134;
+      --text-muted: #3f5369;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #ffe7c6, #fff7ec 40%, #e4fbff 100%);
+      background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%),
+                  radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%),
+                  radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%),
+                  linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%);
       color: var(--text-main);
       line-height: 1.7;
       padding: 1.5rem;
+      background-attachment: fixed;
     }
 
     a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(11,79,108,0.3); }
