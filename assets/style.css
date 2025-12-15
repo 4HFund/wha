@@ -133,7 +133,6 @@ nav a:hover,
   padding: 0.6rem;
   min-width: 220px;
   z-index: 5;
-  display: grid;
   gap: 0.35rem;
 }
 
