@@ -2,182 +2,216 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Luau Manor Resident Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
-  <header>
-    <div class="nav">
-      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
-      <nav class="nav-links">
-        <a class="nav-pill" href="./">Home</a>
-        <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-        <a class="nav-pill" href="concern-report.html">Concerns</a>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Documents ▾</button>
-          <div class="nav-dropdown">
-            <a href="document-request.html">Request documents</a>
-            <a href="resident-handbook.html">Resident handbook</a>
-            <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-          </div>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="shell">
+      <a class="brand-area" href="#top">
+        <img src="assets/logo-placeholder.svg" alt="Luau Manor logo" class="brand-mark" role="presentation">
+        <div class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
         </div>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Policies ▾</button>
-          <div class="nav-dropdown">
-            <a href="policies.html">Community rules</a>
-            <a href="pets.html">Pet policy &amp; forms</a>
-          </div>
-        </div>
-        <a class="nav-pill" href="events.html">Events</a>
-        <a class="nav-pill" href="council.html">Council</a>
-        <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a class="pill" href="#top-actions">Top actions</a>
+        <a class="pill" href="#announcements">Announcements</a>
+        <a class="pill" href="#links">All resources</a>
+        <a class="pill" href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="small-label">Welcome home</p>
-        <h1>Send maintenance, concerns, or paperwork requests in under a minute.</h1>
-        <p>Mobile-friendly forms route your request to the right team and confirm instantly. No logins, no downloads—just tell us what you need.</p>
-        <div class="actions">
-          <a class="btn primary" href="maintenance-request.html">⚡ Submit Maintenance</a>
-          <a class="btn secondary" href="concern-report.html">🔔 Report a Concern</a>
-          <a class="btn outline" href="document-request.html">📄 Request Documents</a>
-          <a class="btn outline" href="resident-of-month.html">🌺 Nominate a Neighbor</a>
-        </div>
-      </div>
-      <div class="card">
-        <h2>Need to reach us?</h2>
-        <p><strong>Call / Text:</strong> <a href="tel:3042152584">(304) 215-2584</a></p>
-        <p><strong>Office:</strong> (304) 233-0658</p>
-        <p><strong>Emergency Maintenance (24/7):</strong> (304) 242-2820</p>
-        <p class="muted">For life-threatening emergencies, call 911 first.</p>
-      </div>
-    </section>
-
-    <section aria-label="Top actions" class="feature-grid">
-      <div class="feature">
-        <div class="pill">Maintenance</div>
-        <strong>Photos welcome—add quick notes so the tech knows what to bring.</strong>
-        <p class="muted">Routine repairs, leaks, appliance issues, or safety hazards.</p>
-        <div class="pill-row">
-          <span class="pill">Under a minute to submit</span>
-          <span class="pill">24/7 emergencies by phone</span>
-        </div>
-        <a class="btn primary" href="maintenance-request.html">Start maintenance</a>
-      </div>
-      <div class="feature">
-        <div class="pill">Concerns</div>
-        <strong>Noise, housekeeping, or nuisance reports stay organized and trackable.</strong>
-        <p class="muted">Share details and location so we can respond quickly.</p>
-        <div class="pill-row">
-          <span class="pill">Anonymous allowed</span>
-          <span class="pill">Safety-first prompts</span>
-        </div>
-        <a class="btn secondary" href="concern-report.html">Report a concern</a>
-      </div>
-      <div class="feature">
-        <div class="pill">Documents</div>
-        <strong>Request letters, ledgers, or packets—tell us how you want to receive them.</strong>
-        <p class="muted">Email, print, or hold-for-pickup options with simple notes.</p>
-        <div class="pill-row">
-          <span class="pill">Common forms listed</span>
-          <span class="pill">Fast confirmation</span>
-        </div>
-        <a class="btn outline" href="document-request.html">Request paperwork</a>
-      </div>
-    </section>
-
-    <section class="card" aria-label="How it works">
-      <h2>How to send a request</h2>
-      <ul class="step-list">
-        <li class="step">
-          <span class="step-number">1</span>
-          <div>
-            <strong>Pick the right form.</strong>
-            <p class="muted">Maintenance for repairs, Concerns for behavior or safety issues, Documents for letters and records.</p>
+  <main id="main">
+    <section class="hero" id="top-actions" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Fast help for residents</p>
+          <h1 id="hero-title">Maintenance, concerns, and paperwork with three big buttons.</h1>
+          <p class="lede">No logins needed. Your request goes directly to the Luau Manor office. Expect a friendly follow-up during business hours.</p>
+          <div class="cta-row" role="group" aria-label="Top resident actions">
+            <a class="btn primary" href="maintenance-request.html">⚡ Maintenance Request <span class="microcopy">Usual reply: 1 business day</span></a>
+            <a class="btn secondary" href="concern-report.html">🔔 Report a Concern <span class="microcopy">You can stay anonymous</span></a>
+            <a class="btn outline" href="document-request.html">📄 Documents / Forms <span class="microcopy">Tell us how to deliver</span></a>
           </div>
-        </li>
-        <li class="step">
-          <span class="step-number">2</span>
-          <div>
-            <strong>Add quick details.</strong>
-            <p class="muted">Include location, timing, and permission to enter. You can stay anonymous on concern reports.</p>
-          </div>
-        </li>
-        <li class="step">
-          <span class="step-number">3</span>
-          <div>
-            <strong>Submit and get a confirmation.</strong>
-            <p class="muted">Requests arrive in the office immediately and we’ll follow up if more info is needed.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="grid" aria-label="Resources">
-      <div class="card">
-        <h2>Policies & Handbook</h2>
-        <p>Read key rules, guest expectations, inspections, rent reminders, and grievance info.</p>
-        <div class="pill-row">
-          <span class="pill">Summaries</span>
-          <span class="pill">Full handbook download</span>
+          <p class="note">Need paper copies? Call or text and we will print and slide them under your door.</p>
         </div>
-        <div class="actions">
-          <a class="btn outline" href="policies.html">Open policies</a>
-          <a class="btn secondary" href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Open Resident Handbook</a>
+        <div class="contact-card" id="contact">
+          <h2>Reach the office</h2>
+          <ul class="contact-list">
+            <li><strong>Call / Text:</strong> <a href="tel:3042152584">(304) 215-2584</a> <span class="microcopy">Goes directly to the office</span></li>
+            <li><strong>Office phone:</strong> <a href="tel:3042330658">(304) 233-0658</a></li>
+            <li><strong>Emergency maintenance (24/7):</strong> <a href="tel:3042422820">(304) 242-2820</a> <span class="microcopy">For life-threatening emergencies, call 911 first</span></li>
+            <li><strong>Email:</strong> <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a></li>
+          </ul>
+          <p class="hours" aria-label="Office hours"><strong>Office hours:</strong> Mon–Fri, 8:30 AM – 4:30 PM <span class="microcopy">Edit hours in HTML if they change</span></p>
         </div>
-      </div>
-      <div class="card">
-        <h2>Pet Policy</h2>
-        <p>See what pets are allowed, registration requirements, and prohibited animals.</p>
-        <a class="btn outline" href="pets.html">View pet rules</a>
-      </div>
-      <div class="card">
-        <h2>Pet Forms & Files</h2>
-        <p>Download pet-related paperwork, forms, and other resources directly from Drive.</p>
-        <a class="btn outline" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Open pet folder</a>
-      </div>
-      <div class="card">
-        <h2>Resident of the Month</h2>
-        <p>Nominate a neighbor who goes above and beyond for the community.</p>
-        <a class="btn outline" href="resident-of-month.html">Submit a nomination</a>
-      </div>
-      <div class="card">
-        <h2>Move-In Files</h2>
-        <p>Grab move-in documents and other useful onboarding resources.</p>
-        <a class="btn outline" href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Open shared folder</a>
-      </div>
-      <div class="card">
-        <h2>Resident Council</h2>
-        <p>Share ideas, volunteer, and check council updates for Luau Manor.</p>
-        <a class="btn outline" href="council.html">Visit council page</a>
-      </div>
-      <div class="card">
-        <h2>Announcements & Events</h2>
-        <p>Catch up on building notices, activity flyers, and meeting dates.</p>
-        <a class="btn outline" href="events.html">See updates</a>
       </div>
     </section>
 
-    <div class="announcement" aria-label="Contact reminder">
-      <strong>Save these numbers</strong>
-      <p class="muted">📱 Call/Text: <a href="tel:3042152584">(304) 215-2584</a> • 📞 Office: (304) 233-0658 • 🚨 Emergency Maintenance: (304) 242-2820</p>
-    </div>
+    <section class="announcements" id="announcements" aria-labelledby="announcements-title">
+      <div class="shell">
+        <div class="section-header">
+          <h2 id="announcements-title">Announcements</h2>
+          <p class="microcopy">Post quick notices or reminders here.</p>
+        </div>
+        <!-- Update announcement items below -->
+        <ul class="announcement-list">
+          <li>
+            <strong>Elevator inspection</strong>
+            <p>Scheduled for Tuesday at 10:00 AM. Expect 20 minutes of downtime.</p>
+          </li>
+          <li>
+            <strong>Community cookout</strong>
+            <p>Join us Friday at 5:00 PM by the courtyard. Bring a chair and a friend.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="search-area" aria-labelledby="search-title">
+      <div class="shell">
+        <div class="section-header">
+          <h2 id="search-title">Quick Search</h2>
+          <p class="microcopy">Type to filter the cards below. All links stay visible if JavaScript is off.</p>
+        </div>
+        <label class="search-label" for="quick-search">Search links and forms</label>
+        <div class="search-input-wrap">
+          <span aria-hidden="true">🔍</span>
+          <input id="quick-search" name="quick-search" type="search" placeholder="Start typing: maintenance, pet policy, handbook…" autocomplete="off">
+        </div>
+      </div>
+    </section>
+
+    <section class="link-grid" id="links" aria-labelledby="links-title">
+      <div class="shell">
+        <div class="section-header">
+          <h2 id="links-title">All links and forms</h2>
+          <p class="microcopy">Every destination from the previous site is here.</p>
+        </div>
+        <div class="card-grid" data-search-grid>
+          <article class="card" data-keywords="maintenance repair work order leak appliance" tabindex="0">
+            <h3>Maintenance Request</h3>
+            <p>Submit issues like leaks, appliances, or safety hazards. Add photos if helpful.</p>
+            <p class="microcopy">Routes straight to maintenance. Usually answered within 1 business day.</p>
+            <a class="btn primary" href="maintenance-request.html">Open maintenance form</a>
+          </article>
+
+          <article class="card" data-keywords="concern report safety nuisance noise" tabindex="0">
+            <h3>Report a Concern</h3>
+            <p>Share noise, nuisance, or safety concerns. Location helps us respond quickly.</p>
+            <p class="microcopy">Anonymous option available.</p>
+            <a class="btn secondary" href="concern-report.html">Report a concern</a>
+          </article>
+
+          <article class="card" data-keywords="documents forms ledger letter packet" tabindex="0">
+            <h3>Documents &amp; Forms</h3>
+            <p>Request letters, ledgers, or packets. Choose email, print, or pickup.</p>
+            <p class="microcopy">Confirmation sent to your contact info.</p>
+            <a class="btn outline" href="document-request.html">Request documents</a>
+          </article>
+
+          <article class="card" data-keywords="resident handbook rules expectations" tabindex="0">
+            <h3>Resident Handbook</h3>
+            <p>Read key rules, guests guidance, inspections, and grievance steps.</p>
+            <div class="inline-actions">
+              <a class="btn ghost" href="resident-handbook.html">Handbook summary</a>
+              <a class="btn ghost" href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Download full handbook</a>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="policies community rules conduct" tabindex="0">
+            <h3>Community Rules</h3>
+            <p>Review conduct expectations, housekeeping standards, and helpful reminders.</p>
+            <a class="btn ghost" href="policies.html">Open policies</a>
+          </article>
+
+          <article class="card" data-keywords="pets pet policy registration" tabindex="0">
+            <h3>Pet Policy</h3>
+            <p>See which pets are allowed, registration steps, and prohibited animals.</p>
+            <div class="inline-actions">
+              <a class="btn ghost" href="pets.html">View pet rules</a>
+              <a class="btn ghost" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Download pet forms</a>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="move in folder files drive" tabindex="0">
+            <h3>Move-In Files</h3>
+            <p>Grab move-in documents and onboarding resources stored in Drive.</p>
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link" target="_blank" rel="noopener noreferrer">Open shared folder</a>
+          </article>
+
+          <article class="card" data-keywords="resident of the month nomination" tabindex="0">
+            <h3>Resident of the Month</h3>
+            <p>Nominate a neighbor who goes above and beyond.</p>
+            <a class="btn ghost" href="resident-of-month.html">Submit a nomination</a>
+          </article>
+
+          <article class="card" data-keywords="resident council involvement ideas" tabindex="0">
+            <h3>Resident Council</h3>
+            <p>Share ideas, volunteer, and catch up on council updates for Luau Manor.</p>
+            <div class="inline-actions">
+              <a class="btn ghost" href="council.html">Visit council page</a>
+              <a class="btn ghost" href="https://drive.google.com/drive/folders/1Ae2oXTsqmI2JKmCxCaE0nKV8AaNmucS4?usp=sharing" target="_blank" rel="noopener noreferrer">Council shared folder</a>
+            </div>
+          </article>
+
+          <article class="card" data-keywords="events announcements calendar" tabindex="0">
+            <h3>Events &amp; Notices</h3>
+            <p>Check building notices, activity flyers, and meeting dates.</p>
+            <a class="btn ghost" href="events.html">See events and updates</a>
+          </article>
+
+          <article class="card" data-keywords="document request paper copies" tabindex="0">
+            <h3>Request Paper Copies</h3>
+            <p>Call or text if you need any form printed. We can leave it at your door.</p>
+            <a class="btn ghost" href="tel:3042152584">Call / text now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="micro-info" aria-labelledby="micro-info-title">
+      <div class="shell info-grid">
+        <div>
+          <h2 id="micro-info-title">What happens after you submit</h2>
+          <ul class="checklist">
+            <li>We confirm we received it and assign it to the right teammate.</li>
+            <li>Maintenance requests get triaged by urgency; safety issues are prioritized.</li>
+            <li>Documents are delivered the way you choose—email, print, or pickup.</li>
+          </ul>
+        </div>
+        <div class="note-card">
+          <h3>Need help filling a form?</h3>
+          <p>Call or visit the office. We can complete the form for you over the phone and send a copy to review.</p>
+          <p class="microcopy">We aim to respond within one business day.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  <button type="button" class="back-to-top is-visible" data-back-to-top>Back to top</button>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">This page summarizes services. Official policies and leases govern.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+        <a href="resident-handbook.html">Handbook</a>
+      </div>
+    </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>
