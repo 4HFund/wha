@@ -105,7 +105,7 @@
           <p class="microcopy">Your message goes directly to the office. Anonymous submissions are welcome, and we send a confirmation if you include your email.</p>
         </div>
         <div class="form-card">
-          <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="concern-report">
+          <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" enctype="multipart/form-data" data-form-source="concern-report">
             <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org">
             <input type="hidden" name="_next" value="thank-you.html">
             <input type="hidden" name="_subject" value="Luau Manor - Concern Report">
@@ -156,6 +156,12 @@
               <label for="concern-details">What happened?</label>
               <textarea id="concern-details" name="Concern Details" placeholder="Share what happened, when it occurred, and any other people involved." required></textarea>
               <small>If someone is in danger, call 911 first. For urgent building safety after hours, call (304) 242-2820.</small>
+            </div>
+
+            <div class="field">
+              <label for="concern-photos">Upload photos or screenshots (optional)</label>
+              <input id="concern-photos" type="file" name="Photos" accept="image/*" multiple>
+              <small>Add photos of the concern if helpful. You can also text pictures to (304) 215-2584.</small>
             </div>
 
             <div class="cta-row" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
