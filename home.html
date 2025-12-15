@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Luau Manor Resident Hub</title>
+  <title>Luau Manor Resident Hub | Wheeling Housing Authority</title>
+  <meta name="description" content="Welcome to the Luau Manor Resident Hub for Wheeling Housing Authority residents. Submit maintenance requests, report concerns, and access resources.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -10,27 +11,41 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header" role="banner">
     <div class="shell header-inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="index.html" aria-label="Luau Manor home">
         <span class="brand-mark" aria-hidden="true">LM</span>
         <span class="brand-text">
           <span class="brand-name">Luau Manor</span>
-          <span class="brand-sub">Resident Hub</span>
+          <span class="brand-sub">Wheeling Housing Authority</span>
         </span>
       </a>
-      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <div class="header-quick">
+        <a class="quick-call" href="tel:3042152584">Office: (304) 215-2584</a>
+        <a class="btn ghost small home-chip" href="index.html">Home</a>
+      </div>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
       <nav class="main-nav" id="main-menu" aria-label="Primary">
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
-          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
-          <li class="nav-item"><a href="document-request.html">Documents</a></li>
-          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
-          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
-          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
-          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance Requests</a></li>
+          <li class="nav-item"><a href="concern-report.html">Report a Concern</a></li>
+          <li class="nav-item"><a href="document-request.html">Request Documents</a></li>
+          <li class="nav-item">
+            <details>
+              <summary>Resident Resources</summary>
+              <div class="nav-submenu" aria-label="Resident Resources submenu">
+                <a href="resident-handbook.html">Resident Handbook summary</a>
+                <a href="policies.html">Community rules &amp; policies</a>
+                <a href="pets.html">Pet policy &amp; forms</a>
+                <a href="printable-forms.html">Printable forms</a>
+                <a href="help.html">Help &amp; support</a>
+              </div>
+            </details>
+          </li>
+          <li class="nav-item"><a href="events.html">Events &amp; news</a></li>
           <li class="nav-item"><a href="council.html">Resident Council</a></li>
           <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+          <li class="nav-item"><a href="help.html">Help / Support</a></li>
+          <li class="nav-item"><a href="faq.html">Frequently Asked Questions</a></li>
         </ul>
       </nav>
     </div>
@@ -104,6 +119,8 @@
       </div>
     </div>
   </footer>
+
+  <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
   <script src="assets/script.js" defer></script>
 </body>

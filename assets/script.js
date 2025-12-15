@@ -3,6 +3,7 @@
   const cards = Array.from(document.querySelectorAll('[data-search-grid] .card'));
   const navToggle = document.querySelector('.nav-toggle');
   const mainNav = document.querySelector('.main-nav');
+  const backToTop = document.querySelector('.back-to-top');
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -31,6 +32,17 @@
           navToggle.setAttribute('aria-expanded', 'false');
         }
       });
+    });
+  }
+
+  if (backToTop) {
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      const shouldShow = window.scrollY > 240;
+      backToTop.classList.toggle('show', shouldShow);
     });
   }
 })();
