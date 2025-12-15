@@ -82,19 +82,15 @@
 
     const replyToField = form.querySelector('input[name="_replyto"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
+    const baseCc = officeEmail;
     let ccField = form.querySelector('input[name="_cc"]');
     const formEmail = form.querySelector('input[type="email"]');
     const syncReplyTo = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
       replyToField.value = emailValue || officeEmail;
 
-      if (emailValue) {
-        ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
-        ccField.value = emailValue;
-      } else if (ccField) {
-        ccField.remove();
-        ccField = null;
-      }
+      ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
+      ccField.value = emailValue ? `${baseCc}, ${emailValue}` : baseCc;
     };
     formEmail && formEmail.addEventListener('input', syncReplyTo);
     syncReplyTo();
