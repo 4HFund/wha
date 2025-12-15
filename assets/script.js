@@ -6,6 +6,7 @@
   const backToTop = document.querySelector('.back-to-top');
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const officeEmail = 'sidney@wheelingwv-pha.org';
+  const officePhone = '(304) 215-2584';
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -98,5 +99,46 @@
     if (!form.querySelector('input[name="_captcha"]')) {
       form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_captcha', value: 'false' }));
     }
+
+    const statusRegion = form.querySelector('[data-form-status]') || (() => {
+      const region = document.createElement('div');
+      region.className = 'form-status';
+      region.setAttribute('data-form-status', 'true');
+      region.setAttribute('role', 'status');
+      region.setAttribute('aria-live', 'polite');
+      form.insertBefore(region, form.firstChild);
+      return region;
+    })();
+
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      statusRegion.classList.remove('error');
+      statusRegion.textContent = 'Sending your request…';
+      submitButton?.setAttribute('disabled', 'true');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network error');
+        }
+
+        const redirectUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
+        statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
+        window.location.href = redirectUrl;
+      } catch (error) {
+        statusRegion.classList.add('error');
+        statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
+      } finally {
+        submitButton?.removeAttribute('disabled');
+      }
+    });
   });
 })();
