@@ -44,19 +44,20 @@
             <span class="pill">Activities &amp; notices</span>
             <span class="pill">Printable flyers</span>
           </div>
-          <h1 id="events-title">Events &amp; Notices</h1>
-          <p class="lede">Check building notices, activity flyers, and meeting dates. Call if you need a printed copy of any flyer.</p>
+          <h1 id="events-title">Bible Study Tuesdays</h1>
+          <p class="lede">Join Pastor Bobby Westfall from the Foundery Church for weekly Bible Study starting December 16, 2025. Sessions run Tuesdays from 3:30 PM to 4:30 PM.</p>
           <div class="cta-row" role="group" aria-label="Event actions">
-            <a class="btn primary" href="https://drive.google.com/drive/folders/1Ae2oXTsqmI2JKmCxCaE0nKV8AaNmucS4?usp=sharing" target="_blank" rel="noopener noreferrer">Open shared folder</a>
-            <a class="btn outline" href="tel:3042152584">Request a printout</a>
+            <a class="btn primary" href="#register">Register for Bible Study</a>
+            <a class="btn outline" href="tel:3042152584">Call the office for help</a>
           </div>
         </div>
         <div class="contact-card">
-          <h2>Coming up</h2>
+          <h2>What to know</h2>
           <ul class="list-check">
-            <li>Community cookout — Friday at 5:00 PM by the courtyard.</li>
-            <li>Resident council meeting — see flyer for the next date.</li>
-            <li>Maintenance updates and holiday hours posted here.</li>
+            <li>Starts Tuesday, December 16, 2025.</li>
+            <li>Meets every Tuesday from 3:30 PM to 4:30 PM.</li>
+            <li>Led by Pastor Bobby Westfall, Foundery Church.</li>
+            <li>All residents welcome; bring your Bible if you have one.</li>
           </ul>
         </div>
       </div>
@@ -65,20 +66,36 @@
     <section class="section" aria-labelledby="events-list-title">
       <div class="shell card-grid columns-2">
         <article class="card">
-          <h3 id="events-list-title">Notice board</h3>
+          <h3 id="events-list-title">Bible Study details</h3>
           <ul class="list-check">
-            <li>Elevator inspection Tuesday at 10:00 AM.</li>
-            <li>Water shutoff notices will be posted here and on each floor.</li>
-            <li>Check the shared folder for printable PDFs.</li>
+            <li><strong>Topic:</strong> Weekly Bible Study and discussion.</li>
+            <li><strong>Day &amp; time:</strong> Tuesdays • 3:30 PM – 4:30 PM.</li>
+            <li><strong>Kickoff:</strong> December 16, 2025.</li>
+            <li><strong>Leader:</strong> Pastor Bobby Westfall from the Foundery Church.</li>
+            <li><strong>Location:</strong> Community room (check lobby signage for any changes).</li>
           </ul>
         </article>
         <article class="card">
-          <h3>Want to add an event?</h3>
-          <p>Email details to the office or drop off a flyer for posting.</p>
-          <div class="quick-links">
-            <a class="btn ghost" href="mailto:sidney@wheelingwv-pha.org">Email the office</a>
-            <a class="btn ghost" href="concern-report.html">Share an idea</a>
-          </div>
+          <h3 id="register">Register now</h3>
+          <p>Reserve your spot so we can plan seating and materials.</p>
+          <form class="stacked-form" action="mailto:sidney@wheelingwv-pha.org?subject=Bible%20Study%20Registration" method="post" enctype="text/plain">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required>
+
+            <label for="apt">Apartment number</label>
+            <input id="apt" name="Apartment" type="text" required>
+
+            <label for="phone">Phone</label>
+            <input id="phone" name="Phone" type="tel" required>
+
+            <label for="email">Email (optional)</label>
+            <input id="email" name="Email" type="email" placeholder="you@example.com">
+
+            <label for="notes">Questions or accessibility needs</label>
+            <textarea id="notes" name="Notes" rows="3"></textarea>
+
+            <button class="btn primary" type="submit">Send registration</button>
+          </form>
         </article>
       </div>
     </section>
