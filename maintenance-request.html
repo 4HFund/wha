@@ -189,28 +189,5 @@
   <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
   <script src="assets/script.js" defer></script>
-  <script>
-    (function () {
-      const thankYouBase = new URL('thank-you.html', window.location.href);
-      document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
-        const nextField = form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
-        const nextUrl = new URL(thankYouBase);
-        nextUrl.searchParams.set('from', form.dataset.formSource || 'maintenance-request');
-        nextField.value = nextUrl.toString();
-
-        const replyToField = form.querySelector('input[name="_replyto"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
-        const formEmail = form.querySelector('input[type="email"]');
-        const syncReplyTo = () => {
-          replyToField.value = (formEmail && formEmail.value) ? formEmail.value : 'sidney@wheelingwv-pha.org';
-        };
-        formEmail && formEmail.addEventListener('input', syncReplyTo);
-        syncReplyTo();
-
-        if (!form.querySelector('input[name="_captcha"]')) {
-          form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_captcha', value: 'false' }));
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
