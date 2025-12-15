@@ -53,6 +53,20 @@
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
 
+    const buildAjaxAction = (action) => {
+      try {
+        const url = new URL(action);
+        const trimmedPath = url.pathname.replace(/^\/+|\/+$/g, '');
+        const emailPath = trimmedPath.split('/').pop();
+        return `${url.origin}/ajax/${emailPath}`;
+      } catch (error) {
+        console.warn('Unable to build ajax form action for', action, error);
+        return action;
+      }
+    };
+
+    const ajaxAction = buildAjaxAction(form.action);
+
     const nextField = form.querySelector('input[name="_next"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
     const nextUrl = new URL(thankYouBase);
@@ -120,14 +134,14 @@
       submitButton?.setAttribute('disabled', 'true');
 
       try {
-        const response = await fetch(form.action, {
+        const response = await fetch(ajaxAction, {
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(form),
         });
 
         if (!response.ok) {
-          throw new Error('Network error');
+          throw new Error(response.statusText || 'Network error');
         }
 
         const redirectUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
@@ -136,6 +150,7 @@
       } catch (error) {
         statusRegion.classList.add('error');
         statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
+        console.error('Form submission failed:', error);
       } finally {
         submitButton?.removeAttribute('disabled');
       }
