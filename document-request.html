@@ -166,16 +166,5 @@
   <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
   <script src="assets/script.js" defer></script>
-  <script>
-    (function () {
-      const thankYouBase = new URL('thank-you.html', window.location.href);
-      document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
-        const nextField = form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
-        const nextUrl = new URL(thankYouBase);
-        nextUrl.searchParams.set('from', form.dataset.formSource || 'document-request');
-        nextField.value = nextUrl.toString();
-      });
-    })();
-  </script>
 </body>
 </html>
