@@ -164,6 +164,7 @@ textarea { min-height: 140px; resize: vertical; }
   .card-grid.columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
   .quick-call { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; border-radius: 0.75rem; background: #fff; color: var(--reef); border: 1px solid var(--border); text-decoration: none; font-weight: 800; }
+  .home-chip { display: none; }
   .hero-visual { min-height: 360px; }
 }
 
