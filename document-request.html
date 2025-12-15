@@ -4,262 +4,159 @@
   <meta charset="UTF-8">
   <title>Request Documents • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #f76b6a;
-      --primary-dark: #d85151;
-      --aqua: #1ec6b6;
-      --sun: #ffd166;
-      --deep-blue: #0f3057;
-      --sand: #fff7ec;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --text-main: #132134;
-      --text-muted: #3f5369;
-      --danger: #c0392b;
-      --success: #2e7d32;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%), radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%), radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%), linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%); color: var(--text-main); line-height: 1.65; min-height: 100vh; background-attachment: fixed; }
-
-    header { background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%); color: #0f172a; padding: 1.1rem 1.25rem 1.35rem; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12); border-bottom: 4px solid rgba(12, 79, 108, 0.08); position: relative; overflow: hidden; backdrop-filter: blur(8px); }
-    header:after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.28), transparent 35%), radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16), transparent 32%); pointer-events: none; }
-    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(12, 79, 108, 0.35); text-decoration-thickness: 2px; }
-    a:hover { text-decoration-color: var(--primary); }
-
-    .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
-    .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
-    .nav-pill { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.9); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; display: inline-flex; align-items: center; gap: 0.25rem; }
-    .nav-pill:hover, .nav-dropdown a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
-    .nav-pill:focus-visible, .nav-dropdown a:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
-    .nav-group { position: relative; }
-    .nav-dropdown { display: none; position: absolute; top: calc(100% + 0.35rem); left: 0; background: #fff; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 0.85rem; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); padding: 0.6rem; min-width: 220px; z-index: 5; gap: 0.35rem; }
-    .nav-dropdown a { background: rgba(246, 251, 255, 0.9); border: 1px solid rgba(15, 23, 42, 0.08); padding: 0.55rem 0.75rem; border-radius: 0.65rem; font-weight: 700; color: #0f172a; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06); text-decoration: none; }
-    .nav-group:hover .nav-dropdown, .nav-group:focus-within .nav-dropdown { display: grid; }
-
-    main { width: min(960px, calc(100% - 1.6rem)); margin: 0 auto; padding: 1.6rem 0 3.5rem; }
-    .info-strip { background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(11, 79, 108, 0.1); padding: 0.65rem 1rem; border-radius: 999px; display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); margin: 0.85rem auto 0; max-width: 920px; }
-    .info-chip { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: linear-gradient(120deg, rgba(30, 198, 182, 0.18), rgba(255, 209, 102, 0.18)); color: var(--deep-blue); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; }
-
-    .hero { background: #ffffff; border: 1px solid rgba(0, 121, 107, 0.1); border-radius: 1.4rem; padding: 1.6rem 1.4rem; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1); margin: 1.15rem 0 1.4rem; display: grid; gap: 1rem; }
-    .hero h1 { font-family: "Baloo 2", "Inter", sans-serif; font-size: 2rem; color: var(--deep-blue); }
-    .hero p { color: var(--text-muted); }
-    .hero strong { color: var(--deep-blue); }
-
-    .label { display: inline-block; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: linear-gradient(120deg, rgba(255, 122, 92, 0.18), rgba(25, 198, 193, 0.18)); color: var(--deep-blue); margin-bottom: 0.4rem; font-weight: 700; letter-spacing: 0.01em; }
-
-    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.05rem; border: 1px solid rgba(12, 79, 108, 0.08); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
-    .card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--deep-blue); }
-    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.4rem; }
-    .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
-    .key-points li { margin-bottom: 0.28rem; }
-
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1rem 0 1.2rem; }
-    .mini-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(12, 79, 108, 0.08); border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); display: grid; gap: 0.35rem; }
-    .mini-card strong { color: var(--deep-blue); }
-    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(30, 198, 182, 0.12); color: var(--deep-blue); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
-    .quick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; color: var(--text-muted); font-size: 0.95rem; }
-    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
-    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
-
-    .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
-    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
-    .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
-    input[type="text"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 0.55rem 0.7rem; border-radius: 0.65rem; border: 1px solid #d9d9d9; background: #fafafa; font-size: 0.95rem; transition: border 0.2s, box-shadow 0.2s; }
-    textarea { min-height: 120px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22, 105, 122, 0.15); background: #fff; }
-
-    .btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; font-weight: 700; letter-spacing: 0.01em; }
-    .btn-primary { background: linear-gradient(120deg, var(--primary), var(--primary-dark)); color: #fff; border-color: rgba(0, 0, 0, 0.05); box-shadow: 0 6px 16px rgba(226, 90, 62, 0.35); }
-    .btn-soft { background: rgba(255, 255, 255, 0.8); color: var(--deep-blue); border-color: rgba(12, 79, 108, 0.1); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
-
-    .form-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.4rem; }
-    .form-note { font-size: 0.85rem; color: var(--text-muted); }
-    .mobile-action-bar { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); border-top: 1px solid rgba(12, 79, 108, 0.12); box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.16); padding: 0.65rem 0.9rem calc(0.65rem + env(safe-area-inset-bottom, 0px)); display: flex; gap: 0.6rem; align-items: center; justify-content: center; z-index: 1200; backdrop-filter: blur(10px); }
-    .mobile-action-bar .btn { flex: 1; font-size: 1rem; }
-    .btn-quiet { background: #0f172a; color: #fff; border-color: rgba(15, 23, 42, 0.1); box-shadow: 0 10px 18px rgba(15, 23, 42, 0.25); }
-    @media (max-width: 960px) { .nav-container { flex-direction: column; align-items: flex-start; } .nav-links { justify-content: flex-start; width: 100%; gap: 0.4rem; } .nav-pill { padding: 0.55rem 0.9rem; font-size: 1rem; } body { background-attachment: scroll; } main { padding-bottom: 4.5rem; } .info-strip { border-radius: 1rem; justify-content: flex-start; } }
-    @media (max-width: 640px) { header { padding: 1rem 1rem 1.15rem; } .brand { font-size: 1.3rem; } .hero, .card { padding: 1.1rem 1rem; } .info-strip { padding: 0.7rem 0.8rem; gap: 0.5rem; } .mobile-action-bar { display: flex; } }
-    @media (min-width: 641px) { .mobile-action-bar { display: none; } }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header>
-  <div class="nav-container">
-    <a class="brand" href="index.html">
-      Luau Manor
-      <span>Resident Hub • Wheeling Housing Authority</span>
-    </a>
-    <nav class="nav-links">
-      <a class="nav-pill" href="./">Home</a>
-      <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-      <a class="nav-pill" href="concern-report.html">Concerns</a>
-      <div class="nav-group">
-        <button class="nav-pill" type="button">Documents ▾</button>
-        <div class="nav-dropdown">
-          <a href="document-request.html">Request documents</a>
-          <a href="resident-handbook.html">Resident handbook</a>
-          <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button class="nav-pill" type="button">Policies ▾</button>
-        <div class="nav-dropdown">
-          <a href="policies.html">Community rules</a>
-          <a href="pets.html">Pet policy &amp; forms</a>
-        </div>
-      </div>
-      <a class="nav-pill" href="events.html">Events</a>
-      <a class="nav-pill" href="council.html">Council</a>
-      <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
-    </nav>
-  </div>
-</header>
-
-  <div class="info-strip" aria-label="Immediate contact info">
-    <span class="info-chip">🌺 Request documents and letters</span>
-    <span class="info-chip">📱 Call/Text Cell: (304) 215-2584</span>
-    <span class="info-chip">📞 Office: (304) 233-0658</span>
-    <span class="info-chip">🚨 Emergency Maintenance: (304) 242-2820</span>
-  </div>
-
-  <main id="top">
-    <section class="hero">
-      <div>
-        <h1>Request Documents or Letters</h1>
-        <p>Let us know which paperwork you need and how you’d like to receive it (email, print, or hold for pickup). The form works on any device and sends straight to the office. You can also call or text <strong>(304) 215-2584</strong> for quick questions.</p>
-      </div>
-      <div class="card">
-        <span class="label">Ideas for Requests</span>
-        <ul class="key-points">
-          <li>Rent letters or payment history.</li>
-          <li>Copy of your lease or addenda.</li>
-          <li>Reasonable accommodation packet.</li>
-          <li>Guest or overnight visitor registration.</li>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
         </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="documents-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Letters, ledgers, and packets</span>
+            <span class="pill">Choose delivery</span>
+          </div>
+          <h1 id="documents-title">Request documents or forms</h1>
+          <p class="lede">Ask for letters, ledgers, or packets. Tell us how to deliver them: email, print for pickup, or drop-off.</p>
+          <div class="cta-row" role="group" aria-label="Document actions">
+            <a class="btn primary" href="#document-form">Start the request</a>
+            <a class="btn outline" href="tel:3042152584">Call/Text the office</a>
+            <a class="btn ghost" href="resident-handbook.html">Read the handbook</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>Common requests</h2>
+          <ul class="list-check">
+            <li>Rent ledger or payment history.</li>
+            <li>Lease packet or addendums.</li>
+            <li>Verification or status letters.</li>
+            <li>Printed forms for pets or move-in files.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <div class="info-grid" aria-label="Tips for document requests">
-      <div class="mini-card">
-        <span class="badge">Fast and flexible</span>
-        <strong>Most requests take under a minute to send.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>Tell us if you want the document emailed, printed, or held for pickup.</span></li>
-          <li><span class="dot"></span><span>Add names that should appear on the letter and any deadlines you have.</span></li>
-          <li><span class="dot"></span><span>We’ll confirm if identification is needed before releasing paperwork.</span></li>
-        </ul>
-      </div>
-      <div class="mini-card">
-        <span class="badge">Document library</span>
-        <strong>Find the files you need without leaving this page.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span><a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link" target="_blank" rel="noopener noreferrer">Move-in files</a> with welcome packets and setup forms.</span></li>
-          <li><span class="dot"></span><span><a href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Resident handbook (Drive)</a> for full policies.</span></li>
-          <li><span class="dot"></span><span><a href="pets.html#pet-forms">Pet policy &amp; forms</a> are grouped together for easy downloading.</span></li>
-        </ul>
-      </div>
-      <div class="mini-card">
-        <span class="badge">After you submit</span>
-        <strong>We route the request to the right team.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>You’ll see a confirmation page after submitting.</span></li>
-          <li><span class="dot"></span><span>We typically respond during business hours with timing or next steps.</span></li>
-          <li><span class="dot"></span><span>If something is missing, we’ll call or text the phone number you provide.</span></li>
-        </ul>
-      </div>
-      <div class="mini-card">
-        <span class="badge">Common needs</span>
-        <strong>Ledgers, verification letters, pet forms, and change forms.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>For maintenance emergencies, call <strong>(304) 242-2820</strong> instead.</span></li>
-          <li><span class="dot"></span><span>For behavior concerns, use the Concern form so we can track it.</span></li>
-          <li><span class="dot"></span><span>Still unsure? Call/Text <strong>(304) 215-2584</strong> and we’ll help.</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="form-card">
-      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="document-request">
-        <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org" />
-        <input type="hidden" name="_next" value="thank-you.html" />
-        <input type="hidden" name="_subject" value="Luau Manor - Document Request">
-        <input type="text" name="_honey" style="display:none">
-        <input type="hidden" name="_template" value="table">
-
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="name">Your Name</label>
-            <input id="name" type="text" name="Resident Name" placeholder="First and last name" autocomplete="name" required>
-          </div>
-          <div class="form-field">
-            <label for="unit">Unit / Apartment Number</label>
-            <input id="unit" type="text" name="Unit" placeholder="Example: 305" autocomplete="address-line2" required>
-          </div>
-          <div class="form-field">
-            <label for="phone">Phone Number</label>
-            <input id="phone" type="tel" name="Phone" placeholder="(304) 555-1234" autocomplete="tel" required>
-          </div>
-          <div class="form-field">
-            <label for="email">Email (optional)</label>
-            <input id="email" type="email" name="Email" placeholder="you@example.com" autocomplete="email">
-          </div>
-          <div class="form-field">
-            <label for="request">What do you need?</label>
-            <select id="request" name="Request Type" required>
-              <option value="">Select one</option>
-              <option>Rent letter / verification</option>
-              <option>Ledger or payment history</option>
-              <option>Copy of lease</option>
-              <option>Reasonable accommodation packet</option>
-              <option>Payment agreement forms (if applicable)</option>
-              <option>Guest / overnight visitor registration</option>
-              <option>Pet registration paperwork</option>
-              <option>Household or income change form</option>
-              <option>Other (describe below)</option>
-            </select>
-          </div>
+    <section class="section" aria-labelledby="document-form-title">
+      <div class="form-shell" id="document-form">
+        <div class="section-header">
+          <h2 id="document-form-title">Tell us what you need</h2>
+          <p class="microcopy">We confirm each request. If you choose print, we can slide it under your door.</p>
         </div>
+        <div class="form-card">
+          <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="document-request">
+            <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org">
+            <input type="hidden" name="_next" value="thank-you.html">
+            <input type="hidden" name="_subject" value="Luau Manor - Document Request">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_template" value="table">
 
-        <div class="form-field">
-          <label for="details">Details or Special Instructions</label>
-          <textarea id="details" name="Details" placeholder="Tell us if you need the document printed, emailed, or held in the office." required></textarea>
-        </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="doc-name">Your name</label>
+                <input id="doc-name" type="text" name="Resident Name" placeholder="First and last name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="doc-unit">Unit / apartment number</label>
+                <input id="doc-unit" type="text" name="Unit" placeholder="Example: 305" autocomplete="address-line2" required>
+              </div>
+              <div class="field">
+                <label for="doc-phone">Best phone number</label>
+                <input id="doc-phone" type="tel" name="Phone" placeholder="(304) 555-1234" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="doc-email">Email</label>
+                <input id="doc-email" type="email" name="Email" placeholder="you@example.com" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="delivery">How should we deliver it?</label>
+                <select id="delivery" name="Delivery Method" required>
+                  <option value="">Select one</option>
+                  <option>Email me a PDF</option>
+                  <option>Print and place under my door</option>
+                  <option>Print for pickup at the office</option>
+                  <option>Other (add details below)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="timeline">When do you need it?</label>
+                <select id="timeline" name="Timeline" required>
+                  <option value="">Choose one</option>
+                  <option>Today if available</option>
+                  <option>Within 1 business day</option>
+                  <option>This week</option>
+                </select>
+              </div>
+            </div>
 
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Send Request</button>
-          <span class="form-note">Most requests are processed during normal office hours.</span>
+            <div class="field">
+              <label for="doc-type">What documents are you requesting?</label>
+              <textarea id="doc-type" name="Requested Documents" placeholder="Example: rent ledger for March–May, verification letter for employer." required></textarea>
+              <small>Tell us if you need signatures, stamps, or multiple copies.</small>
+            </div>
+
+            <div class="cta-row" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <button type="submit" class="btn primary">Submit document request</button>
+              <a class="btn ghost" href="tel:3042152584">Call/Text the office</a>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
   </main>
 
-  <div class="mobile-action-bar" aria-label="Quick contact actions">
-    <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
-    <a class="btn btn-secondary" href="tel:3042330658">Call Office</a>
-  </div>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">We deliver documents the way you choose—email, print, or pickup.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="events.html">Events</a>
+      </div>
+    </div>
+  </footer>
 
+  <script src="assets/script.js" defer></script>
   <script>
     (function () {
       const thankYouBase = new URL('thank-you.html', window.location.href);
-
-      document
-        .querySelectorAll('form[action^="https://formsubmit.co"]')
-        .forEach((form) => {
-          const nextField =
-            form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
-
-          const nextUrl = new URL(thankYouBase);
-          nextUrl.searchParams.set('from', form.dataset.formSource || 'document-request');
-          nextField.value = nextUrl.toString();
-        });
+      document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
+        const nextField = form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
+        const nextUrl = new URL(thankYouBase);
+        nextUrl.searchParams.set('from', form.dataset.formSource || 'document-request');
+        nextField.value = nextUrl.toString();
+      });
     })();
   </script>
 </body>

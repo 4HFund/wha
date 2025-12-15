@@ -4,235 +4,180 @@
   <meta charset="UTF-8">
   <title>Report a Concern • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #f76b6a;
-      --primary-dark: #d85151;
-      --aqua: #1ec6b6;
-      --sun: #ffd166;
-      --deep-blue: #0f3057;
-      --sand: #fff7ec;
-      --card-bg: rgba(255, 255, 255, 0.95);
-      --text-main: #132134;
-      --text-muted: #3f5369;
-      --danger: #c0392b;
-      --success: #2e7d32;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%), radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%), radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%), linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%); color: var(--text-main); line-height: 1.65; min-height: 100vh; background-attachment: fixed; }
-
-    header { background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%); color: #0f172a; padding: 1.1rem 1.25rem 1.35rem; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12); border-bottom: 4px solid rgba(12, 79, 108, 0.08); position: relative; overflow: hidden; backdrop-filter: blur(8px); }
-    header:after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.28), transparent 35%), radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16), transparent 32%); pointer-events: none; }
-    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(12, 79, 108, 0.35); text-decoration-thickness: 2px; }
-    a:hover { text-decoration-color: var(--primary); }
-
-    .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
-    .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
-    .nav-pill { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.9); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; display: inline-flex; align-items: center; gap: 0.25rem; }
-    .nav-pill:hover, .nav-dropdown a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
-    .nav-pill:focus-visible, .nav-dropdown a:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
-    .nav-group { position: relative; }
-    .nav-dropdown { display: none; position: absolute; top: calc(100% + 0.35rem); left: 0; background: #fff; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 0.85rem; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); padding: 0.6rem; min-width: 220px; z-index: 5; gap: 0.35rem; }
-    .nav-dropdown a { background: rgba(246, 251, 255, 0.9); border: 1px solid rgba(15, 23, 42, 0.08); padding: 0.55rem 0.75rem; border-radius: 0.65rem; font-weight: 700; color: #0f172a; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06); text-decoration: none; }
-    .nav-group:hover .nav-dropdown, .nav-group:focus-within .nav-dropdown { display: grid; }
-
-    main { width: min(960px, calc(100% - 1.6rem)); margin: 0 auto; padding: 1.6rem 0 3.5rem; }
-    .info-strip { background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(11, 79, 108, 0.1); padding: 0.65rem 1rem; border-radius: 999px; display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); margin: 0.85rem auto 0; max-width: 920px; }
-    .info-chip { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: linear-gradient(120deg, rgba(30, 198, 182, 0.18), rgba(255, 209, 102, 0.18)); color: var(--deep-blue); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; }
-
-    .hero { background: #ffffff; border: 1px solid rgba(0, 121, 107, 0.1); border-radius: 1.4rem; padding: 1.6rem 1.4rem; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1); margin: 1.15rem 0 1.4rem; display: grid; gap: 1rem; }
-    .hero h1 { font-family: "Baloo 2", "Inter", sans-serif; font-size: 2rem; color: var(--deep-blue); }
-    .hero p { color: var(--text-muted); }
-    .hero strong { color: var(--deep-blue); }
-
-    .label { display: inline-block; font-size: 0.85rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: linear-gradient(120deg, rgba(255, 122, 92, 0.18), rgba(25, 198, 193, 0.18)); color: var(--deep-blue); margin-bottom: 0.4rem; font-weight: 700; letter-spacing: 0.01em; }
-    .label-danger { background: rgba(192, 57, 43, 0.12); color: var(--danger); }
-
-    .card { background: var(--card-bg); border-radius: 1rem; padding: 1.05rem; border: 1px solid rgba(12, 79, 108, 0.08); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
-    .card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--deep-blue); }
-    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.4rem; }
-    .key-points { list-style: disc; padding-left: 1.05rem; font-size: 0.95rem; color: var(--text-muted); }
-    .key-points li { margin-bottom: 0.28rem; }
-
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; margin: 1rem 0 1.2rem; }
-    .mini-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(12, 79, 108, 0.08); border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); display: grid; gap: 0.35rem; }
-    .mini-card strong { color: var(--deep-blue); }
-    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(30, 198, 182, 0.12); color: var(--deep-blue); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
-    .quick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; color: var(--text-muted); font-size: 0.95rem; }
-    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
-    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
-
-    .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
-    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
-    .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
-    input[type="text"], input[type="email"], select, textarea { width: 100%; padding: 0.55rem 0.7rem; border-radius: 0.65rem; border: 1px solid #d9d9d9; background: #fafafa; font-size: 0.95rem; transition: border 0.2s, box-shadow 0.2s; }
-    textarea { min-height: 120px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22, 105, 122, 0.15); background: #fff; }
-
-    .btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; font-weight: 700; letter-spacing: 0.01em; }
-    .btn-secondary { background: linear-gradient(120deg, var(--aqua), #6ee7e0); color: #0b4f6c; border-color: rgba(11, 79, 108, 0.15); box-shadow: 0 6px 16px rgba(25, 198, 193, 0.3); }
-    .btn-secondary:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(25, 198, 193, 0.45); }
-
-    .form-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.4rem; }
-    .form-note { font-size: 0.85rem; color: var(--text-muted); }
-
-    .mobile-action-bar { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); border-top: 1px solid rgba(12, 79, 108, 0.12); box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.16); padding: 0.65rem 0.9rem calc(0.65rem + env(safe-area-inset-bottom, 0px)); display: flex; gap: 0.6rem; align-items: center; justify-content: center; z-index: 1200; backdrop-filter: blur(10px); }
-    .mobile-action-bar .btn { flex: 1; font-size: 1rem; }
-    .btn-quiet { background: #0f172a; color: #fff; border-color: rgba(15, 23, 42, 0.1); box-shadow: 0 10px 18px rgba(15, 23, 42, 0.25); }
-    @media (max-width: 960px) { .nav-container { flex-direction: column; align-items: flex-start; } .nav-links { justify-content: flex-start; width: 100%; gap: 0.4rem; } .nav-pill { padding: 0.55rem 0.9rem; font-size: 1rem; } body { background-attachment: scroll; } main { padding-bottom: 4.5rem; } .info-strip { border-radius: 1rem; justify-content: flex-start; } }
-    @media (max-width: 640px) { header { padding: 1rem 1rem 1.15rem; } .brand { font-size: 1.3rem; } .hero, .card { padding: 1.1rem 1rem; } .info-strip { padding: 0.7rem 0.8rem; gap: 0.5rem; } .mobile-action-bar { display: flex; } }
-    @media (min-width: 641px) { .mobile-action-bar { display: none; } }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header>
-    <div class="nav-container">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
       <a class="brand" href="index.html">
-        Luau Manor
-        <span>Resident Hub • Wheeling Housing Authority</span>
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
       </a>
-      <nav class="nav-links">
-        <a class="nav-pill" href="./">Home</a>
-        <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-        <a class="nav-pill" href="concern-report.html">Concerns</a>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Documents ▾</button>
-          <div class="nav-dropdown">
-            <a href="document-request.html">Request documents</a>
-            <a href="resident-handbook.html">Resident handbook</a>
-            <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-          </div>
-        </div>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Policies ▾</button>
-          <div class="nav-dropdown">
-            <a href="policies.html">Community rules</a>
-            <a href="pets.html">Pet policy &amp; forms</a>
-          </div>
-        </div>
-        <a class="nav-pill" href="events.html">Events</a>
-        <a class="nav-pill" href="council.html">Council</a>
-        <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <div class="info-strip" aria-label="Immediate contact info">
-    <span class="info-chip">🌺 Share a concern securely</span>
-    <span class="info-chip">📱 Call/Text Cell: (304) 215-2584</span>
-    <span class="info-chip">📞 Office: (304) 233-0658</span>
-    <span class="info-chip">🚨 Emergency Maintenance: (304) 242-2820</span>
-  </div>
-
-  <main id="top">
-    <section class="hero">
-      <div>
-        <h1>Report a Concern</h1>
-        <p>Noise, safety, nuisance, or housekeeping concerns—tell us what happened so we can follow up. The form is mobile-friendly and can be submitted anonymously. For quick updates, call or text <strong>(304) 215-2584</strong>.</p>
-      </div>
-      <div class="card">
-        <span class="label label-danger">Call 911 First for Emergencies</span>
-        <p>After contacting emergency responders, you can still document the situation here so management is aware.</p>
-        <p><strong>Emergency maintenance:</strong> (304) 242-2820</p>
+  <main id="main">
+    <section class="hero" aria-labelledby="concern-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Safety &amp; neighbor issues</span>
+            <span class="pill">Anonymous option</span>
+          </div>
+          <h1 id="concern-title">Report a Concern</h1>
+          <p class="lede">Tell us about noise, nuisance, or safety concerns. You can stay anonymous. The information goes directly to Luau Manor staff.</p>
+          <div class="cta-row" role="group" aria-label="Concern actions">
+            <a class="btn primary" href="#concern-form">Start the concern form</a>
+            <a class="btn outline" href="tel:3042152584">Call/Text the office</a>
+            <a class="btn coral" href="tel:911">If life threatening, call 911 first</a>
+          </div>
+          <p class="microcopy">For urgent building safety after hours, call Emergency Maintenance at (304) 242-2820.</p>
+        </div>
+        <div class="contact-card">
+          <h2>What to include</h2>
+          <ul class="list-check">
+            <li>Location of the issue (building, floor, or unit if known).</li>
+            <li>What is happening and how often it occurs.</li>
+            <li>Your contact info if you want follow-up. Leave blank to stay anonymous.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <div class="info-grid" aria-label="Guidance for concern reports">
-      <div class="mini-card">
-        <span class="badge">Fast and simple</span>
-        <strong>Most reports take under a minute.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>You may leave your name blank if you prefer to stay anonymous.</span></li>
-          <li><span class="dot"></span><span>Include the location and time so staff can verify and respond.</span></li>
-          <li><span class="dot"></span><span>Add safety concerns or ongoing patterns so we can prioritize correctly.</span></li>
-        </ul>
+    <section class="section" aria-labelledby="concern-steps-title">
+      <div class="shell card-grid columns-3">
+        <article class="card">
+          <span class="badge">Step 1</span>
+          <h3 id="concern-steps-title">Share the concern</h3>
+          <p>Describe what you saw or heard. Include dates, times, and locations if possible.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Step 2</span>
+          <h3>Decide if you want contact</h3>
+          <p>Add your name and phone number for updates. You can stay anonymous and we will still review.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Step 3</span>
+          <h3>We review promptly</h3>
+          <p>We route safety concerns right away. Non-urgent items are reviewed within one business day.</p>
+        </article>
       </div>
-      <div class="mini-card">
-        <span class="badge">After you submit</span>
-        <strong>Your report routes to management right away.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>You’ll get a confirmation screen after sending the form.</span></li>
-          <li><span class="dot"></span><span>We may call or text if clarification is needed for follow-up.</span></li>
-          <li><span class="dot"></span><span>For ongoing issues, note how often it happens so we can track trends.</span></li>
-        </ul>
+    </section>
+
+    <section class="section" aria-labelledby="concern-form-title">
+      <div class="form-shell" id="concern-form">
+        <div class="section-header">
+          <h2 id="concern-form-title">Tell us about your concern</h2>
+          <p class="microcopy">Your message goes directly to the office. Anonymous submissions are welcome.</p>
+        </div>
+        <div class="form-card">
+          <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="concern-report">
+            <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org">
+            <input type="hidden" name="_next" value="thank-you.html">
+            <input type="hidden" name="_subject" value="Luau Manor - Concern Report">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_template" value="table">
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="concern-name">Your name (optional)</label>
+                <input id="concern-name" type="text" name="Name" placeholder="Leave blank to stay anonymous" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="concern-unit">Unit / location (if known)</label>
+                <input id="concern-unit" type="text" name="Location" placeholder="Example: Building A, floor 3">
+              </div>
+              <div class="field">
+                <label for="concern-phone">Best phone number</label>
+                <input id="concern-phone" type="tel" name="Phone" placeholder="(304) 555-1234" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="concern-email">Email (optional)</label>
+                <input id="concern-email" type="email" name="Email" placeholder="you@example.com" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="concern-type">Type of concern</label>
+                <select id="concern-type" name="Concern Type">
+                  <option value="">Select one</option>
+                  <option>Noise or nuisance</option>
+                  <option>Safety or security</option>
+                  <option>Neighbor dispute</option>
+                  <option>Cleanliness / housekeeping</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="contact-ok">May we contact you?</label>
+                <select id="contact-ok" name="Contact Permission">
+                  <option value="">Choose one</option>
+                  <option>Yes, you may call or text me</option>
+                  <option>Yes, email is best</option>
+                  <option>No, review without contacting me</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="concern-details">What happened?</label>
+              <textarea id="concern-details" name="Concern Details" placeholder="Share what happened, when it occurred, and any other people involved." required></textarea>
+              <small>If someone is in danger, call 911 first. For urgent building safety after hours, call (304) 242-2820.</small>
+            </div>
+
+            <div class="cta-row" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <button type="submit" class="btn primary">Submit concern</button>
+              <a class="btn ghost" href="tel:3042152584">Call/Text the office</a>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="mini-card">
-        <span class="badge">Use this form for</span>
-        <strong>Noise, guests, safety, or housekeeping concerns.</strong>
-        <ul class="quick-list">
-          <li><span class="dot"></span><span>Wellness checks or emergencies should go to <strong>911</strong> first.</span></li>
-          <li><span class="dot"></span><span>Maintenance emergencies should call <strong>(304) 242-2820</strong>.</span></li>
-          <li><span class="dot"></span><span>Other questions? Call/Text <strong>(304) 215-2584</strong>.</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="form-card">
-      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="concern-page">
-        <input type="hidden" name="_next" value="thank-you.html" />
-        <input type="hidden" name="_subject" value="Luau Manor - Concern or Incident Report">
-        <input type="text" name="_honey" style="display:none">
-        <input type="hidden" name="_template" value="table">
-
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="name">Your Name (optional)</label>
-            <input id="name" type="text" name="Your Name" placeholder="You may remain anonymous if you prefer" autocomplete="name">
-          </div>
-          <div class="form-field">
-            <label for="contact">Phone or Email (optional)</label>
-            <input id="contact" type="text" name="Contact" placeholder="Include if you want a follow-up" autocomplete="tel">
-          </div>
-          <div class="form-field">
-            <label for="location">Location of Concern</label>
-            <input id="location" type="text" name="Location" placeholder="Example: 2nd floor hallway, apartment number" required>
-          </div>
-          <div class="form-field">
-            <label for="datetime">Date & Time (if known)</label>
-            <input id="datetime" type="text" name="Date and Time" placeholder="Example: March 12 around 9:30 PM">
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label for="details">What Happened?</label>
-          <textarea id="details" name="Details" placeholder="Describe the issue, people involved, and any safety concerns." required></textarea>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-secondary">Submit Concern</button>
-          <span class="form-note">Call 911 first for emergencies, then notify management.</span>
-        </div>
-      </form>
-    </div>
+    </section>
   </main>
 
-  <div class="mobile-action-bar" aria-label="Quick contact actions">
-    <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
-    <a class="btn btn-secondary" href="tel:3042330658">Call Office</a>
-  </div>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">We review every report. You can stay anonymous if you prefer.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="document-request.html">Documents</a>
+        <a href="events.html">Events</a>
+      </div>
+    </div>
+  </footer>
 
+  <script src="assets/script.js" defer></script>
   <script>
     (function () {
       const thankYouBase = new URL('thank-you.html', window.location.href);
-
-      document
-        .querySelectorAll('form[action^="https://formsubmit.co"]')
-        .forEach((form) => {
-          const nextField =
-            form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
-
-          const nextUrl = new URL(thankYouBase);
-          nextUrl.searchParams.set('from', form.dataset.formSource || 'concern-report');
-          nextField.value = nextUrl.toString();
-        });
+      document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
+        const nextField = form.querySelector('input[name="_next"]') || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
+        const nextUrl = new URL(thankYouBase);
+        nextUrl.searchParams.set('from', form.dataset.formSource || 'concern-report');
+        nextField.value = nextUrl.toString();
+      });
     })();
   </script>
 </body>
