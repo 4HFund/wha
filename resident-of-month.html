@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resident of the Month Nomination • Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f76b6a;
+      --primary-dark: #d85151;
+      --aqua: #1ec6b6;
+      --sun: #ffd166;
+      --deep-blue: #0f3057;
+      --sand: #fff7ec;
+      --text-main: #132134;
+      --text-muted: #3f5369;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%),
+                  radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%),
+                  radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%),
+                  linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-attachment: fixed;
+    }
+
+    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(12, 79, 108, 0.35); text-decoration-thickness: 2px; }
+    a:hover { text-decoration-color: var(--primary); }
+
+    header {
+      background: linear-gradient(120deg, var(--primary) 0%, var(--aqua) 55%, #7cded7 100%);
+      color: #0f172a;
+      padding: 1.1rem 1.25rem 1.35rem;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      border-bottom: 4px solid rgba(12, 79, 108, 0.08);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    header:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.28), transparent 35%),
+                  radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16), transparent 32%);
+      pointer-events: none;
+    }
+
+    .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
+    .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
+    nav { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
+    nav a { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.9); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; }
+    nav a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+
+    main { width: min(960px, calc(100% - 1.6rem)); margin: 0 auto; padding: 1.6rem 0 3.5rem; display: grid; gap: 1rem; }
+
+    .hero {
+      background: #ffffff;
+      border: 1px solid rgba(0, 121, 107, 0.1);
+      border-radius: 1.4rem;
+      padding: 1.4rem 1.25rem;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.1);
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .hero h1 { font-family: "Baloo 2", "Inter", sans-serif; font-size: 2rem; color: var(--deep-blue); }
+    .hero p { color: var(--text-muted); }
+    .pill-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .pill { background: rgba(25, 198, 193, 0.16); color: var(--deep-blue); padding: 0.25rem 0.65rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
+    .card { background: rgba(255, 255, 255, 0.95); border-radius: 1rem; padding: 1rem; border: 1px solid rgba(12, 79, 108, 0.08); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--deep-blue); }
+    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(255, 122, 92, 0.15); color: var(--primary-dark); padding: 0.3rem 0.6rem; border-radius: 999px; font-weight: 700; font-size: 0.88rem; }
+    .quick-list { list-style: none; padding: 0; margin: 0.2rem 0 0; display: grid; gap: 0.3rem; color: var(--text-muted); }
+    .quick-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem; align-items: start; }
+    .dot { width: 9px; height: 9px; margin-top: 0.35rem; border-radius: 50%; background: linear-gradient(120deg, var(--primary), var(--aqua)); box-shadow: 0 8px 16px rgba(18, 197, 179, 0.3); }
+
+    .form-card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 0.85rem; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem 1rem; margin: 0.75rem 0; }
+    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-field label { font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
+    input[type="text"], input[type="email"], textarea { width: 100%; padding: 0.55rem 0.7rem; border-radius: 0.65rem; border: 1px solid #d9d9d9; background: #fafafa; font-size: 0.95rem; transition: border 0.2s, box-shadow 0.2s; }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22, 105, 122, 0.15); background: #fff; }
+
+    .form-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.4rem; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.1s, box-shadow 0.2s, border-color 0.2s; font-weight: 700; letter-spacing: 0.01em; }
+    .btn-primary { background: linear-gradient(120deg, var(--primary), #ff9f7a); color: #fff; border-color: rgba(216, 81, 81, 0.5); box-shadow: 0 6px 16px rgba(216, 81, 81, 0.3); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(216, 81, 81, 0.45); }
+    .form-note { font-size: 0.85rem; color: var(--text-muted); }
+
+    @media (max-width: 960px) {
+      .nav-container { flex-direction: column; align-items: flex-start; }
+      nav { justify-content: flex-start; width: 100%; gap: 0.4rem; }
+      nav a { padding: 0.55rem 0.9rem; font-size: 1rem; }
+      body { background-attachment: scroll; }
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 1rem 1rem 1.15rem; }
+      .brand { font-size: 1.3rem; }
+      .hero, .card { padding: 1.1rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a class="brand" href="index.html">
+        Luau Manor
+        <span>Resident Hub • Wheeling Housing Authority</span>
+      </a>
+      <nav>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+        <a href="pets.html">Pets</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="pill-row">
+          <span class="pill">Resident of the Month</span>
+          <span class="pill">Celebrate great neighbors</span>
+        </div>
+        <h1>Nominate a Neighbor</h1>
+        <p>Recognize residents who brighten the building, help others, or embody community values. Share a quick story so we can celebrate them.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Need help?</span>
+        <p>Questions? Call or text <strong>(304) 215-2584</strong> or email <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</p>
+        <p class="form-note">Nominations are reviewed monthly by management.</p>
+      </div>
+    </section>
+
+    <div class="info-grid" aria-label="Nomination tips">
+      <div class="card">
+        <h3>What to include</h3>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Name and apartment of the person you’re nominating.</span></li>
+          <li><span class="dot"></span><span>A quick example of how they help the community.</span></li>
+          <li><span class="dot"></span><span>Your contact info if we can follow up.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Great reasons to nominate</h3>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span>Helping neighbors with errands or rides.</span></li>
+          <li><span class="dot"></span><span>Keeping shared spaces tidy or welcoming newcomers.</span></li>
+          <li><span class="dot"></span><span>Positive attitude that brightens the building.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="resident-of-month">
+        <input type="hidden" name="_next" value="thank-you.html" />
+        <input type="hidden" name="_subject" value="Luau Manor - Resident of the Month Nomination">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nominee-name">Nominee’s Name</label>
+            <input id="nominee-name" type="text" name="Nominee Name" placeholder="Person you want to recognize" required>
+          </div>
+          <div class="form-field">
+            <label for="nominee-unit">Nominee’s Apartment (if known)</label>
+            <input id="nominee-unit" type="text" name="Nominee Apartment" placeholder="Apartment number or floor">
+          </div>
+          <div class="form-field">
+            <label for="your-name">Your Name</label>
+            <input id="your-name" type="text" name="Your Name" placeholder="Share your name so we can thank you" required>
+          </div>
+          <div class="form-field">
+            <label for="contact">Phone or Email</label>
+            <input id="contact" type="text" name="Your Contact" placeholder="For quick follow-up" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="story">Why are you nominating them?</label>
+          <textarea id="story" name="Nomination Story" placeholder="Tell us how they help or brighten the community" required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="examples">Any specific examples or dates?</label>
+          <textarea id="examples" name="Examples" placeholder="Moments we can share when we recognize them"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit nomination</button>
+          <span class="form-note">Thank you for celebrating your neighbors!</span>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
