@@ -2,261 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Luau Manor Resident Handbook Summary</title>
+  <title>Resident Handbook • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #f76b6a;
-      --primary-dark: #d85151;
-      --aqua: #1ec6b6;
-      --sun: #ffd166;
-      --deep-blue: #0f3057;
-      --sand: #fff7ec;
-      --text-main: #132134;
-      --text-muted: #3f5369;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at 12% 20%, rgba(255, 209, 102, 0.25), transparent 30%),
-                  radial-gradient(circle at 85% 12%, rgba(30, 198, 182, 0.18), transparent 28%),
-                  radial-gradient(circle at 20% 80%, rgba(247, 107, 106, 0.15), transparent 28%),
-                  linear-gradient(135deg, #fef6e7 0%, #f6fffc 55%, #e8f2ff 100%);
-      color: var(--text-main);
-      line-height: 1.7;
-      padding: 1.5rem;
-      background-attachment: fixed;
-    }
-
-    a { color: var(--deep-blue); text-decoration: underline; text-decoration-color: rgba(11,79,108,0.3); }
-    a:hover { text-decoration-color: var(--primary); }
-
-    .page {
-      max-width: 900px;
-      margin: 0 auto 2rem;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(11, 79, 108, 0.08);
-      border-radius: 1.2rem;
-      padding: 1.5rem 1.4rem 1.8rem;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page:after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 12% 10%, rgba(255, 209, 102, 0.2), transparent 35%),
-                  radial-gradient(circle at 88% 80%, rgba(25, 198, 193, 0.18), transparent 35%);
-      pointer-events: none;
-    }
-
-    header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-family: "Baloo 2", "Inter", sans-serif;
-      font-size: 2rem;
-      color: var(--deep-blue);
-    }
-
-    h2 {
-      font-family: "Baloo 2", "Inter", sans-serif;
-      font-size: 1.35rem;
-      color: var(--deep-blue);
-      margin: 1.2rem 0 0.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    h3 {
-      font-size: 1.05rem;
-      margin: 0.6rem 0 0.3rem;
-      color: var(--text-main);
-    }
-
-    p { margin-bottom: 0.75rem; color: var(--text-muted); }
-
-    ul { margin: 0.3rem 0 0.8rem 1.1rem; color: var(--text-muted); }
-    li { margin-bottom: 0.35rem; }
-
-    .pill-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 0.25rem; }
-    .pill { background: rgba(25,198,193,0.16); color: var(--deep-blue); padding: 0.15rem 0.65rem; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
-
-    .note {
-      background: rgba(255,122,92,0.12);
-      border: 1px solid rgba(226,90,62,0.16);
-      padding: 0.85rem 1rem;
-      border-radius: 0.95rem;
-      color: var(--text-main);
-      margin: 0.4rem 0 1rem;
-    }
-
-    .section-nav {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(11, 79, 108, 0.12);
-      padding: 0.75rem 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-    }
-
-    .section-nav-label {
-      font-weight: 700;
-      color: var(--deep-blue);
-      white-space: nowrap;
-    }
-
-    .section-nav-links {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    .section-nav-links::-webkit-scrollbar { display: none; }
-
-    .section-link {
-      padding: 0.4rem 0.75rem;
-      border-radius: 999px;
-      background: linear-gradient(120deg, rgba(25,198,193,0.16), rgba(255,209,102,0.16));
-      color: var(--deep-blue);
-      font-weight: 700;
-      text-decoration: none;
-      border: 1px solid rgba(11, 79, 108, 0.12);
-      transition: transform 0.1s ease, box-shadow 0.2s ease;
-    }
-
-    .section-link:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .back-link { display: inline-block; margin-top: 0.8rem; font-weight: 700; }
-
-    @media (max-width: 640px) {
-      body { padding: 1rem; }
-      h1 { font-size: 1.75rem; }
-      .section-nav { position: sticky; top: 0.5rem; z-index: 500; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="page">
-    <header>
-      <h1>Luau Manor Resident Handbook Summary</h1>
-      <p>Quick, colorful reference to key topics from the Wheeling Housing Authority Resident Handbook. For questions, contact the office at (304) 233-0658 or email <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</p>
-      <div class="actions" style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:center;">
-        <a class="section-link" href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Open full Resident Handbook (Drive)</a>
-        <a class="section-link" href="./">Return to hub</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="handbook-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Rules &amp; expectations</span>
+            <span class="pill">Plain language</span>
+          </div>
+          <h1 id="handbook-title">Resident Handbook</h1>
+          <p class="lede">Read key rules, guest guidance, inspections, grievance steps, and housekeeping expectations.</p>
+          <div class="cta-row" role="group" aria-label="Handbook actions">
+            <a class="btn primary" href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Download full handbook</a>
+            <a class="btn ghost" href="document-request.html">Request a printed copy</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>Highlights</h2>
+          <ul class="list-check">
+            <li>Guest limits, quiet hours, and housekeeping standards.</li>
+            <li>Annual and housekeeping inspections—what to expect.</li>
+            <li>Grievance process and how to appeal decisions.</li>
+            <li>Pet rules, forms, and service/assistance animal guidance.</li>
+          </ul>
+        </div>
       </div>
-    </header>
+    </section>
 
-    <div class="note">This page is a friendly summary for quick reading—your signed lease, WHA policies, and HUD rules are the final authority.</div>
+    <section class="section" aria-labelledby="handbook-summary-title">
+      <div class="shell card-grid columns-2">
+        <article class="card">
+          <h3 id="handbook-summary-title">Quick reminders</h3>
+          <ul class="list-check">
+            <li>Keep common areas clear for safety.</li>
+            <li>Report maintenance issues right away.</li>
+            <li>Call 911 for emergencies before contacting the office.</li>
+            <li>Pets must be approved and registered.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Need help?</h3>
+          <p>Call the office and we will help you find the right section or provide a printed copy.</p>
+          <a class="btn outline" href="tel:3042152584">Call/Text (304) 215-2584</a>
+        </article>
+      </div>
+    </section>
+  </main>
 
-    <div class="section-nav" aria-label="Jump to a topic">
-      <span class="section-nav-label">Jump to:</span>
-      <div class="section-nav-links">
-        <a class="section-link" href="#conduct">Conduct</a>
-        <a class="section-link" href="#maintenance">Maintenance</a>
-        <a class="section-link" href="#guests">Guests</a>
-        <a class="section-link" href="#housekeeping">Housekeeping</a>
-        <a class="section-link" href="#pets">Pets</a>
-        <a class="section-link" href="#rent">Rent</a>
-        <a class="section-link" href="#inspections">Inspections</a>
-        <a class="section-link" href="#grievances">Grievances</a>
-        <a class="section-link" href="#bans">Ban Policy</a>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">Official policies and leases govern. This summary is for quick reference.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
       </div>
     </div>
+  </footer>
 
-    <h2 id="conduct">📘 General Conduct</h2>
-    <p>Be a great neighbor—keep noise down, treat staff and residents with respect, and follow posted guidance in common areas.</p>
-    <ul>
-      <li>Respect quiet hours and avoid loud music, slamming doors, or shouting in hallways.</li>
-      <li>Only invite guests you know and supervise them at all times.</li>
-      <li>Do not let strangers “piggyback” into secure areas.</li>
-    </ul>
-
-    <h2 id="maintenance">🛠️ Maintenance & Repairs</h2>
-    <p>Report issues quickly to prevent damage. Non-emergencies can be submitted online from the main page.</p>
-    <ul>
-      <li>Emergency maintenance: (304) 242-2820 (24/7).</li>
-      <li>Give permission to enter or provide clear instructions for scheduling.</li>
-      <li>Resident-caused damage may result in charges per policy.</li>
-    </ul>
-
-    <h2 id="guests">🚪 Guests & Visitors</h2>
-    <p>You are responsible for the conduct of your guests.</p>
-    <ul>
-      <li>Follow overnight guest limits and any required registration.</li>
-      <li>Never host someone who is banned from WHA property.</li>
-      <li>Report disturbances or unsafe behavior to the office and, if needed, 911.</li>
-    </ul>
-
-    <h2 id="housekeeping">🏠 Housekeeping & Safety</h2>
-    <ul>
-      <li>Keep exits, smoke detectors, and sprinklers clear of clutter.</li>
-      <li>Bag trash and dispose of it in designated locations only.</li>
-      <li>Report pests early for treatment; maintain a sanitary unit.</li>
-    </ul>
-
-    <h2 id="pets">🐾 Pet & Assistance Animals</h2>
-    <p>Pets must be registered and follow behavior rules.</p>
-    <ul>
-      <li>Typical limit: small household pets, up to ~25 lbs for dogs/cats.</li>
-      <li>Provide vaccination, licensing, and spay/neuter documentation.</li>
-      <li>Clean up after animals and prevent damage or disturbances.</li>
-    </ul>
-    <div class="pill-row">
-      <span class="pill">Service & assistance animals are accommodations</span>
-      <span class="pill">No aggressive breeds</span>
-    </div>
-
-    <h2 id="rent">💳 Rent & Fees</h2>
-    <ul>
-      <li>Rent is due on the 1st; late fees may apply after policy deadlines.</li>
-      <li>Air conditioner charges apply when units are installed.</li>
-      <li>Contact the office early if you anticipate difficulty paying.</li>
-    </ul>
-
-    <h2 id="inspections">🔍 Inspections & Entry</h2>
-    <ul>
-      <li>Annual and special inspections are required; reasonable notice is provided when possible.</li>
-      <li>Management may enter without notice during emergencies.</li>
-      <li>Refusal of entry can lead to lease enforcement action.</li>
-    </ul>
-
-    <h2 id="grievances">🧭 Grievances & Hearings</h2>
-    <p>You may request an informal hearing or grievance for certain decisions.</p>
-    <ul>
-      <li>Requests must be made in writing within policy timeframes.</li>
-      <li>Include your name, unit, contact information, and reason for the request.</li>
-      <li>Email <a href="mailto:sidney@wheelingwv-pha.org?subject=Hearing%20Request%20-%20Luau%20Manor">sidney@wheelingwv-pha.org</a> or visit the office to begin.</li>
-    </ul>
-
-    <h2 id="bans">🚫 Ban Policy</h2>
-    <ul>
-      <li>Banned individuals may not be invited or allowed in the building.</li>
-      <li>Report sightings to the office or security; call 911 if safety is at risk.</li>
-    </ul>
-
-    <p class="back-link"><a href="index.html#top">⬅ Back to the Resident Hub</a></p>
-  </div>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>

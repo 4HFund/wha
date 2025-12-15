@@ -2,88 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Resident Council | Luau Manor</title>
+  <title>Resident Council • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
-      <nav class="nav-links">
-        <a class="nav-pill" href="./">Home</a>
-        <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-        <a class="nav-pill" href="concern-report.html">Concerns</a>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Documents ▾</button>
-          <div class="nav-dropdown">
-            <a href="document-request.html">Request documents</a>
-            <a href="resident-handbook.html">Resident handbook</a>
-            <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-          </div>
-        </div>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Policies ▾</button>
-          <div class="nav-dropdown">
-            <a href="policies.html">Community rules</a>
-            <a href="pets.html">Pet policy &amp; forms</a>
-          </div>
-        </div>
-        <a class="nav-pill" href="events.html">Events</a>
-        <a class="nav-pill" href="council.html">Council</a>
-        <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="small-label">Resident Council</p>
-        <h1>Stay involved with your community</h1>
-        <p>Share ideas, volunteer, and stay updated on council announcements for Luau Manor.</p>
+  <main id="main">
+    <section class="hero" aria-labelledby="council-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Community voice</span>
+            <span class="pill">Volunteer</span>
+          </div>
+          <h1 id="council-title">Resident Council</h1>
+          <p class="lede">Share ideas, volunteer, and review council updates for Luau Manor. Everyone is welcome.</p>
+          <div class="cta-row" role="group" aria-label="Council actions">
+            <a class="btn primary" href="https://drive.google.com/drive/folders/1Ae2oXTsqmI2JKmCxCaE0nKV8AaNmucS4?usp=sharing" target="_blank" rel="noopener noreferrer">Open council folder</a>
+            <a class="btn outline" href="concern-report.html">Send an idea</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>How to get involved</h2>
+          <ul class="list-check">
+            <li>Attend the next council meeting—check dates on the events page.</li>
+            <li>Share ideas for building improvements or activities.</li>
+            <li>Volunteer to help with events or welcome new residents.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Connect with the council</h2>
-        <p>Share event ideas, volunteer to help, or suggest improvements for Luau Manor.</p>
-        <div class="actions">
-          <a class="btn outline" href="mailto:sidney@wheelingwv-pha.org?subject=Resident%20Council%20Idea%20-%20Luau%20Manor">Share an idea / volunteer</a>
-        </div>
-      </div>
-      <div class="card">
-        <h2>Announcements</h2>
-        <p>Council meeting notices and activity flyers are posted in the lobby and will be shared here when available.</p>
-      </div>
-      <div class="card">
-        <h2>Stay in the loop</h2>
-        <ul>
-          <li>Watch the lobby bulletin boards for meeting dates and agendas.</li>
-          <li>Check the <a href="events.html">announcements & events</a> page for upcoming activities.</li>
-          <li>Talk with your neighbors and council representatives about what matters most.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Resident Council forms</h2>
-        <p>Download and print the forms the council shares with residents. You can also ask the office for printed copies.</p>
-        <div class="actions">
-          <a class="btn" href="https://drive.google.com/drive/folders/1Ae2oXTsqmI2JKmCxCaE0nKV8AaNmucS4?usp=sharing" target="_blank" rel="noopener noreferrer">Open council forms</a>
-        </div>
+    <section class="section" aria-labelledby="council-updates-title">
+      <div class="shell card-grid columns-2">
+        <article class="card">
+          <h3 id="council-updates-title">Recent focus areas</h3>
+          <ul class="list-check">
+            <li>Activity nights and community meals.</li>
+            <li>Safety walkthroughs and maintenance feedback.</li>
+            <li>Ideas for seasonal decorating and welcome packets.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Contact the council</h3>
+          <p>Use the concern form for suggestions or email the office and we will share with council leads.</p>
+          <div class="quick-links">
+            <a class="btn ghost" href="concern-report.html">Share feedback</a>
+            <a class="btn ghost" href="mailto:sidney@wheelingwv-pha.org">Email the office</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">Thank you to all resident volunteers who make events possible.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+      </div>
+    </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>

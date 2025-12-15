@@ -2,226 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Thank You • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You | Luau Manor Requests</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #e25a3e;
-      --primary-dark: #c44c35;
-      --accent: #19c6c1;
-      --bg: #f6f7fb;
-      --text: #0f172a;
-      --muted: #475569;
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem 1rem;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 1rem;
-      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.06);
-      padding: 1.75rem;
-      max-width: 640px;
-      width: 100%;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0 0 0.35rem;
-      font-size: 1.9rem;
-      color: var(--primary-dark);
-    }
-
-    p {
-      margin: 0.4rem 0 1.2rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.6rem;
-      margin-top: 1.1rem;
-    }
-
-    a.btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 1rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: transform 0.1s ease, box-shadow 0.2s ease, border 0.2s ease;
-    }
-
-    a.btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 10px 18px rgba(226, 90, 62, 0.25);
-    }
-
-    a.btn-secondary {
-      background: #fff;
-      color: var(--text);
-      border-color: #e2e8f0;
-      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
-    }
-
-    a.btn-quiet {
-      background: #0f172a;
-      color: #fff;
-      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.35);
-    }
-
-    a.btn:hover { transform: translateY(-2px); }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(25, 198, 193, 0.12);
-      color: #0f766e;
-      border: 1px solid rgba(25, 198, 193, 0.35);
-      padding: 0.5rem 0.75rem;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    @media (max-width: 520px) {
-      body { padding: 1rem; }
-      .card { padding: 1.25rem; }
-      h1 { font-size: 1.6rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="card">
-    <div class="badge" id="badge-status">✅ Submission received</div>
-    <h1 id="thankyou-title">Thank you for your submission!</h1>
-    <p id="thankyou-copy">
-      We received your form and will follow up shortly. If this is an emergency or you need immediate help,
-      please call the office or use the numbers below to reach us right away.
-    </p>
-    <p id="followup-text">
-      While you wait, you can keep your phone nearby for a call or text in case we need clarification.
-    </p>
-    <div class="actions">
-      <a class="btn btn-primary" id="primary-link" href="home.html#top">Back to Home Page</a>
-      <a class="btn btn-secondary" id="secondary-link" href="home.html#forms">Fill out another form</a>
-      <a class="btn btn-secondary" href="index.html#top">Go to Resident Hub</a>
-      <a class="btn btn-quiet" href="tel:3042152584">Call/Text (304) 215-2584</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
-  <script>
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const source = params.get('from') || 'resident-hub';
+  </header>
 
-      const primaryLink = document.getElementById('primary-link');
-      const secondaryLink = document.getElementById('secondary-link');
-      const followupText = document.getElementById('followup-text');
-      const title = document.getElementById('thankyou-title');
+  <main id="main">
+    <section class="hero" aria-labelledby="thanks-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">We received your message</span>
+            <span class="pill">Thank you</span>
+          </div>
+          <h1 id="thanks-title">Thank you for reaching out</h1>
+          <p class="lede">We’ll follow up soon. If this is urgent, call the office and mention that you submitted a form.</p>
+          <div class="cta-row" role="group" aria-label="Follow-up actions">
+            <a class="btn primary" href="tel:3042152584">Call/Text the office</a>
+            <a class="btn outline" href="index.html">Return to the Resident Hub</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>Need faster help?</h2>
+          <ul class="list-check">
+            <li>Emergency maintenance: <a href="tel:3042422820">(304) 242-2820</a>.</li>
+            <li>Life-threatening emergencies: call <a href="tel:911">911</a> first.</li>
+            <li>Office hours: Mon–Fri, 8:30 AM – 4:30 PM.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
 
-      const copyBySource = {
-        'resident-hub': {
-          title: 'Thanks for reaching out!',
-          primary: { href: 'home.html#forms', text: 'Return to online forms' },
-          secondary: { href: 'index.html#top', text: 'Go to Resident Hub' },
-          followup:
-            'We will review your submission soon. Call the office if you need to update details or provide photos.',
-        },
-        'home-maintenance': {
-          title: 'Maintenance request received',
-          primary: { href: 'home.html#maintenance-form', text: 'Submit another maintenance request' },
-          secondary: { href: 'maintenance-request.html#top', text: 'Open full maintenance page' },
-          followup:
-            'Our maintenance team will review the details and reach out if we need a time window or permission to enter.',
-        },
-        'home-maintenance-detailed': {
-          title: 'Maintenance request received',
-          primary: { href: 'home.html#maintenance', text: 'Return to maintenance info' },
-          secondary: { href: 'home.html#maintenance-form', text: 'Send another maintenance request' },
-          followup:
-            'We will prioritize urgent issues first. For emergencies, call (304) 242-2820 instead of replying to this email.',
-        },
-        'maintenance-page': {
-          title: 'Maintenance request received',
-          primary: { href: 'maintenance-request.html#top', text: 'Back to maintenance request page' },
-          secondary: { href: 'home.html#maintenance', text: 'View maintenance tips' },
-          followup:
-            'We will contact you using the phone or email you provided. Please keep your phone nearby for scheduling.',
-        },
-        'home-concern': {
-          title: 'Concern submitted',
-          primary: { href: 'home.html#concern-form', text: 'Submit another concern' },
-          secondary: { href: 'concern-report.html#top', text: 'Open concern form page' },
-          followup:
-            'If this relates to safety or criminal activity, remember to call 911 first before waiting for a follow-up.',
-        },
-        'concern-page': {
-          title: 'Concern submitted',
-          primary: { href: 'concern-report.html#top', text: 'Back to concern form' },
-          secondary: { href: 'home.html#concerns', text: 'View safety reminders' },
-          followup:
-            'Management will review your report. If you requested a follow-up, keep an eye on your phone for a call or text.',
-        },
-        'home-documents': {
-          title: 'Document request received',
-          primary: { href: 'home.html#document-form', text: 'Send another document request' },
-          secondary: { href: 'home.html#forms', text: 'Return to online forms' },
-          followup:
-            'Most document requests are processed during office hours. We will contact you if anything else is needed.',
-        },
-        'document-request': {
-          title: 'Document request received',
-          primary: { href: 'document-request.html#top', text: 'Back to document request page' },
-          secondary: { href: 'home.html#forms', text: 'See all online forms' },
-          followup:
-            'Expect a follow-up during office hours. If you need to add details, reply to the confirmation email or call the office.',
-        },
-      };
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">We appreciate you contacting us. We review submissions daily.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+      </div>
+    </div>
+  </footer>
 
-      const selected = copyBySource[source] || copyBySource['resident-hub'];
-
-      if (selected) {
-        if (selected.title) {
-          title.textContent = selected.title;
-        }
-
-        if (selected.primary) {
-          primaryLink.href = selected.primary.href;
-          primaryLink.textContent = selected.primary.text;
-        }
-
-        if (selected.secondary) {
-          secondaryLink.href = selected.secondary.href;
-          secondaryLink.textContent = selected.secondary.text;
-        }
-
-        if (selected.followup) {
-          followupText.textContent = selected.followup;
-        }
-      }
-    })();
-  </script>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>

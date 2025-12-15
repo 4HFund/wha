@@ -2,79 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Announcements & Events | Luau Manor</title>
+  <title>Events & Notices • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
-      <nav class="nav-links">
-        <a class="nav-pill" href="./">Home</a>
-        <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-        <a class="nav-pill" href="concern-report.html">Concerns</a>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Documents ▾</button>
-          <div class="nav-dropdown">
-            <a href="document-request.html">Request documents</a>
-            <a href="resident-handbook.html">Resident handbook</a>
-            <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-          </div>
-        </div>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Policies ▾</button>
-          <div class="nav-dropdown">
-            <a href="policies.html">Community rules</a>
-            <a href="pets.html">Pet policy &amp; forms</a>
-          </div>
-        </div>
-        <a class="nav-pill" href="events.html">Events</a>
-        <a class="nav-pill" href="council.html">Council</a>
-        <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="small-label">Announcements & Events</p>
-        <h1>Current notices for Luau Manor</h1>
-        <p>Check here for building updates and resident activities. Watch lobby bulletin boards for the latest flyers and sign-up sheets.</p>
+  <main id="main">
+    <section class="hero" aria-labelledby="events-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Activities &amp; notices</span>
+            <span class="pill">Printable flyers</span>
+          </div>
+          <h1 id="events-title">Events &amp; Notices</h1>
+          <p class="lede">Check building notices, activity flyers, and meeting dates. Call if you need a printed copy of any flyer.</p>
+          <div class="cta-row" role="group" aria-label="Event actions">
+            <a class="btn primary" href="https://drive.google.com/drive/folders/1Ae2oXTsqmI2JKmCxCaE0nKV8AaNmucS4?usp=sharing" target="_blank" rel="noopener noreferrer">Open shared folder</a>
+            <a class="btn outline" href="tel:3042152584">Request a printout</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>Coming up</h2>
+          <ul class="list-check">
+            <li>Community cookout — Friday at 5:00 PM by the courtyard.</li>
+            <li>Resident council meeting — see flyer for the next date.</li>
+            <li>Maintenance updates and holiday hours posted here.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Building updates</h2>
-        <ul>
-          <li><strong>Elevator notice:</strong> One elevator is out of service while we wait for a part. We will post a timeline as soon as it is available.</li>
-          <li><strong>Pest control:</strong> Scheduled service will be posted on each floor’s bulletin board.</li>
-          <li><strong>Signage:</strong> New signs have been added to improve safety and communication around the building.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Resident activities</h2>
-        <ul>
-          <li><strong>Bingo Night:</strong> Monthly in the community room.</li>
-          <li><strong>Coffee &amp; Conversations:</strong> Occasional morning gatherings with local partners.</li>
-          <li><strong>Resident of the Month:</strong> Ongoing voting and recognition.</li>
-        </ul>
-        <p>See lobby bulletin boards and flyers for dates, times, and any sign-up requirements.</p>
+    <section class="section" aria-labelledby="events-list-title">
+      <div class="shell card-grid columns-2">
+        <article class="card">
+          <h3 id="events-list-title">Notice board</h3>
+          <ul class="list-check">
+            <li>Elevator inspection Tuesday at 10:00 AM.</li>
+            <li>Water shutoff notices will be posted here and on each floor.</li>
+            <li>Check the shared folder for printable PDFs.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Want to add an event?</h3>
+          <p>Email details to the office or drop off a flyer for posting.</p>
+          <div class="quick-links">
+            <a class="btn ghost" href="mailto:sidney@wheelingwv-pha.org">Email the office</a>
+            <a class="btn ghost" href="concern-report.html">Share an idea</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">Need a printed flyer? Call and we will provide one.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+      </div>
+    </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>

@@ -2,107 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pet Policy | Luau Manor</title>
+  <title>Pet Policy • Luau Manor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <a class="brand" href="./">Luau Manor <small>Resident Hub</small></a>
-      <nav class="nav-links">
-        <a class="nav-pill" href="./">Home</a>
-        <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
-        <a class="nav-pill" href="concern-report.html">Concerns</a>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Documents ▾</button>
-          <div class="nav-dropdown">
-            <a href="document-request.html">Request documents</a>
-            <a href="resident-handbook.html">Resident handbook</a>
-            <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
-          </div>
-        </div>
-        <div class="nav-group">
-          <button class="nav-pill" type="button">Policies ▾</button>
-          <div class="nav-dropdown">
-            <a href="policies.html">Community rules</a>
-            <a href="pets.html">Pet policy &amp; forms</a>
-          </div>
-        </div>
-        <a class="nav-pill" href="events.html">Events</a>
-        <a class="nav-pill" href="council.html">Council</a>
-        <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-name">Luau Manor</span>
+          <span class="brand-sub">Resident Hub</span>
+        </span>
+      </a>
+      <a class="quick-call" href="tel:3042152584">Call office • (304) 215-2584</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-menu">☰ <span>Menu</span></button>
+      <nav class="main-nav" id="main-menu" aria-label="Primary">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="maintenance-request.html">Maintenance</a></li>
+          <li class="nav-item"><a href="concern-report.html">Concerns</a></li>
+          <li class="nav-item"><a href="document-request.html">Documents</a></li>
+          <li class="nav-item"><a href="resident-handbook.html">Handbook</a></li>
+          <li class="nav-item"><a href="policies.html">Community Rules</a></li>
+          <li class="nav-item"><a href="pets.html">Pet Policy</a></li>
+          <li class="nav-item"><a href="events.html">Events</a></li>
+          <li class="nav-item"><a href="council.html">Resident Council</a></li>
+          <li class="nav-item"><a href="resident-of-month.html">Resident of the Month</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="small-label">Pet Policy (Summary)</p>
-        <h1>Rules for pets and assistance animals</h1>
-        <p>This summary is for quick reference. The official WHA Pet Policy and your lease control any questions.</p>
-        <div class="actions">
-          <a class="btn primary" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Open pet policy folder</a>
-          <a class="btn outline" href="#pet-forms">Jump to registration forms</a>
+  <main id="main">
+    <section class="hero" aria-labelledby="pet-title">
+      <div class="shell hero-grid">
+        <div class="hero-card">
+          <div class="meta-strip">
+            <span class="pill">Pet rules &amp; forms</span>
+            <span class="pill">Service/assistance animal guidance</span>
+          </div>
+          <h1 id="pet-title">Pet Policy</h1>
+          <p class="lede">Learn which pets are allowed, registration steps, and prohibited animals. Service and assistance animals have a separate process.</p>
+          <div class="cta-row" role="group" aria-label="Pet actions">
+            <a class="btn primary" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Download pet forms</a>
+            <a class="btn outline" href="document-request.html">Request printed forms</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h2>Key points</h2>
+          <ul class="list-check">
+            <li>Pets must be approved and registered before arrival.</li>
+            <li>Provide vet records and required vaccinations.</li>
+            <li>Some animals are prohibited for safety—ask the office.</li>
+            <li>Service/assistance animals follow HUD guidance; call us for help.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="grid" id="pet-policy">
-      <div class="card">
-        <h2>Allowed pets</h2>
-        <ul>
-          <li>Common household pets such as small dogs, cats, birds, and fish.</li>
-          <li>Weight limit generally up to 25 lbs for dogs and cats.</li>
-          <li>Pets must be registered with management before being brought into the unit.</li>
-        </ul>
-        <p>Service animals and assistance animals are handled as reasonable accommodations and are not subject to pet fees, but must still follow behavior rules.</p>
-      </div>
-      <div class="card">
-        <h2>Prohibited types</h2>
-        <ul>
-          <li>Reptiles, rodents (other than approved small caged animals if allowed), insects, and wild animals.</li>
-          <li>Certain breeds such as pit bulls, rottweilers, chows, and boxers are not permitted.</li>
-          <li>Any animal that is aggressive, unsafe, or disruptive may not remain on the property.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Registration & care</h2>
-        <ul>
-          <li>Pets must be spayed/neutered by required age (unless medically excused).</li>
-          <li>Current vaccination and local license records must be provided.</li>
-          <li>Owners are responsible for cleaning up after pets and preventing damage.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="grid" id="pet-forms">
-      <div class="card" style="grid-column: span 2;">
-        <h2>Pet forms, policy, and how to submit</h2>
-        <p>Everything lives in one place so you do not have to hunt around. Open the pet folder to download the official policy, registration packet, and assistance animal forms.</p>
-        <ul>
-          <li><strong>Pet policy PDF</strong> and addenda are stored with the forms so you can review requirements and fees.</li>
-          <li><strong>Registration packet</strong> includes the application, vet form, and caretaker form. Email the completed packet to <a href="mailto:sidney@wheelingwv-pha.org">sidney@wheelingwv-pha.org</a>.</li>
-          <li><strong>Assistance animal requests</strong> are handled with the reasonable accommodation paperwork in the same folder.</li>
-        </ul>
-        <div class="actions">
-          <a class="btn secondary" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Open pet policy & forms folder</a>
-          <a class="btn outline" href="mailto:sidney@wheelingwv-pha.org?subject=Pet%20Registration%20Packet%20-%20Luau%20Manor">Email the completed forms</a>
-        </div>
+    <section class="section" aria-labelledby="pet-rules-title">
+      <div class="shell card-grid columns-2">
+        <article class="card">
+          <h3 id="pet-rules-title">How to register</h3>
+          <ul class="list-check">
+            <li>Pick up or download the pet application packet.</li>
+            <li>Include vet records and recent vaccination proof.</li>
+            <li>Submit the packet to the office for review.</li>
+            <li>Wait for approval before bringing a pet home.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Need assistance?</h3>
+          <p>Call the office and we will walk you through the forms or print them for you.</p>
+          <div class="quick-links">
+            <a class="btn ghost" href="tel:3042152584">Call/Text (304) 215-2584</a>
+            <a class="btn ghost" href="https://drive.google.com/drive/folders/1sDD4_y57Nxfrat1Hr_lzGuK989Kh2RtR?usp=sharing" target="_blank" rel="noopener noreferrer">Open pet forms</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    &copy; <span id="year"></span> Luau Manor • Wheeling Housing Authority. Policies and leases govern over this summary.
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">We are here to help you register pets and service/assistance animals correctly.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="index.html">Home</a>
+        <a href="maintenance-request.html">Maintenance</a>
+        <a href="concern-report.html">Concerns</a>
+        <a href="document-request.html">Documents</a>
+      </div>
+    </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/script.js" defer></script>
 </body>
 </html>

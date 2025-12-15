@@ -1,8 +1,8 @@
 (function () {
   const searchInput = document.getElementById('quick-search');
   const cards = Array.from(document.querySelectorAll('[data-search-grid] .card'));
-  const backToTop = document.querySelector('[data-back-to-top]');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -18,18 +18,19 @@
     });
   }
 
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      const behavior = prefersReducedMotion ? 'auto' : 'smooth';
-      window.scrollTo({ top: 0, behavior });
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    const toggleBackToTop = () => {
-      const show = window.scrollY > 240;
-      backToTop.classList.toggle('is-visible', show);
-    };
-
-    toggleBackToTop();
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    mainNav.querySelectorAll('a, summary').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
   }
 })();
