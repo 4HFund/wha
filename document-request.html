@@ -34,9 +34,14 @@
     .nav-container { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .brand { font-family: "Baloo 2", "Inter", system-ui, sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.02em; text-decoration: none; color: #0f172a; display: inline-block; }
     .brand span { font-weight: 500; font-size: 0.9rem; opacity: 0.95; display: block; }
-    nav { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
-    nav a { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.9); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; }
-    nav a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: flex-end; }
+    .nav-pill { font-size: 0.95rem; padding: 0.45rem 0.75rem; border-radius: 999px; border: 1px solid rgba(15, 23, 42, 0.12); color: #0f172a; background: rgba(255, 255, 255, 0.9); text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); transition: transform 0.15s ease, box-shadow 0.2s ease, border 0.2s ease; display: inline-flex; align-items: center; gap: 0.25rem; }
+    .nav-pill:hover, .nav-dropdown a:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); border-color: rgba(255, 255, 255, 0.6); }
+    .nav-pill:focus-visible, .nav-dropdown a:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+    .nav-group { position: relative; }
+    .nav-dropdown { display: none; position: absolute; top: calc(100% + 0.35rem); left: 0; background: #fff; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 0.85rem; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); padding: 0.6rem; min-width: 220px; z-index: 5; display: grid; gap: 0.35rem; }
+    .nav-dropdown a { background: rgba(246, 251, 255, 0.9); border: 1px solid rgba(15, 23, 42, 0.08); padding: 0.55rem 0.75rem; border-radius: 0.65rem; font-weight: 700; color: #0f172a; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06); text-decoration: none; }
+    .nav-group:hover .nav-dropdown, .nav-group:focus-within .nav-dropdown { display: grid; }
 
     main { width: min(960px, calc(100% - 1.6rem)); margin: 0 auto; padding: 1.6rem 0 3.5rem; }
     .info-strip { background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(11, 79, 108, 0.1); padding: 0.65rem 1rem; border-radius: 999px; display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); margin: 0.85rem auto 0; max-width: 920px; }
@@ -80,25 +85,43 @@
     .mobile-action-bar { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); border-top: 1px solid rgba(12, 79, 108, 0.12); box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.16); padding: 0.65rem 0.9rem calc(0.65rem + env(safe-area-inset-bottom, 0px)); display: flex; gap: 0.6rem; align-items: center; justify-content: center; z-index: 1200; backdrop-filter: blur(10px); }
     .mobile-action-bar .btn { flex: 1; font-size: 1rem; }
     .btn-quiet { background: #0f172a; color: #fff; border-color: rgba(15, 23, 42, 0.1); box-shadow: 0 10px 18px rgba(15, 23, 42, 0.25); }
-    @media (max-width: 960px) { .nav-container { flex-direction: column; align-items: flex-start; } nav { justify-content: flex-start; width: 100%; gap: 0.4rem; } nav a { padding: 0.55rem 0.9rem; font-size: 1rem; } body { background-attachment: scroll; } main { padding-bottom: 4.5rem; } .info-strip { border-radius: 1rem; justify-content: flex-start; } }
+    @media (max-width: 960px) { .nav-container { flex-direction: column; align-items: flex-start; } .nav-links { justify-content: flex-start; width: 100%; gap: 0.4rem; } .nav-pill { padding: 0.55rem 0.9rem; font-size: 1rem; } body { background-attachment: scroll; } main { padding-bottom: 4.5rem; } .info-strip { border-radius: 1rem; justify-content: flex-start; } }
     @media (max-width: 640px) { header { padding: 1rem 1rem 1.15rem; } .brand { font-size: 1.3rem; } .hero, .card { padding: 1.1rem 1rem; } .info-strip { padding: 0.7rem 0.8rem; gap: 0.5rem; } .mobile-action-bar { display: flex; } }
     @media (min-width: 641px) { .mobile-action-bar { display: none; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav-container">
-      <a class="brand" href="index.html">
-        Luau Manor
-        <span>Resident Hub • Wheeling Housing Authority</span>
-      </a>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="maintenance-request.html">Maintenance</a>
-        <a href="concern-report.html">Concerns</a>
-      </nav>
-    </div>
-  </header>
+  <div class="nav-container">
+    <a class="brand" href="index.html">
+      Luau Manor
+      <span>Resident Hub • Wheeling Housing Authority</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-pill" href="./">Home</a>
+      <a class="nav-pill" href="maintenance-request.html">Maintenance</a>
+      <a class="nav-pill" href="concern-report.html">Concerns</a>
+      <div class="nav-group">
+        <button class="nav-pill" type="button">Documents ▾</button>
+        <div class="nav-dropdown">
+          <a href="document-request.html">Request documents</a>
+          <a href="resident-handbook.html">Resident handbook</a>
+          <a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link">Move-in files</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-pill" type="button">Policies ▾</button>
+        <div class="nav-dropdown">
+          <a href="policies.html">Community rules</a>
+          <a href="pets.html">Pet policy &amp; forms</a>
+        </div>
+      </div>
+      <a class="nav-pill" href="events.html">Events</a>
+      <a class="nav-pill" href="council.html">Council</a>
+      <a class="nav-pill" href="resident-of-month.html">Resident of the Month</a>
+    </nav>
+  </div>
+</header>
 
   <div class="info-strip" aria-label="Immediate contact info">
     <span class="info-chip">🌺 Request documents and letters</span>
@@ -132,6 +155,15 @@
           <li><span class="dot"></span><span>Tell us if you want the document emailed, printed, or held for pickup.</span></li>
           <li><span class="dot"></span><span>Add names that should appear on the letter and any deadlines you have.</span></li>
           <li><span class="dot"></span><span>We’ll confirm if identification is needed before releasing paperwork.</span></li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <span class="badge">Document library</span>
+        <strong>Find the files you need without leaving this page.</strong>
+        <ul class="quick-list">
+          <li><span class="dot"></span><span><a href="https://drive.google.com/drive/folders/1TUh2mZKS4gK4WXEdqqfFBoUAiiUeflt_?usp=drive_link" target="_blank" rel="noopener noreferrer">Move-in files</a> with welcome packets and setup forms.</span></li>
+          <li><span class="dot"></span><span><a href="https://docs.google.com/document/d/1rCGUO4DpghgW0RDzCHwc_3ESRccSAzG8/edit?usp=sharing&amp;ouid=113544893689592710054&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Resident handbook (Drive)</a> for full policies.</span></li>
+          <li><span class="dot"></span><span><a href="pets.html#pet-forms">Pet policy &amp; forms</a> are grouped together for easy downloading.</span></li>
         </ul>
       </div>
       <div class="mini-card">
