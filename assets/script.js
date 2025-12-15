@@ -76,15 +76,25 @@
       autoresponseField.value = `Thank you for contacting the Luau Manor office. We received your ${formName} and will respond within one business day. This confirmation includes a copy of what you submitted.`;
     }
 
+    const toField = form.querySelector('input[name="_to"]')
+      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_to' }));
+    toField.value = officeEmail;
+
     const replyToField = form.querySelector('input[name="_replyto"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
-    const ccField = form.querySelector('input[name="_cc"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
+    let ccField = form.querySelector('input[name="_cc"]');
     const formEmail = form.querySelector('input[type="email"]');
     const syncReplyTo = () => {
-      const emailValue = (formEmail && formEmail.value) ? formEmail.value : '';
+      const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
       replyToField.value = emailValue || officeEmail;
-      ccField.value = emailValue;
+
+      if (emailValue) {
+        ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
+        ccField.value = emailValue;
+      } else if (ccField) {
+        ccField.remove();
+        ccField = null;
+      }
     };
     formEmail && formEmail.addEventListener('input', syncReplyTo);
     syncReplyTo();
