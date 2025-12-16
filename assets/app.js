@@ -2,6 +2,7 @@
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const officeRecipients = ['sidney@wheelingwv-pha.org'];
   const ccDefaults = ['sidney.mozingo@gmail.com'];
+  const bccDefaults = [...officeRecipients];
   const officeEmail = officeRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
@@ -69,6 +70,8 @@
     applyFilter();
   });
 
+  const formatRecipients = (values) => Array.from(values).map((entry) => entry.trim()).filter(Boolean).join(',');
+
   const ensureHiddenField = (form, name, defaultValue = '') => {
     const existing = form.querySelector(`input[name="${name}"]`);
     if (existing) {
@@ -103,7 +106,8 @@
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
 
-    const ccField = ensureHiddenField(form, '_cc', ccDefaults.join(', '));
+    const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
+    ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
     if (!ccField.dataset.defaultCc) {
       ccField.dataset.defaultCc = ccField.value;
     }
@@ -114,7 +118,7 @@
     const syncEmails = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
       const defaultCc = (ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean);
-      const ccValues = new Set([...ccDefaults, ...defaultCc]);
+      const ccValues = new Set([...officeRecipients, ...ccDefaults, ...defaultCc]);
 
       replyToField.value = emailValue;
 
@@ -122,7 +126,7 @@
         ccValues.add(emailValue);
       }
 
-      ccField.value = Array.from(ccValues).join(', ');
+      ccField.value = formatRecipients(ccValues);
     };
 
     formEmail && formEmail.addEventListener('input', syncEmails);
