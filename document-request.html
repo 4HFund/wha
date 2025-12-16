@@ -123,8 +123,24 @@
             </div>
 
             <div class="field">
-              <label for="documents">Which documents or forms do you need?</label>
-              <textarea id="documents" name="Documents Needed" placeholder="Examples: Ledger for Jan–Mar, Pet packet, Verification letter for landlord." required></textarea>
+              <label for="document-type">Choose a document to request</label>
+              <select id="document-type" name="Document Type" required>
+                <option value="">Select a document</option>
+                <option>Rent ledger / payment history</option>
+                <option>Lease copy</option>
+                <option>Verification of residency letter</option>
+                <option>Pet policy packet</option>
+                <option>Maintenance/repair history</option>
+                <option>Resident handbook</option>
+                <option>Recertification forms</option>
+                <option>Printable forms packet</option>
+                <option>Other (describe below)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="documents">Add details (names, dates, or extra requests)</label>
+              <textarea id="documents" name="Documents Needed" placeholder="Examples: Ledger for Jan–Mar, Verification letter for landlord with account balance, pet packet in Spanish." required></textarea>
             </div>
 
             <div class="field">
