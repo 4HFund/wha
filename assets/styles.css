@@ -101,7 +101,12 @@ details summary::-webkit-details-marker { display: none; }
 .action-tile.coral { background: linear-gradient(135deg, var(--coral), #ff9f7f); color: #fff; border-color: #e65959; }
 .action-tile.outline { background: rgba(255,255,255,0.96); border-color: var(--lagoon); color: var(--lagoon-strong); }
 .action-icon { font-size: 1.9rem; }
-.action-copy { display: grid; line-height: 1.35; overflow-wrap: anywhere; }
+.action-copy {
+  display: grid;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
 .action-title { font-weight: 800; letter-spacing: -0.01em; font-size: 1.2rem; }
 .action-text { color: inherit; opacity: 0.96; font-weight: 700; }
 .cta-row { display: grid; gap: 0.65rem; }
