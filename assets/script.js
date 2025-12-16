@@ -94,19 +94,28 @@
 
     const toField = form.querySelector('input[name="_to"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_to' }));
-    toField.value = officeEmail;
+    if (!toField.value) {
+      toField.value = officeEmail;
+    }
 
     const replyToField = form.querySelector('input[name="_replyto"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
-    const baseCc = officeEmail;
     let ccField = form.querySelector('input[name="_cc"]');
+    const presetCc = (ccField && ccField.value) ? ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean) : [];
+    const ccList = new Set([officeEmail, ...presetCc]);
     const formEmail = form.querySelector('input[type="email"]');
     const syncReplyTo = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
       replyToField.value = emailValue || officeEmail;
 
       ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
-      ccField.value = emailValue ? `${baseCc}, ${emailValue}` : baseCc;
+
+      const ccValues = new Set([...ccList]);
+      if (emailValue) {
+        ccValues.add(emailValue);
+      }
+
+      ccField.value = Array.from(ccValues).join(', ');
     };
     formEmail && formEmail.addEventListener('input', syncReplyTo);
     syncReplyTo();
