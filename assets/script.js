@@ -5,12 +5,12 @@
   const mainNav = document.querySelector('.main-nav');
   const backToTop = document.querySelector('.back-to-top');
   const thankYouBase = new URL('thank-you.html', window.location.href);
-  const officeRecipients = ['sidney@wheelingwv-pha.org', 'sidney.mozingo@gmail.com'];
+  const officeRecipients = ['sidney@wheelingwv-pha.org'];
+  const ccDefaults = ['sidney.mozingo@gmail.com'];
   const officeEmail = officeRecipients[0];
   const officePhone = '(304) 215-2584';
-  const formspreeBase = 'https://formspree.io/';
-  const formspreeFormId = 'xwpeprkp';
-  const formspreeDefaultEndpoint = `${formspreeBase}f/${formspreeFormId}`;
+  const formsubmitBase = 'https://formsubmit.co/';
+  const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -53,18 +53,18 @@
     });
   }
 
-  document.querySelectorAll('form[action^="https://formspree.io"]').forEach((form) => {
+  document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
     const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
     const useAjaxSubmission = form.dataset.ajax === 'true';
 
-    if (!form.action || form.action === formspreeBase || form.action.endsWith('/f/placeholder')) {
-      form.action = formspreeDefaultEndpoint;
+    if (!form.action || form.action === formsubmitBase || form.action.endsWith('/placeholder')) {
+      form.action = formsubmitDefaultEndpoint;
     }
 
-    const redirectField = form.querySelector('input[name="_redirect"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_redirect' }));
+    const redirectField = form.querySelector('input[name="_next"]')
+      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
     const redirectUrl = new URL(thankYouBase);
     redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
     redirectField.value = redirectUrl.toString();
@@ -87,21 +87,11 @@
       autoresponseField.value = `Thank you for contacting the Luau Manor office. We received your ${formName} and will respond within one business day. This confirmation includes a copy of what you submitted.`;
     }
 
-    const toField = form.querySelector('input[name="_to"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_to' }));
-    const toRecipients = new Set(
-      (toField.value ? toField.value.split(',') : [])
-        .map((entry) => entry.trim())
-        .filter(Boolean)
-        .concat(officeRecipients),
-    );
-    toField.value = Array.from(toRecipients).join(', ');
-
     const replyToField = form.querySelector('input[name="_replyto"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
     let ccField = form.querySelector('input[name="_cc"]');
     const presetCc = (ccField && ccField.value) ? ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean) : [];
-    const ccList = new Set([...officeRecipients, ...presetCc]);
+    const ccList = new Set([officeEmail, ...ccDefaults, ...presetCc]);
     const formEmail = form.querySelector('input[type="email"]');
     const syncReplyTo = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
@@ -144,7 +134,7 @@
         submitButton?.setAttribute('disabled', 'true');
 
         try {
-          const response = await fetch(form.action.startsWith(formspreeBase) ? form.action : formspreeDefaultEndpoint, {
+          const response = await fetch(form.action.startsWith(formsubmitBase) ? form.action : formsubmitDefaultEndpoint, {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: new FormData(form),
@@ -156,7 +146,7 @@
             throw new Error(response.statusText || 'Network error');
           }
 
-          const redirectUrlValue = form.querySelector('input[name="_redirect"]')?.value || thankYouBase.toString();
+          const redirectUrlValue = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
           statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
           window.location.href = redirectUrlValue;
         } catch (error) {
