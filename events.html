@@ -92,7 +92,11 @@
         <article class="card">
           <h3 id="register">Register now</h3>
           <p>Reserve your spot so we can plan seating and materials.</p>
-          <form class="stacked-form" action="mailto:sidney@wheelingwv-pha.org?subject=Bible%20Study%20Registration" method="post" enctype="text/plain">
+          <form class="stacked-form" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="bible-study">
+            <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org">
+            <input type="hidden" name="_subject" value="Luau Manor - Bible Study Registration">
+            <input type="hidden" name="_next" value="thank-you.html">
+            <input type="hidden" name="_template" value="table">
             <label for="name">Name</label>
             <input id="name" name="Name" type="text" required>
 

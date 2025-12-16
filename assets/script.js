@@ -50,6 +50,7 @@
   }
 
   document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
+    const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
 
@@ -126,7 +127,7 @@
 
     const submitButton = form.querySelector('button[type="submit"]');
 
-    form.addEventListener('submit', async (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
 
       statusRegion.classList.remove('error');
@@ -151,9 +152,21 @@
         statusRegion.classList.add('error');
         statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
         console.error('Form submission failed:', error);
+
+        // Fall back to the standard FormSubmit POST so messages are still delivered.
+        try {
+          form.removeEventListener('submit', handleSubmit);
+          form.action = originalAction;
+          form.method = 'POST';
+          form.submit();
+        } catch (fallbackError) {
+          console.error('Form fallback submission failed:', fallbackError);
+        }
       } finally {
         submitButton?.removeAttribute('disabled');
       }
-    });
+    };
+
+    form.addEventListener('submit', handleSubmit);
   });
 })();
