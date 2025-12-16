@@ -105,6 +105,7 @@
     ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
+    ensureHiddenField(form, '_to', formatRecipients(officeRecipients));
 
     const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
     ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
