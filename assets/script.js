@@ -53,6 +53,7 @@
     const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
+    const useAjaxSubmission = form.dataset.ajax === 'true';
 
     const buildAjaxAction = (action) => {
       try {
@@ -124,63 +125,65 @@
       form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_captcha', value: 'false' }));
     }
 
-    const statusRegion = form.querySelector('[data-form-status]') || (() => {
-      const region = document.createElement('div');
-      region.className = 'form-status';
-      region.setAttribute('data-form-status', 'true');
-      region.setAttribute('role', 'status');
-      region.setAttribute('aria-live', 'polite');
-      form.insertBefore(region, form.firstChild);
-      return region;
-    })();
+    if (useAjaxSubmission) {
+      const statusRegion = form.querySelector('[data-form-status]') || (() => {
+        const region = document.createElement('div');
+        region.className = 'form-status';
+        region.setAttribute('data-form-status', 'true');
+        region.setAttribute('role', 'status');
+        region.setAttribute('aria-live', 'polite');
+        form.insertBefore(region, form.firstChild);
+        return region;
+      })();
 
-    const submitButton = form.querySelector('button[type="submit"]');
+      const submitButton = form.querySelector('button[type="submit"]');
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+      const handleSubmit = async (event) => {
+        event.preventDefault();
 
-      statusRegion.classList.remove('error');
-      statusRegion.textContent = 'Sending your request…';
-      submitButton?.setAttribute('disabled', 'true');
+        statusRegion.classList.remove('error');
+        statusRegion.textContent = 'Sending your request…';
+        submitButton?.setAttribute('disabled', 'true');
 
-      try {
-        const response = await fetch(ajaxAction, {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: new FormData(form),
-          // no-cors prevents CORS errors from blocking the request; the opaque
-          // response still indicates that the submission was sent.
-          mode: 'no-cors',
-        });
-
-        const submissionDelivered = response.ok || response.type === 'opaque' || response.status === 0;
-
-        if (!submissionDelivered) {
-          throw new Error(response.statusText || 'Network error');
-        }
-
-        const redirectUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
-        statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
-        window.location.href = redirectUrl;
-      } catch (error) {
-        statusRegion.classList.add('error');
-        statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
-        console.error('Form submission failed:', error);
-
-        // Fall back to the standard FormSubmit POST so messages are still delivered.
         try {
-          form.removeEventListener('submit', handleSubmit);
-          form.action = originalAction;
-          form.method = 'POST';
-          form.submit();
-        } catch (fallbackError) {
-          console.error('Form fallback submission failed:', fallbackError);
-        }
-      } finally {
-        submitButton?.removeAttribute('disabled');
-      }
-    };
+          const response = await fetch(ajaxAction, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(form),
+            // no-cors prevents CORS errors from blocking the request; the opaque
+            // response still indicates that the submission was sent.
+            mode: 'no-cors',
+          });
 
-    form.addEventListener('submit', handleSubmit);
+          const submissionDelivered = response.ok || response.type === 'opaque' || response.status === 0;
+
+          if (!submissionDelivered) {
+            throw new Error(response.statusText || 'Network error');
+          }
+
+          const redirectUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
+          statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
+          window.location.href = redirectUrl;
+        } catch (error) {
+          statusRegion.classList.add('error');
+          statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
+          console.error('Form submission failed:', error);
+
+          // Fall back to the standard FormSubmit POST so messages are still delivered.
+          try {
+            form.removeEventListener('submit', handleSubmit);
+            form.action = originalAction;
+            form.method = 'POST';
+            form.submit();
+          } catch (fallbackError) {
+            console.error('Form fallback submission failed:', fallbackError);
+          }
+        } finally {
+          submitButton?.removeAttribute('disabled');
+        }
+      };
+
+      form.addEventListener('submit', handleSubmit);
+    }
   });
 })();
