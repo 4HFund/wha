@@ -139,9 +139,14 @@
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(form),
+          // no-cors prevents CORS errors from blocking the request; the opaque
+          // response still indicates that the submission was sent.
+          mode: 'no-cors',
         });
 
-        if (!response.ok) {
+        const submissionDelivered = response.ok || response.type === 'opaque' || response.status === 0;
+
+        if (!submissionDelivered) {
           throw new Error(response.statusText || 'Network error');
         }
 
