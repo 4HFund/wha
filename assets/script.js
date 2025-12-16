@@ -53,122 +53,63 @@
     });
   }
 
+  const ensureHiddenField = (form, name, defaultValue = '') => {
+    const existing = form.querySelector(`input[name="${name}"]`);
+    if (existing) {
+      if (!existing.value && defaultValue) {
+        existing.value = defaultValue;
+      }
+      return existing;
+    }
+
+    const field = document.createElement('input');
+    field.type = 'hidden';
+    field.name = name;
+    field.value = defaultValue;
+    form.appendChild(field);
+    return field;
+  };
+
   document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
-    const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
-    const useAjaxSubmission = form.dataset.ajax !== 'false';
 
-    if (!form.action || form.action === formsubmitBase || form.action.endsWith('/placeholder')) {
+    if (!form.action || form.action === formsubmitBase || form.action.endsWith('/')) {
       form.action = formsubmitDefaultEndpoint;
     }
 
-    const redirectField = form.querySelector('input[name="_next"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
+    const redirectField = ensureHiddenField(form, '_next');
     const redirectUrl = new URL(thankYouBase);
     redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
     redirectField.value = redirectUrl.toString();
 
-    const subjectField = form.querySelector('input[name="_subject"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_subject' }));
-    if (!subjectField.value) {
-      subjectField.value = `Luau Manor - ${readableName} submission`;
+    ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
+    ensureHiddenField(form, '_template', 'table');
+    ensureHiddenField(form, '_captcha', 'false');
+
+    const ccField = ensureHiddenField(form, '_cc', ccDefaults.join(', '));
+    if (!ccField.dataset.defaultCc) {
+      ccField.dataset.defaultCc = ccField.value;
     }
 
-    const templateField = form.querySelector('input[name="_template"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_template' }));
-    if (!templateField.value) {
-      templateField.value = 'table';
-    }
-
-    const autoresponseField = form.querySelector('input[name="_autoresponse"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_autoresponse' }));
-    if (!autoresponseField.value) {
-      autoresponseField.value = `Thank you for contacting the Luau Manor office. We received your ${formName} and will respond within one business day. This confirmation includes a copy of what you submitted.`;
-    }
-
-    const replyToField = form.querySelector('input[name="_replyto"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
-    let ccField = form.querySelector('input[name="_cc"]');
-    const presetCc = (ccField && ccField.value) ? ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean) : [];
-    const ccList = new Set([officeEmail, ...ccDefaults, ...presetCc]);
+    const replyToField = ensureHiddenField(form, '_replyto');
     const formEmail = form.querySelector('input[type="email"]');
-    const syncReplyTo = () => {
+
+    const syncEmails = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
+      const defaultCc = (ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean);
+      const ccValues = new Set([...ccDefaults, ...defaultCc]);
+
       replyToField.value = emailValue;
 
-      ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
-
-      const ccValues = new Set([...ccList]);
       if (emailValue) {
         ccValues.add(emailValue);
       }
 
       ccField.value = Array.from(ccValues).join(', ');
     };
-    formEmail && formEmail.addEventListener('input', syncReplyTo);
-    syncReplyTo();
 
-    if (!form.querySelector('input[name="_captcha"]')) {
-      form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_captcha', value: 'false' }));
-    }
-
-    if (useAjaxSubmission) {
-      const statusRegion = form.querySelector('[data-form-status]') || (() => {
-        const region = document.createElement('div');
-        region.className = 'form-status';
-        region.setAttribute('data-form-status', 'true');
-        region.setAttribute('role', 'status');
-        region.setAttribute('aria-live', 'polite');
-        form.insertBefore(region, form.firstChild);
-        return region;
-      })();
-
-      const submitButton = form.querySelector('button[type="submit"]');
-
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        statusRegion.classList.remove('error');
-        statusRegion.textContent = 'Sending your request…';
-        submitButton?.setAttribute('disabled', 'true');
-
-        try {
-          const response = await fetch(form.action.startsWith(formsubmitBase) ? form.action : formsubmitDefaultEndpoint, {
-            method: 'POST',
-            headers: { Accept: 'application/json' },
-            body: new FormData(form),
-          });
-
-          const submissionDelivered = response.ok;
-
-          if (!submissionDelivered) {
-            throw new Error(response.statusText || 'Network error');
-          }
-
-          const redirectUrlValue = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
-          statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
-          window.location.href = redirectUrlValue;
-        } catch (error) {
-          statusRegion.classList.add('error');
-          statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
-          console.error('Form submission failed:', error);
-
-          // Fall back to the standard form POST so messages are still delivered.
-          try {
-            form.removeEventListener('submit', handleSubmit);
-            form.action = originalAction;
-            form.method = 'POST';
-            form.submit();
-          } catch (fallbackError) {
-            console.error('Form fallback submission failed:', fallbackError);
-          }
-        } finally {
-          submitButton?.removeAttribute('disabled');
-        }
-      };
-
-      form.addEventListener('submit', handleSubmit);
-    }
+    formEmail && formEmail.addEventListener('input', syncEmails);
+    syncEmails();
   });
 })();
