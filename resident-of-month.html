@@ -85,10 +85,12 @@
         <div class="form-card">
           <form action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="resident-of-month">
             <input type="hidden" name="_to" value="sidney@wheelingwv-pha.org">
+            <input type="hidden" name="_cc" value="sidney.mozingo@gmail.com">
             <input type="hidden" name="_next" value="thank-you.html">
             <input type="hidden" name="_subject" value="Luau Manor - Resident of the Month Nomination">
             <input type="text" name="_honey" style="display:none">
             <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_autoresponse" value="Thank you for nominating a neighbor for Resident of the Month at Luau Manor. We received your submission and will follow up if we have questions.">
 
             <div class="form-grid">
               <div class="field">
@@ -104,8 +106,12 @@
                 <input id="your-name" type="text" name="Your Name" placeholder="Leave blank to stay anonymous">
               </div>
               <div class="field">
-                <label for="your-phone">Phone or email</label>
-                <input id="your-phone" type="text" name="Your Contact" placeholder="Phone or email for follow-up">
+                <label for="your-phone">Phone (optional)</label>
+                <input id="your-phone" type="tel" name="Your Phone" placeholder="Best number for follow-up" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="your-email">Email (optional)</label>
+                <input id="your-email" type="email" name="Your Email" placeholder="you@example.com" autocomplete="email">
               </div>
             </div>
 
