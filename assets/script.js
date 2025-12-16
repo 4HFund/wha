@@ -7,6 +7,7 @@
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const officeEmail = 'sidney@wheelingwv-pha.org';
   const officePhone = '(304) 215-2584';
+  const formspreeBase = 'https://formspree.io/';
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -49,31 +50,17 @@
     });
   }
 
-  document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
+  document.querySelectorAll('form[action^="https://formspree.io"]').forEach((form) => {
     const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
     const useAjaxSubmission = form.dataset.ajax === 'true';
 
-    const buildAjaxAction = (action) => {
-      try {
-        const url = new URL(action);
-        const trimmedPath = url.pathname.replace(/^\/+|\/+$/g, '');
-        const emailPath = trimmedPath.split('/').pop();
-        return `${url.origin}/ajax/${emailPath}`;
-      } catch (error) {
-        console.warn('Unable to build ajax form action for', action, error);
-        return action;
-      }
-    };
-
-    const ajaxAction = buildAjaxAction(form.action);
-
-    const nextField = form.querySelector('input[name="_next"]')
-      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_next' }));
-    const nextUrl = new URL(thankYouBase);
-    nextUrl.searchParams.set('from', form.dataset.formSource || 'form');
-    nextField.value = nextUrl.toString();
+    const redirectField = form.querySelector('input[name="_redirect"]')
+      || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_redirect' }));
+    const redirectUrl = new URL(thankYouBase);
+    redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
+    redirectField.value = redirectUrl.toString();
 
     const subjectField = form.querySelector('input[name="_subject"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_subject' }));
@@ -146,30 +133,27 @@
         submitButton?.setAttribute('disabled', 'true');
 
         try {
-          const response = await fetch(ajaxAction, {
+          const response = await fetch(form.action.startsWith(formspreeBase) ? form.action : `${formspreeBase}f/mjkbdedq`, {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: new FormData(form),
-            // no-cors prevents CORS errors from blocking the request; the opaque
-            // response still indicates that the submission was sent.
-            mode: 'no-cors',
           });
 
-          const submissionDelivered = response.ok || response.type === 'opaque' || response.status === 0;
+          const submissionDelivered = response.ok;
 
           if (!submissionDelivered) {
             throw new Error(response.statusText || 'Network error');
           }
 
-          const redirectUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.toString();
+          const redirectUrlValue = form.querySelector('input[name="_redirect"]')?.value || thankYouBase.toString();
           statusRegion.textContent = 'Sent! Redirecting to the confirmation page…';
-          window.location.href = redirectUrl;
+          window.location.href = redirectUrlValue;
         } catch (error) {
           statusRegion.classList.add('error');
           statusRegion.innerHTML = `We could not reach the server. Please call <a href="tel:${officePhone.replace(/[^0-9]/g, '')}">${officePhone}</a> or email <a href="mailto:${officeEmail}">${officeEmail}</a> while we fix this.`;
           console.error('Form submission failed:', error);
 
-          // Fall back to the standard FormSubmit POST so messages are still delivered.
+          // Fall back to the standard form POST so messages are still delivered.
           try {
             form.removeEventListener('submit', handleSubmit);
             form.action = originalAction;
