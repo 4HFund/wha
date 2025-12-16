@@ -57,7 +57,7 @@
     const originalAction = form.action;
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
-    const useAjaxSubmission = form.dataset.ajax === 'true';
+    const useAjaxSubmission = form.dataset.ajax !== 'false';
 
     if (!form.action || form.action === formsubmitBase || form.action.endsWith('/placeholder')) {
       form.action = formsubmitDefaultEndpoint;
