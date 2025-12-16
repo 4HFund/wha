@@ -36,7 +36,7 @@
       navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    mainNav.querySelectorAll('a, summary').forEach((link) => {
+    mainNav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         if (mainNav.classList.contains('open')) {
           mainNav.classList.remove('open');
