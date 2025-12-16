@@ -83,7 +83,7 @@ details summary::-webkit-details-marker { display: none; }
 .nav-submenu { display: grid; gap: 0.35rem; padding: 0.45rem 0.6rem 0.2rem 0.9rem; }
 .nav-submenu a { text-decoration: none; color: var(--muted); font-weight: 700; padding: 0.5rem 0.65rem; border-radius: 0.75rem; border: 1px dashed transparent; background: rgba(255, 243, 227, 0.6); }
 .nav-submenu a:hover { border-color: var(--lagoon); color: var(--reef); background: rgba(255, 255, 255, 0.9); }
-.quick-call { display: none; }
+.quick-call { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; border-radius: 0.75rem; background: #fff; color: var(--reef); border: 1px solid var(--border); text-decoration: none; font-weight: 800; }
 .home-chip { background: #fff; color: var(--reef); border-color: var(--border); }
 
 .hero { padding: 2.6rem 0 1.4rem; position: relative; }
@@ -201,10 +201,13 @@ textarea { min-height: 140px; resize: vertical; }
   .cta-row .btn { width: 100%; }
   .quick-links { flex-direction: column; align-items: stretch; }
   .card-grid.columns-3, .card-grid.columns-2 { grid-template-columns: 1fr; }
-  .main-nav { inset: 68px 0 auto; padding: 0.25rem 1rem 1rem; }
-  .nav-list { gap: 0.5rem; }
+  .header-inner { flex-direction: column; align-items: stretch; gap: 0.65rem; }
+  .brand { width: auto; justify-content: flex-start; }
+  .header-quick { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+  .main-nav { position: static; inset: auto; transform: none; padding: 0; background: transparent; box-shadow: none; border: 0; }
+  .nav-toggle { display: none; }
+  .nav-list { gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .nav-item > a, .nav-item summary { width: 100%; }
-  .brand { width: 100%; justify-content: space-between; }
 }
 
 @media (min-width: 760px) {
