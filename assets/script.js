@@ -92,9 +92,16 @@
 
     const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
     ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
-    if (!ccField.dataset.defaultCc) {
-      ccField.dataset.defaultCc = ccField.value;
-    }
+
+    const ccSeed = new Set([
+      ...officeRecipients,
+      ...ccDefaults,
+      ...ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
+      ...((ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean)),
+    ]);
+
+    ccField.value = formatRecipients(ccSeed);
+    ccField.dataset.defaultCc = ccField.dataset.defaultCc || ccField.value;
 
     const replyToField = ensureHiddenField(form, '_replyto');
     const formEmail = form.querySelector('input[type="email"]');
