@@ -254,12 +254,13 @@
             <article class="card">
               <h3>General inquiry form</h3>
               <p>Send a message about billing, paperwork, community space, or other questions.</p>
-              <form class="contact-form" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="contact" data-ajax="true">
+              <form class="contact-form" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="contact">
+                <input type="hidden" name="_next" value="thank-you.html?from=contact">
                 <input type="hidden" name="_subject" value="Luau Manor - General Inquiry">
-                <input type="hidden" name="_next" value="thank-you.html">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_cc" value="sidney.mozingo@gmail.com">
-                <input type="hidden" name="_autoresponse" value="Thank you for contacting the Luau Manor office. We received your message and will respond within one business day.">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_cc" value="sidney.mozingo@gmail.com" data-default-cc="sidney.mozingo@gmail.com">
+                <input type="hidden" name="_replyto" value="">
                 <div class="form-grid">
                   <label class="field">Name
                     <input type="text" name="Name" required aria-label="Your name">
