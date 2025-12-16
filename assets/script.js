@@ -5,7 +5,8 @@
   const mainNav = document.querySelector('.main-nav');
   const backToTop = document.querySelector('.back-to-top');
   const thankYouBase = new URL('thank-you.html', window.location.href);
-  const officeEmail = 'sidney@wheelingwv-pha.org';
+  const officeRecipients = ['sidney@wheelingwv-pha.org', 'sidney.mozingo@gmail.com'];
+  const officeEmail = officeRecipients[0];
   const officePhone = '(304) 215-2584';
   const formspreeBase = 'https://formspree.io/';
   const formspreeFormId = 'xwpeprkp';
@@ -88,19 +89,23 @@
 
     const toField = form.querySelector('input[name="_to"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_to' }));
-    if (!toField.value) {
-      toField.value = officeEmail;
-    }
+    const toRecipients = new Set(
+      (toField.value ? toField.value.split(',') : [])
+        .map((entry) => entry.trim())
+        .filter(Boolean)
+        .concat(officeRecipients),
+    );
+    toField.value = Array.from(toRecipients).join(', ');
 
     const replyToField = form.querySelector('input[name="_replyto"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }));
     let ccField = form.querySelector('input[name="_cc"]');
     const presetCc = (ccField && ccField.value) ? ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean) : [];
-    const ccList = new Set([officeEmail, ...presetCc]);
+    const ccList = new Set([...officeRecipients, ...presetCc]);
     const formEmail = form.querySelector('input[type="email"]');
     const syncReplyTo = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
-      replyToField.value = emailValue || officeEmail;
+      replyToField.value = emailValue;
 
       ccField = ccField || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_cc' }));
 
