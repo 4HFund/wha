@@ -8,6 +8,8 @@
   const officeEmail = 'sidney@wheelingwv-pha.org';
   const officePhone = '(304) 215-2584';
   const formspreeBase = 'https://formspree.io/';
+  const formspreeFormId = 'xwpeprkp';
+  const formspreeDefaultEndpoint = `${formspreeBase}f/${formspreeFormId}`;
 
   function filterCards(value) {
     const term = value.toLowerCase().trim();
@@ -55,6 +57,10 @@
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
     const useAjaxSubmission = form.dataset.ajax === 'true';
+
+    if (!form.action || form.action === formspreeBase || form.action.endsWith('/f/placeholder')) {
+      form.action = formspreeDefaultEndpoint;
+    }
 
     const redirectField = form.querySelector('input[name="_redirect"]')
       || form.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name: '_redirect' }));
@@ -133,7 +139,7 @@
         submitButton?.setAttribute('disabled', 'true');
 
         try {
-          const response = await fetch(form.action.startsWith(formspreeBase) ? form.action : `${formspreeBase}f/mjkbdedq`, {
+          const response = await fetch(form.action.startsWith(formspreeBase) ? form.action : formspreeDefaultEndpoint, {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: new FormData(form),
