@@ -163,7 +163,7 @@
 
       try {
         const response = await fetch(form.action, {
-          method: form.method || 'POST',
+          method: 'POST',
           body: formData,
         });
         const responseText = await response.text();
@@ -192,6 +192,13 @@
   document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+    if ((form.getAttribute('method') || '').toUpperCase() !== 'POST') {
+      console.warn('[FormSubmit] Form missing method="POST"; defaulting to POST for compatibility.', {
+        source: form.dataset.formSource || 'form',
+      });
+      form.setAttribute('method', 'POST');
+    }
 
     if (!form.action || form.action === formsubmitBase || form.action.endsWith('/')) {
       form.action = formsubmitDefaultEndpoint;
