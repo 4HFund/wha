@@ -114,7 +114,7 @@
     ccField.value = formatRecipients(ccSeed);
     ccField.dataset.defaultCc = ccField.dataset.defaultCc || ccField.value;
 
-    const replyToField = ensureHiddenField(form, '_replyto');
+    const replyToField = ensureHiddenField(form, '_replyto', officeEmail);
     const formEmail = form.querySelector('input[type="email"]');
 
     const syncEmails = () => {
@@ -122,7 +122,7 @@
       const defaultCc = (ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean);
       const ccValues = new Set([...officeRecipients, ...ccDefaults, ...defaultCc]);
 
-      replyToField.value = emailValue;
+      replyToField.value = officeEmail;
 
       if (emailValue) {
         ccValues.add(emailValue);
