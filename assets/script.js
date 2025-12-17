@@ -7,6 +7,7 @@
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
   const backupRecipients = ['sidney.mozingo@gmail.com'];
+  const allRecipients = [...primaryRecipients, ...backupRecipients];
   const officeRecipients = [...primaryRecipients, ...backupRecipients];
   const ccDefaults = [...backupRecipients];
   const bccDefaults = [...primaryRecipients];
@@ -86,24 +87,24 @@
     const redirectField = ensureHiddenField(form, '_next');
     const redirectUrl = new URL(thankYouBase);
     redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
-    redirectField.value = redirectUrl.toString();
+    redirectField.value = redirectUrl.href;
 
     ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
 
-    const toField = ensureHiddenField(form, '_to');
+    const toField = ensureHiddenField(form, '_to', formatRecipients(allRecipients));
     const toSeed = new Set([
-      ...primaryRecipients,
-      ...backupRecipients,
+      ...allRecipients,
       ...toField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
     ]);
     toField.value = formatRecipients(toSeed);
 
-    const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
+    const ccField = ensureHiddenField(form, '_cc', formatRecipients([...allRecipients, ...ccDefaults]));
     ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
 
     const ccSeed = new Set([
+      ...allRecipients,
       ...officeRecipients,
       ...ccDefaults,
       ...ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
