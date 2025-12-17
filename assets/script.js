@@ -5,10 +5,12 @@
   const mainNav = document.querySelector('.main-nav');
   const backToTop = document.querySelector('.back-to-top');
   const thankYouBase = new URL('thank-you.html', window.location.href);
-  const officeRecipients = ['sidney@wheelingwv-pha.org'];
-  const ccDefaults = ['sidney.mozingo@gmail.com'];
-  const bccDefaults = [...officeRecipients];
-  const officeEmail = officeRecipients[0];
+  const primaryRecipients = ['sidney@wheelingwv-pha.org'];
+  const backupRecipients = ['sidney.mozingo@gmail.com'];
+  const officeRecipients = [...primaryRecipients, ...backupRecipients];
+  const ccDefaults = [...backupRecipients];
+  const bccDefaults = [...primaryRecipients];
+  const officeEmail = primaryRecipients[0];
   const officePhone = '(304) 215-2584';
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
@@ -89,6 +91,14 @@
     ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
+
+    const toField = ensureHiddenField(form, '_to');
+    const toSeed = new Set([
+      ...primaryRecipients,
+      ...backupRecipients,
+      ...toField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
+    ]);
+    toField.value = formatRecipients(toSeed);
 
     const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
     ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
