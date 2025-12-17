@@ -243,7 +243,7 @@
       const defaultCc = parseList(ccField.dataset.defaultCc || '');
       const ccValues = new Set([...defaultCc]);
 
-      replyToField.value = emailValue || officeEmail;
+      replyToField.value = officeEmail;
 
       if (emailValue) {
         ccValues.add(emailValue);
