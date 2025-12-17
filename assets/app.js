@@ -2,9 +2,6 @@
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
   const backupRecipients = ['sidney.mozingo@gmail.com'];
-  const officeRecipients = [...primaryRecipients, ...backupRecipients];
-  const ccDefaults = [...backupRecipients];
-  const bccDefaults = [...primaryRecipients];
   const officeEmail = primaryRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
@@ -73,6 +70,7 @@
   });
 
   const formatRecipients = (values) => Array.from(values).map((entry) => entry.trim()).filter(Boolean).join(',');
+  const parseList = (value = '') => value.split(',').map((entry) => entry.trim()).filter(Boolean);
 
   const ensureHiddenField = (form, name, defaultValue = '') => {
     const existing = form.querySelector(`input[name="${name}"]`);
@@ -108,36 +106,30 @@
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
 
-    const toField = ensureHiddenField(form, '_to');
-    const toSeed = new Set([
-      ...primaryRecipients,
-      ...backupRecipients,
-      ...toField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
-    ]);
+    const toField = ensureHiddenField(form, '_to', formatRecipients(primaryRecipients));
+    const toSeed = new Set([...primaryRecipients, ...parseList(toField.value)]);
     toField.value = formatRecipients(toSeed);
 
-    const ccField = ensureHiddenField(form, '_cc', formatRecipients([...officeRecipients, ...ccDefaults]));
-    ensureHiddenField(form, '_bcc', formatRecipients(bccDefaults));
-
-    const ccSeed = new Set([
-      ...officeRecipients,
-      ...ccDefaults,
-      ...ccField.value.split(',').map((entry) => entry.trim()).filter(Boolean),
-      ...((ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean)),
+    const ccField = ensureHiddenField(form, '_cc');
+    const ccDefaultSeed = new Set([
+      ...parseList(ccField.value),
+      ...parseList(ccField.dataset.defaultCc || ''),
     ]);
+    ccField.dataset.defaultCc = formatRecipients(ccDefaultSeed);
 
-    ccField.value = formatRecipients(ccSeed);
-    ccField.dataset.defaultCc = ccField.dataset.defaultCc || ccField.value;
+    const bccField = ensureHiddenField(form, '_bcc', formatRecipients(backupRecipients));
+    const bccSeed = new Set([...backupRecipients, ...parseList(bccField.value)]);
+    bccField.value = formatRecipients(bccSeed);
 
     const replyToField = ensureHiddenField(form, '_replyto');
     const formEmail = form.querySelector('input[type="email"]');
 
     const syncEmails = () => {
       const emailValue = (formEmail && formEmail.value) ? formEmail.value.trim() : '';
-      const defaultCc = (ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean);
-      const ccValues = new Set([...officeRecipients, ...ccDefaults, ...defaultCc]);
+      const defaultCc = parseList(ccField.dataset.defaultCc || '');
+      const ccValues = new Set([...defaultCc]);
 
-      replyToField.value = emailValue;
+      replyToField.value = emailValue || officeEmail;
 
       if (emailValue) {
         ccValues.add(emailValue);
