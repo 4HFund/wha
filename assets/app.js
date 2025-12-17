@@ -9,6 +9,17 @@
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
   const debugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
+  const logDebug = (...args) => {
+    if (debugMode) {
+      console.log('[FormSubmit]', ...args);
+    }
+  };
+
+  const buildAjaxEndpoint = (action) => {
+    if (!action) return '';
+    if (action.includes('/ajax/')) return action;
+    return action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+  };
 
   const pageKey = document.body.dataset.page;
   const navLinks = document.querySelectorAll('[data-nav]');
@@ -212,27 +223,91 @@
 
       const formData = new FormData(form);
 
+      const describeFailure = (result) => {
+        if (result?.response) {
+          const statusText = result.response.statusText || '';
+          return `${result.response.status} ${statusText}`.trim();
+        }
+
+        if (result?.error?.name === 'AbortError') return 'Request timed out';
+        if (result?.error?.message) return result.error.message;
+        return 'Unknown error';
+      };
+
+      const tryFormSubmit = async (url, expectJson = false) => {
+        if (!url) return { success: false, error: new Error('No FormSubmit URL provided') };
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 12000);
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: expectJson ? { Accept: 'application/json' } : { Accept: 'text/html,application/json' },
+            signal: controller.signal,
+          });
+          const responseText = await response.text();
+
+          let success = response.ok;
+          let details;
+
+          if (expectJson) {
+            try {
+              details = JSON.parse(responseText || '{}');
+              if (details.success === false) {
+                success = false;
+              }
+            } catch (error) {
+              details = { parseError: error?.message || String(error) };
+            }
+          }
+
+          logDebug('FormSubmit response', {
+            url,
+            ok: response.ok,
+            status: response.status,
+            statusText: response.statusText,
+            body: responseText,
+            details,
+          });
+
+          return { success, response, responseText, details };
+        } catch (error) {
+          logDebug('FormSubmit fetch error', { url, error });
+          return { success: false, error };
+        } finally {
+          clearTimeout(timeout);
+        }
+      };
+
       try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            Accept: 'application/json',
-          },
-        });
-        const responseText = await response.text();
+        const attempts = [
+          { label: 'AJAX endpoint', url: buildAjaxEndpoint(form.action), expectJson: true },
+          { label: 'standard endpoint', url: form.action, expectJson: false },
+        ].filter((entry, index, list) => entry.url && list.findIndex((item) => item.url === entry.url) === index);
 
-        if (debugMode) {
-          console.log('[FormSubmit]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
+        let delivered = false;
+
+        for (const attempt of attempts) {
+          statusEl && updateStatus(statusEl, `Sending via ${attempt.label}…`, 'info');
+          const result = await tryFormSubmit(attempt.url, attempt.expectJson);
+
+          if (result.success) {
+            delivered = true;
+            updateStatus(statusEl, 'Sent! We are redirecting you to the confirmation page.', 'success');
+            const nextUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.href;
+            window.location.href = nextUrl;
+            break;
+          }
+
+          const reason = describeFailure(result);
+          statusEl && updateStatus(statusEl, `Attempt via ${attempt.label} failed: ${reason}. Trying backup…`, 'error');
         }
 
-        if (!response.ok) {
-          throw new Error(`FormSubmit returned ${response.status}`);
+        if (!delivered) {
+          throw new Error('All FormSubmit attempts failed');
         }
-
-        updateStatus(statusEl, 'Sent! We are redirecting you to the confirmation page.', 'success');
-        const nextUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.href;
-        window.location.href = nextUrl;
       } catch (error) {
         console.error('[FormSubmit] submission failed', error);
         updateStatus(statusEl, 'We could not send automatically. Opening an email draft now.', 'error');
