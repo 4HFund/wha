@@ -122,10 +122,11 @@
       const defaultCc = (ccField.dataset.defaultCc || '').split(',').map((entry) => entry.trim()).filter(Boolean);
       const ccValues = new Set([...officeRecipients, ...ccDefaults, ...defaultCc]);
 
-      replyToField.value = officeEmail;
-
       if (emailValue) {
         ccValues.add(emailValue);
+        replyToField.value = emailValue;
+      } else {
+        replyToField.value = officeEmail;
       }
 
       ccField.value = formatRecipients(ccValues);
