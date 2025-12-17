@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>FormSubmit Debug • Luau Manor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="page" data-page="debug">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <div class="shell header-bar">
+      <a class="brand" href="../index.html" aria-label="Luau Manor home">
+        <span class="brand-mark" aria-hidden="true">LM</span>
+        <span class="brand-text">
+          <span class="brand-eyebrow">Wheeling Housing Authority</span>
+          <span class="brand-name">Luau Manor Resident Hub</span>
+          <span class="brand-sub">FormSubmit debug</span>
+        </span>
+      </a>
+      <div class="header-actions">
+        <span class="chip">Office: <a href="tel:3042152584">(304) 215-2584</a></span>
+        <span class="chip">Emergency: <a href="tel:3042422820">(304) 242-2820</a></span>
+      </div>
+    </div>
+    <div class="shell header-sub">
+      <p class="microcopy">Use this page to test FormSubmit delivery without changing the live forms.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="debug-title">
+      <div class="shell card-grid columns-2">
+        <article class="form-card">
+          <div class="section-header">
+            <h1 id="debug-title">FormSubmit test form</h1>
+            <p class="microcopy">Run a test submission and capture the response for IT. Use <code>?debug=true</code> in the URL to turn on fetch interception on other pages.</p>
+          </div>
+          <form id="debug-form" class="stacked-form" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="formsubmit-debug">
+            <input type="hidden" name="_next" value="../thank-you.html?from=formsubmit-debug">
+            <input type="hidden" name="_subject" value="Luau Manor - FormSubmit Debug Test">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="Page URL" value="">
+            <input type="hidden" name="_cc" value="sidney@wheelingwv-pha.org, sidney.mozingo@gmail.com" data-default-cc="sidney@wheelingwv-pha.org, sidney.mozingo@gmail.com">
+            <input type="hidden" name="_autoresponse" value="We received your FormSubmit debug test for Luau Manor.">
+            <input type="hidden" name="_replyto" value="">
+            <input type="text" name="_honey" style="display:none">
+            <div aria-hidden="true" data-bot-field="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+              <label>Leave this field blank <input type="text" name="bot_field" tabindex="-1" autocomplete="off"></label>
+            </div>
+
+            <label class="field" for="debug-name">Name</label>
+            <input id="debug-name" name="Name" type="text" required placeholder="Your name">
+
+            <label class="field" for="debug-email">Email</label>
+            <input id="debug-email" name="email" type="email" required placeholder="you@example.com">
+
+            <label class="field" for="debug-message">Message</label>
+            <textarea id="debug-message" name="Message" rows="4" required>FormSubmit debug test</textarea>
+
+            <div class="cta-row" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <button type="submit" class="btn primary">Submit normally</button>
+              <button type="button" id="send-test" class="btn outline">Send test via fetch</button>
+            </div>
+          </form>
+        </article>
+        <article class="card">
+          <div class="section-header">
+            <h2>What to capture for IT</h2>
+            <p class="microcopy">Use the fetch test to gather evidence for support.</p>
+          </div>
+          <ul class="list-check">
+            <li>Timestamp of the test.</li>
+            <li>That the request was sent from <strong>wheelingwv-pha.org</strong> with subject <strong>“Luau Manor - FormSubmit Debug Test.”</strong></li>
+            <li>FormSubmit HTTP status and raw response text (see the panel below).</li>
+            <li>The inbox headers showing which address received it.</li>
+          </ul>
+          <div class="debug-panel" style="margin-top: 1rem; padding: 1rem; background: #f6f7fb; border: 1px solid #d8dbe7; border-radius: 8px;">
+            <p id="debug-status"><strong>Status:</strong> Awaiting test.</p>
+            <pre id="debug-log" style="white-space: pre-wrap; margin: 0;">Response output will appear here after you click “Send test via fetch.”</pre>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <p class="foot-brand">Luau Manor • Wheeling Housing Authority</p>
+        <p class="microcopy">This page is for debugging only; live forms stay unchanged.</p>
+      </div>
+      <div class="foot-links" aria-label="Footer quick links">
+        <a href="../index.html">Home</a>
+        <a href="../maintenance-request.html">Maintenance</a>
+        <a href="../concern-report.html">Concerns</a>
+        <a href="../document-request.html">Documents</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
+
+  <script src="../assets/app.js" defer></script>
+  <script>
+    (function () {
+      const form = document.getElementById('debug-form');
+      const sendTest = document.getElementById('send-test');
+      const status = document.getElementById('debug-status');
+      const log = document.getElementById('debug-log');
+      const officeEmail = 'sidney@wheelingwv-pha.org';
+
+      const buildMailto = (formData, reason) => {
+        const subject = formData.get('_subject') || 'FormSubmit debug fallback';
+        const lines = [];
+        if (reason) lines.push(reason);
+
+        formData.forEach((value, key) => {
+          if (key.startsWith('_')) return;
+          if (value instanceof File) {
+            if (value.name) lines.push(`${key}: ${value.name}`);
+            return;
+          }
+          lines.push(`${key}: ${value}`);
+        });
+
+        lines.push(`Page URL: ${window.location.href}`);
+        return `mailto:${encodeURIComponent(officeEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\\n'))}`;
+      };
+
+      sendTest.addEventListener('click', async (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        status.textContent = 'Status: Sending via fetch…';
+        log.textContent = '';
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method || 'POST',
+            body: formData,
+          });
+          const text = await response.text();
+          status.textContent = `Status: ${response.status} ${response.ok ? '(OK)' : '(Not OK)'}`;
+          log.textContent = text || '(No response body)';
+
+          if (!response.ok) {
+            alert('Fetch completed but returned a non-OK status. Opening email draft to sidney@wheelingwv-pha.org.');
+            window.location.href = buildMailto(formData, 'Fetch response not OK.');
+          }
+        } catch (error) {
+          status.textContent = 'Status: Network error (see details below).';
+          log.textContent = String(error);
+          alert('Network error while sending test. Opening email draft to sidney@wheelingwv-pha.org.');
+          window.location.href = buildMailto(formData, 'Network error during fetch.');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 (() => {
-  const thankYouBase = new URL('thank-you.html', window.location.href);
+  const thankYouBase = new URL('/thank-you.html', window.location.origin);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
   const backupRecipients = ['sidney.mozingo@gmail.com'];
   const officeEmail = primaryRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
+  const debugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
 
   const pageKey = document.body.dataset.page;
   const navLinks = document.querySelectorAll('[data-nav]');
@@ -89,6 +90,105 @@
     return field;
   };
 
+  const ensureBotField = (form) => {
+    const existing = form.querySelector('[data-bot-field]');
+    if (existing) return existing;
+
+    const wrapper = document.createElement('div');
+    wrapper.dataset.botField = 'true';
+    wrapper.setAttribute('aria-hidden', 'true');
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-9999px';
+    wrapper.style.top = 'auto';
+    wrapper.style.width = '1px';
+    wrapper.style.height = '1px';
+    wrapper.style.overflow = 'hidden';
+
+    const label = document.createElement('label');
+    label.textContent = 'Leave this field blank';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'bot_field';
+    input.tabIndex = -1;
+    input.autocomplete = 'off';
+
+    label.appendChild(input);
+    wrapper.appendChild(label);
+    form.appendChild(wrapper);
+    return wrapper;
+  };
+
+  const syncPageField = (field) => {
+    if (field) {
+      field.value = window.location.href;
+    }
+  };
+
+  const buildMailtoFallback = (formData) => {
+    const subject = formData.get('_subject') || 'Luau Manor form submission';
+    const lines = [];
+
+    formData.forEach((value, key) => {
+      if (key.startsWith('_')) return;
+      if (value instanceof File) {
+        if (value.name) {
+          lines.push(`${key}: ${value.name} (${value.type || 'file'})`);
+        }
+        return;
+      }
+      lines.push(`${key}: ${value}`);
+    });
+
+    lines.push(`Page URL: ${window.location.href}`);
+
+    const mailto = `mailto:${encodeURIComponent(officeEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    return mailto;
+  };
+
+  const enhanceDebugSubmit = (form) => {
+    form.addEventListener('submit', async (event) => {
+      if (!debugMode) return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      event.preventDefault();
+      const submitButton = form.querySelector('[type="submit"]');
+      submitButton?.setAttribute('aria-busy', 'true');
+
+      const formData = new FormData(form);
+      syncPageField(form.querySelector('input[name="Page URL"]'));
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method || 'POST',
+          body: formData,
+        });
+        const responseText = await response.text();
+        console.log('[FormSubmit debug]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
+
+        if (!response.ok) {
+          alert('We could not send the form automatically. We will open an email draft so you can send it manually.');
+          window.location.href = buildMailtoFallback(formData);
+          return;
+        }
+
+        const nextUrl = form.querySelector('input[name="_next"]')?.value;
+        if (nextUrl) {
+          window.location.href = nextUrl;
+        }
+      } catch (error) {
+        console.error('[FormSubmit debug] network error', error);
+        alert('Network error while sending. We will open an email draft so you can send it manually.');
+        window.location.href = buildMailtoFallback(formData);
+      } finally {
+        submitButton?.removeAttribute('aria-busy');
+      }
+    });
+  };
+
   document.querySelectorAll('form[action^="https://formsubmit.co"]').forEach((form) => {
     const formName = (form.dataset.formSource || 'form').replace(/[-_]+/g, ' ');
     const readableName = formName.replace(/\b\w/g, (letter) => letter.toUpperCase());
@@ -100,11 +200,16 @@
     const redirectField = ensureHiddenField(form, '_next');
     const redirectUrl = new URL(thankYouBase);
     redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
-    redirectField.value = redirectUrl.toString();
+    redirectField.value = redirectUrl.pathname + redirectUrl.search;
 
     ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
     ensureHiddenField(form, '_template', 'table');
     ensureHiddenField(form, '_captcha', 'false');
+    ensureHiddenField(form, '_honey', '');
+    ensureBotField(form);
+
+    const pageField = ensureHiddenField(form, 'Page URL', window.location.href);
+    pageField.dataset.capturePage = 'true';
 
     const toField = ensureHiddenField(form, '_to', formatRecipients(primaryRecipients));
     const toSeed = new Set([...primaryRecipients, ...parseList(toField.value)]);
@@ -140,5 +245,7 @@
 
     formEmail && formEmail.addEventListener('input', syncEmails);
     syncEmails();
+    syncPageField(pageField);
+    enhanceDebugSubmit(form);
   });
 })();
