@@ -244,10 +244,11 @@
       const defaultCc = parseList(ccField.dataset.defaultCc || '');
       const ccValues = new Set([...defaultCc]);
 
-      replyToField.value = replyToAddress;
-
       if (emailValue) {
         ccValues.add(emailValue);
+        replyToField.value = emailValue;
+      } else {
+        replyToField.value = replyToAddress;
       }
 
       ccField.value = formatRecipients(ccValues);
