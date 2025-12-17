@@ -198,10 +198,6 @@
       const pageField = form.querySelector('input[name="Page URL"]');
       syncPageField(pageField);
 
-      if (!debugMode) {
-        return;
-      }
-
       event.preventDefault();
 
       if (!form.checkValidity()) {
@@ -224,17 +220,17 @@
         });
         const responseText = await response.text();
 
-        console.log('[FormSubmit]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
+        if (debugMode) {
+          console.log('[FormSubmit]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
+        }
 
         if (!response.ok) {
           throw new Error(`FormSubmit returned ${response.status}`);
         }
 
         updateStatus(statusEl, 'Sent! We are redirecting you to the confirmation page.', 'success');
-        const nextUrl = form.querySelector('input[name="_next"]')?.value;
-        if (nextUrl) {
-          window.location.href = nextUrl;
-        }
+        const nextUrl = form.querySelector('input[name="_next"]')?.value || thankYouBase.href;
+        window.location.href = nextUrl;
       } catch (error) {
         console.error('[FormSubmit] submission failed', error);
         updateStatus(statusEl, 'We could not send automatically. Opening an email draft now.', 'error');
