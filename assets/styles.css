@@ -681,6 +681,38 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.form-status {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  background: #f8fafc;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.form-status.is-info {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #111827;
+}
+
+.form-status.is-success {
+  background: #e7f6ec;
+  border-color: #b5e2c6;
+  color: #0f5132;
+}
+
+.form-status.is-error {
+  background: #f8d7da;
+  border-color: #f5c2c7;
+  color: #842029;
+}
+
+.btn.is-busy {
+  opacity: 0.85;
+  pointer-events: none;
+}
+
 .field,
 label {
   display: grid;
