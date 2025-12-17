@@ -1,5 +1,5 @@
 (() => {
-  const thankYouBase = new URL('/thank-you.html', window.location.origin);
+  const thankYouBase = new URL('thank-you.html', window.location.href);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
   const backupRecipients = ['sidney.mozingo@gmail.com'];
   const allRecipients = [...primaryRecipients, ...backupRecipients];
