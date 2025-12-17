@@ -2,6 +2,7 @@
   const thankYouBase = new URL('/thank-you.html', window.location.origin);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
   const backupRecipients = ['sidney.mozingo@gmail.com'];
+  const allRecipients = [...primaryRecipients, ...backupRecipients];
   const officeEmail = primaryRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
@@ -207,7 +208,7 @@
     const redirectField = ensureHiddenField(form, '_next');
     const redirectUrl = new URL(thankYouBase);
     redirectUrl.searchParams.set('from', form.dataset.formSource || 'form');
-    redirectField.value = redirectUrl.pathname + redirectUrl.search;
+    redirectField.value = redirectUrl.href;
 
     ensureHiddenField(form, '_subject', `Luau Manor - ${readableName}`);
     ensureHiddenField(form, '_template', 'table');
@@ -218,12 +219,13 @@
     const pageField = ensureHiddenField(form, 'Page URL', window.location.href);
     pageField.dataset.capturePage = 'true';
 
-    const toField = ensureHiddenField(form, '_to', formatRecipients(primaryRecipients));
-    const toSeed = new Set([...primaryRecipients, ...parseList(toField.value)]);
+    const toField = ensureHiddenField(form, '_to', formatRecipients(allRecipients));
+    const toSeed = new Set([...allRecipients, ...parseList(toField.value)]);
     toField.value = formatRecipients(toSeed);
 
     const ccField = ensureHiddenField(form, '_cc');
     const ccDefaultSeed = new Set([
+      ...allRecipients,
       ...parseList(ccField.value),
       ...parseList(ccField.dataset.defaultCc || ''),
     ]);
