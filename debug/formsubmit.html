@@ -36,8 +36,11 @@
             <h1 id="debug-title">FormSubmit test form</h1>
             <p class="microcopy">Run a test submission and capture the response for IT. Use <code>?debug=true</code> in the URL to turn on fetch interception on other pages.</p>
           </div>
+          <div id="debug-success" style="display:none; padding: 0.75rem 1rem; border-radius: 8px; background: #e7f6ec; border: 1px solid #b5e2c6; color: #0f5132;">
+            ✅ FormSubmit received your test submission. Check your email for the autoresponse and verify delivery headers.
+          </div>
           <form id="debug-form" class="stacked-form" action="https://formsubmit.co/sidney@wheelingwv-pha.org" method="POST" data-form-source="formsubmit-debug">
-            <input type="hidden" name="_next" value="../thank-you.html?from=formsubmit-debug">
+            <input type="hidden" name="_next" value="formsubmit.html?submitted=1">
             <input type="hidden" name="_subject" value="Luau Manor - FormSubmit Debug Test">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
@@ -102,6 +105,7 @@
 
   <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
+  <script src="../assets/js/formsubmit-guard.js" defer></script>
   <script src="../assets/app.js" defer></script>
   <script>
     (function () {
@@ -110,6 +114,12 @@
       const status = document.getElementById('debug-status');
       const log = document.getElementById('debug-log');
       const officeEmail = 'sidney@wheelingwv-pha.org';
+      const successBanner = document.getElementById('debug-success');
+
+      const submitted = new URLSearchParams(window.location.search).get('submitted');
+      if (submitted === '1' && successBanner) {
+        successBanner.style.display = 'block';
+      }
 
       const buildMailto = (formData, reason) => {
         const subject = formData.get('_subject') || 'FormSubmit debug fallback';
