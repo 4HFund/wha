@@ -125,9 +125,13 @@
     }
   };
 
-  const buildMailtoFallback = (formData) => {
+  const buildMailtoFallback = (formData, reason) => {
     const subject = formData.get('_subject') || 'Luau Manor form submission';
     const lines = [];
+    if (reason) {
+      lines.push(reason);
+      lines.push('');
+    }
 
     formData.forEach((value, key) => {
       if (key.startsWith('_')) return;
@@ -146,21 +150,64 @@
     return mailto;
   };
 
-  const enhanceDebugSubmit = (form) => {
+  const ensureStatusRegion = (form) => {
+    const existing = form.querySelector('[data-form-status]');
+    if (existing) return existing;
+
+    const status = document.createElement('div');
+    status.dataset.formStatus = 'true';
+    status.className = 'form-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.hidden = true;
+    form.appendChild(status);
+    return status;
+  };
+
+  const updateStatus = (statusEl, message, type = 'info') => {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.textContent = message;
+    statusEl.classList.remove('is-error', 'is-success', 'is-info');
+    if (type === 'error') {
+      statusEl.classList.add('is-error');
+    } else if (type === 'success') {
+      statusEl.classList.add('is-success');
+    } else {
+      statusEl.classList.add('is-info');
+    }
+  };
+
+  const setSubmittingState = (form, isSubmitting) => {
+    const submitButton = form.querySelector('[type="submit"]');
+    submitButton?.classList.toggle('is-busy', isSubmitting);
+    if (isSubmitting) {
+      submitButton?.setAttribute('aria-busy', 'true');
+      submitButton?.setAttribute('disabled', 'true');
+    } else {
+      submitButton?.removeAttribute('aria-busy');
+      submitButton?.removeAttribute('disabled');
+    }
+  };
+
+  const reliableSubmit = (form, statusEl) => {
+    if (form.dataset.reliableSubmit === 'true') return;
+    form.dataset.reliableSubmit = 'true';
+
     form.addEventListener('submit', async (event) => {
-      if (!debugMode) return;
+      event.preventDefault();
 
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      event.preventDefault();
-      const submitButton = form.querySelector('[type="submit"]');
-      submitButton?.setAttribute('aria-busy', 'true');
+      const pageField = form.querySelector('input[name="Page URL"]');
+      syncPageField(pageField);
+      setSubmittingState(form, true);
+      statusEl && updateStatus(statusEl, 'Sending your form…', 'info');
 
       const formData = new FormData(form);
-      syncPageField(form.querySelector('input[name="Page URL"]'));
 
       try {
         const response = await fetch(form.action, {
@@ -168,24 +215,25 @@
           body: formData,
         });
         const responseText = await response.text();
-        console.log('[FormSubmit debug]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
+
+        console.log('[FormSubmit]', form.dataset.formSource || 'form', 'status:', response.status, 'body:', responseText);
 
         if (!response.ok) {
-          alert('We could not send the form automatically. We will open an email draft so you can send it manually.');
-          window.location.href = buildMailtoFallback(formData);
-          return;
+          throw new Error(`FormSubmit returned ${response.status}`);
         }
 
+        updateStatus(statusEl, 'Sent! We are redirecting you to the confirmation page.', 'success');
         const nextUrl = form.querySelector('input[name="_next"]')?.value;
         if (nextUrl) {
           window.location.href = nextUrl;
         }
       } catch (error) {
-        console.error('[FormSubmit debug] network error', error);
-        alert('Network error while sending. We will open an email draft so you can send it manually.');
-        window.location.href = buildMailtoFallback(formData);
+        console.error('[FormSubmit] submission failed', error);
+        updateStatus(statusEl, 'We could not send automatically. Opening an email draft now.', 'error');
+        alert('We could not send the form automatically. We will open an email draft to sidney@wheelingwv-pha.org with your details.');
+        window.location.href = buildMailtoFallback(formData, 'Automatic FormSubmit delivery failed. Please send this email.');
       } finally {
-        submitButton?.removeAttribute('aria-busy');
+        setSubmittingState(form, false);
       }
     });
   };
@@ -257,6 +305,7 @@
     formEmail && formEmail.addEventListener('input', syncEmails);
     syncEmails();
     syncPageField(pageField);
-    enhanceDebugSubmit(form);
+    const statusEl = ensureStatusRegion(form);
+    reliableSubmit(form, statusEl);
   });
 })();
