@@ -1,6 +1,7 @@
 (() => {
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
+  const replyToAddress = primaryRecipients[0];
   const ccRecipients = ['sidney.mozingo@gmail.com'];
   const officeEmail = primaryRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
@@ -235,7 +236,7 @@
     const bccSeed = new Set([...ccRecipients, ...parseList(bccField.value)]);
     bccField.value = formatRecipients(bccSeed);
 
-    const replyToField = ensureHiddenField(form, '_replyto');
+    const replyToField = ensureHiddenField(form, '_replyto', replyToAddress);
     const formEmail = form.querySelector('input[type="email"]');
 
     const syncEmails = () => {
@@ -243,7 +244,7 @@
       const defaultCc = parseList(ccField.dataset.defaultCc || '');
       const ccValues = new Set([...defaultCc]);
 
-      replyToField.value = officeEmail;
+      replyToField.value = replyToAddress;
 
       if (emailValue) {
         ccValues.add(emailValue);
