@@ -195,6 +195,13 @@
     form.dataset.reliableSubmit = 'true';
 
     form.addEventListener('submit', async (event) => {
+      const pageField = form.querySelector('input[name="Page URL"]');
+      syncPageField(pageField);
+
+      if (!debugMode) {
+        return;
+      }
+
       event.preventDefault();
 
       if (!form.checkValidity()) {
@@ -202,8 +209,6 @@
         return;
       }
 
-      const pageField = form.querySelector('input[name="Page URL"]');
-      syncPageField(pageField);
       setSubmittingState(form, true);
       statusEl && updateStatus(statusEl, 'Sending your form…', 'info');
 
@@ -213,6 +218,9 @@
         const response = await fetch(form.action, {
           method: 'POST',
           body: formData,
+          headers: {
+            Accept: 'application/json',
+          },
         });
         const responseText = await response.text();
 
