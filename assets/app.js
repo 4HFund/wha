@@ -1,8 +1,7 @@
 (() => {
   const thankYouBase = new URL('thank-you.html', window.location.href);
   const primaryRecipients = ['sidney@wheelingwv-pha.org'];
-  const backupRecipients = ['sidney.mozingo@gmail.com'];
-  const allRecipients = [...primaryRecipients, ...backupRecipients];
+  const ccRecipients = ['sidney.mozingo@gmail.com'];
   const officeEmail = primaryRecipients[0];
   const formsubmitBase = 'https://formsubmit.co/';
   const formsubmitDefaultEndpoint = `${formsubmitBase}${encodeURIComponent(officeEmail)}`;
@@ -219,20 +218,21 @@
     const pageField = ensureHiddenField(form, 'Page URL', window.location.href);
     pageField.dataset.capturePage = 'true';
 
-    const toField = ensureHiddenField(form, '_to', formatRecipients(allRecipients));
-    const toSeed = new Set([...allRecipients, ...parseList(toField.value)]);
+    const toField = ensureHiddenField(form, '_to', formatRecipients(primaryRecipients));
+    const toSeed = new Set([...primaryRecipients, ...parseList(toField.value)]);
     toField.value = formatRecipients(toSeed);
 
     const ccField = ensureHiddenField(form, '_cc');
     const ccDefaultSeed = new Set([
-      ...allRecipients,
+      ...primaryRecipients,
+      ...ccRecipients,
       ...parseList(ccField.value),
       ...parseList(ccField.dataset.defaultCc || ''),
     ]);
     ccField.dataset.defaultCc = formatRecipients(ccDefaultSeed);
 
-    const bccField = ensureHiddenField(form, '_bcc', formatRecipients(backupRecipients));
-    const bccSeed = new Set([...backupRecipients, ...parseList(bccField.value)]);
+    const bccField = ensureHiddenField(form, '_bcc', formatRecipients(ccRecipients));
+    const bccSeed = new Set([...ccRecipients, ...parseList(bccField.value)]);
     bccField.value = formatRecipients(bccSeed);
 
     const replyToField = ensureHiddenField(form, '_replyto');
